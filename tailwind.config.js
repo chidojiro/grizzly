@@ -40,16 +40,21 @@ const palette = {
   cyan: '#1e94b6',
 };
 
-const fontSize = {
+const fontSize = { xs: '12px', sm: '14px', md: '16px', lg: '18px', xl: '22.4px' };
+
+const fontWeight = {
   bold: 700,
   'semi-bold': 500,
   normal: 400,
 };
 
+const screens = {
+  md: { max: '992px' },
+  sm: { max: '768px' },
+};
+
 module.exports = {
-  // jit seems not working with postCss@7
-  // TODO: enable jit when react-scripts@^4.1 is released
-  // mode: 'jit',
+  mode: 'jit',
   important: true,
   purge: [
     './src/**/*.{js,jsx,ts,tsx}',
@@ -76,48 +81,13 @@ module.exports = {
       marginBottom: extendedSize,
       marginLeft: extendedSize,
       marginRight: extendedSize,
-      fontWeight: {
-        semibold: 500,
-        bold: 700,
-      },
-      fontFamily: {
-        'default-family': `'Noto Sans JP', sans-serif`,
-      },
-      keyframes: {
-        'cart-indicator': {
-          '0%': { transform: 'scale(1)' },
-          '20%': { transform: 'scale(1.3)' },
-          '100%': { transform: 'scale(1)' },
-        },
-      },
-      boxShadow: {
-        'dark-gray': '0 0px 3px rgba(214, 214, 214, 1)',
-      },
-      borderRadius: {
-        lg: '0.625rem',
-      },
-    },
-    animation: {
-      'cart-indicator': 'cart-indicator 900ms ease-in-out',
+      fontWeight,
     },
     colors: {
       ...palette,
     },
-    fontSize: {
-      xxs: '10px',
-      xs: '12px',
-      sm: '14px',
-      md: '16px',
-      lg: '18px',
-      xl: '22px',
-      'default-size': '14px',
-    },
-  },
-  variants: {
-    extend: {
-      margin: ['first'],
-      borderStyle: ['last'],
-    },
+    fontSize,
+    screens,
   },
   plugins: [],
 };
