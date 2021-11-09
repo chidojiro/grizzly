@@ -53,7 +53,7 @@ export const Toolbar = () => {
     );
 
   return (
-    <div className='h-[70px] shadow-md bg-gray-light-3 px-[15px] flex items-center justify-between'>
+    <div className='h-[70px] border-b border-solid border-gray shadow-sm bg-gray-light-3 px-[15px] flex items-center justify-between'>
       <h1>
         Lathes - Metalworking
         <span className='text-green'></span>

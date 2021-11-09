@@ -52,6 +52,11 @@ const fontWeight = {
   normal: 400,
 };
 
+const fontFamily = {
+  avantgardeMedium: 'avantgarde_medium',
+  avantgardeBold: 'avantgardebold',
+};
+
 const screens = {
   md: { max: '992px' },
   sm: { max: '768px' },
@@ -85,6 +90,7 @@ module.exports = {
       ...palette,
     },
     fontSize,
+    fontFamily,
     screens,
   },
   plugins: [],

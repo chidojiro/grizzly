@@ -4,36 +4,17 @@
 
 @layer base {
   @font-face {
-    font-family: 'Noto Sans JP';
-    font-weight: normal;
-    font-style: normal;
-    src: local('Noto Sans JP'), url('assets/fonts/NotoSansJP-Regular.woff') format('woff');
-  }
-
-  @font-face {
-    font-family: 'Noto Sans JP';
-    font-weight: 100;
-    src: local('Noto Sans JP'), url('assets/fonts/NotoSansJP-Thin.woff') format('woff');
-  }
-
-  @font-face {
-    font-family: 'Noto Sans JP';
-    font-weight: 300;
-    src: local('Noto Sans JP'), url('assets/fonts/NotoSansJP-Light.woff') format('woff');
-  }
-
-  @font-face {
     font-family: 'avantgarde_medium';
     font-weight: normal;
     font-style: normal;
     src: local('avantgarde_medium'), url('/fonts/avantgarde/avantn-webfont.woff2') format('woff2');
   }
 
-  /* @font-face {
-    font-family: 'avantgarde_medium';
+  @font-face {
+    font-family: 'avantgardebold';
     font-weight: 400;
     src: local('avantgarde_medium'), url('/fonts/avantgarde/avantgarde_bold-webfont.woff2') format('woff2');
-  } */
+  }
 
   *,
   ::before,

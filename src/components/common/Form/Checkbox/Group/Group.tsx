@@ -5,5 +5,5 @@ import { Field, FieldProps } from '../../Field';
 export type Props = CheckboxGroupProps & Omit<FieldProps, 'component'>;
 
 export const Group = (props: Props) => {
-  return <Field {...props} component={BaseCheckboxGroup} />;
+  return <Field {...props} component={BaseCheckboxGroup} emptyValue={[]} />;
 };

@@ -9,7 +9,6 @@ type OwnProps<T = any> = {
   value?: T[];
   name?: string;
   defaultValue?: T[];
-  options?: Option[];
   error?: boolean;
 };
 
@@ -32,16 +31,7 @@ export const GroupContext = React.createContext<GroupProvider>({
 });
 
 export const Group = React.forwardRef((props: Props, ref: React.ForwardedRef<HTMLInputElement>) => {
-  const {
-    onChange: onChangeProp,
-    defaultValue = [],
-    value: valueProp,
-    name,
-    children,
-    options = [],
-    error,
-    ...restProps
-  } = props;
+  const { onChange: onChangeProp, defaultValue = [], value: valueProp, name, children, error, ...restProps } = props;
 
   const [value, setValue] = useControllable({
     value: valueProp,
@@ -54,19 +44,18 @@ export const Group = React.forwardRef((props: Props, ref: React.ForwardedRef<HTM
       const eventValue = e.target.value as any;
       const isChecked = e.target.checked;
 
-      setValue((prevValue: any) => {
-        let newValue;
-        if (isChecked) {
-          newValue = [...prevValue, eventValue];
-        } else {
-          newValue = prevValue.filter((value: any) => value !== eventValue);
-        }
+      let newValue;
+      if (isChecked) {
+        newValue = [...value, eventValue];
+      } else {
+        newValue = value.filter((value: any) => value !== eventValue);
+      }
 
-        onChangeProp?.(newValue);
-        return newValue;
-      });
+      onChangeProp?.(newValue);
+
+      setValue(newValue);
     },
-    [onChangeProp, setValue]
+    [onChangeProp, setValue, value]
   );
 
   const providerValue = React.useMemo(() => ({ handleChange, value, groupProps: props }), [handleChange, props, value]);
@@ -75,20 +64,7 @@ export const Group = React.forwardRef((props: Props, ref: React.ForwardedRef<HTM
     <GroupContext.Provider value={providerValue}>
       <div {...restProps}>
         <input ref={ref} name={name} className='minimized' />
-        {options.map(({ label, value: checkboxValue, ...rest }) => (
-          <div className='relative flex items-center' key={JSON.stringify(checkboxValue)}>
-            <Checkbox
-              value={checkboxValue as any}
-              onChange={handleChange}
-              checked={value.includes(checkboxValue)}
-              label={label}
-              className='mr-2'
-              error={error}
-              name={name}
-              {...rest}
-            />
-          </div>
-        ))}
+        {children}
       </div>
     </GroupContext.Provider>
   );
