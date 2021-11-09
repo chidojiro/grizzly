@@ -14,7 +14,7 @@ const MOCK_LOGO = 'https://www.grizzly.com/img/logo/griz-logo@1x.webp';
 
 export const Header = ({}: Props) => {
   return (
-    <div className={classNames('gl-header', 'bg-repeat-x')} style={{ backgroundImage: `url(${MOCK_HEADER_BG})` }}>
+    <div className={classNames('gl-header', 'bg-repeat-x z-50')} style={{ backgroundImage: `url(${MOCK_HEADER_BG})` }}>
       <div className='h-11 bg-red'></div>
       <div className='relative flex items-center px-4 h-25'>
         <Link to='/'>

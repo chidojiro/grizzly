@@ -27,7 +27,7 @@ export const Item = ({ children, label, href }: Props) => {
     <div className={className} onMouseEnter={control.show} onMouseLeave={control.hide}>
       <div className='text-white'>{label}</div>
       <FontAwesomeIcon icon={faCaretDown} className='ml-2 transform -translate-y-0.5 text-white' />
-      {control.visible && <div className='absolute top-[188px] left-0 w-screen z-10 max-h-[645px]'>{children}</div>}
+      {/* {control.visible && <div className='absolute top-[188px] left-0 w-screen z-10 max-h-[645px]'>{children}</div>} */}
     </div>
   );
 };

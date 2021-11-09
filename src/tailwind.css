@@ -124,3 +124,9 @@
     @apply mb-3;
   }
 }
+
+@layer utilities {
+  .minimized {
+    @apply h-0 w-0 border-none outline-none m-0 p-0 absolute !important;
+  }
+}
