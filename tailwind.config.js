@@ -31,12 +31,15 @@ const palette = {
   black: '#212529',
   white: '#fff',
   gray: '#ccc',
-  'gray-light-1': '##999',
-  'gray-dark-1': '##666',
-  'gray-light-2': '##f2f2f2',
-  'black-light-1': '##212529',
+  'gray-light-1': '#999',
+  'gray-dark-1': '#666',
+  'gray-dark-2': '#2f2f2f',
+  'gray-light-2': '#f2f2f2',
+  black: '#101010',
+  'black-light-1': '#212529',
   lime: '#28c43c',
   blue: '##007bff',
+  'blue-light-1': '#80bdff',
   cyan: '#1e94b6',
 };
 
@@ -55,13 +58,7 @@ const screens = {
 
 module.exports = {
   mode: 'jit',
-  important: true,
-  purge: [
-    './src/**/*.{js,jsx,ts,tsx}',
-    '../vs-components/src/**/*.{js,jsx,ts,tsx}',
-    './public/index.html',
-    './public/locales/**/*.json',
-  ],
+  purge: ['./src/**/*.{ts,tsx}', './index.html'],
   darkMode: false, // or 'media' or 'class',
   theme: {
     extend: {
