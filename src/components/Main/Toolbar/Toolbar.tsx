@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { Form } from 'components';
 import { useQuery } from 'hooks';
 import { useLocation, useParams } from 'react-router';
@@ -41,19 +42,22 @@ export const Toolbar = () => {
     </div>
   );
 
+  const baseClassName =
+    'flex items-center justify-between w-[calc(100%+15px)] transform translate-x-[-7.5px] px-[15px]';
+
   if (pathname === '/search')
     return (
-      <div className='h-[51px] shadow-md bg-white px-[15px] flex items-center justify-between'>
+      <div className={classNames('h-[51px] shadow-md bg-white', baseClassName)}>
         <div className='text-sm'>
           1 - 25 of 40 matches for{' '}
-          <span className='text-green'>"(categoryid:161) AND (category:"Router Bit Sets")"</span>
+          <span className='font-medium text-green'>"(categoryid:161) AND (category:"Router Bit Sets")"</span>
         </div>
         {toolbarRight}
       </div>
     );
 
   return (
-    <div className='h-[70px] border-b border-solid border-gray shadow-sm bg-gray-light-3 px-[15px] flex items-center justify-between'>
+    <div className={classNames('h-[70px] border-b border-solid border-gray shadow-sm bg-gray-light-3', baseClassName)}>
       <h1>
         Lathes - Metalworking
         <span className='text-green'></span>

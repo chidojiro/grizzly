@@ -7,20 +7,7 @@ import { ClassName } from 'types';
 
 export type Props = ClassName & {};
 
-function checkFont(strFamily: any) {
-  var objDiv = document.createElement('div');
-
-  objDiv.style.fontFamily = strFamily;
-  objDiv.appendChild(document.createTextNode('FONT TEST'));
-
-  if (window.getComputedStyle) {
-    return window.getComputedStyle(objDiv, null).getPropertyValue('font-family') === strFamily;
-  }
-
-  return (objDiv as any).currentStyle.fontFamily === strFamily;
-}
-
-const Search = ({ className }: Props) => {
+export const Search = ({ className }: Props) => {
   const [isFocused, setIsFocused] = React.useState(false);
 
   return (
@@ -31,15 +18,13 @@ const Search = ({ className }: Props) => {
         className
       )}>
       <input
-        className='w-full px-4 outline-none bg-gray placeholder-black::placeholder'
+        className='w-full px-4 font-medium text-black outline-none bg-gray placeholder-black::placeholder'
         placeholder='Search Products'
         onBlur={() => setIsFocused(false)}
         onFocus={() => setIsFocused(true)}></input>
-      <div className='flex items-center justify-center flex-shrink-0 h-full px-3 bg-green'>
+      <div className='flex items-center justify-center flex-shrink-0 h-full px-3 cursor-pointer bg-green'>
         <FontAwesomeIcon icon={faSearch} className='text-white' />
       </div>
     </div>
   );
 };
-
-export default Search;

@@ -27,7 +27,7 @@ const palette = {
   'green-dark-1': '#096a5a',
   'red-dark-1': 'rgb(174, 1, 1)',
   red: '#d71a20',
-  'red-light-1': '#d71a20',
+  'red-light-1': '#ec1f27',
   black: '#212529',
   white: '#fff',
   gray: '#ccc',
@@ -53,8 +53,9 @@ const fontWeight = {
 };
 
 const fontFamily = {
-  avantgardeMedium: 'avantgarde_medium',
-  avantgardeBold: 'avantgardebold',
+  normal: 'avantgarde_normalbook',
+  medium: 'avantgarde_medium',
+  bold: 'avantgardebold',
 };
 
 const screens = {

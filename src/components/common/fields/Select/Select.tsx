@@ -52,7 +52,7 @@ export const Select = React.forwardRef(
           })}>
           <div className='text-gray-light-1'>{label}</div>
           <div className='text-gray-dark-1'>{selectedOption?.label}</div>
-          <FontAwesomeIcon icon={faCaretDown} className='absolute top-1 right-2 text-gray-light-1' />
+          <FontAwesomeIcon icon={faCaretDown} className='absolute top-1 right-1.5 text-gray-light-1' />
         </div>
       </div>
     );

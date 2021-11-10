@@ -3,7 +3,7 @@ import { FilterBox } from './FilterBox';
 
 export const Sidebar = () => {
   return (
-    <div className='w-[250px] border-r-2 border-solid border-gray-light-3 text-[13px]'>
+    <div className='w-[250px] border-r-2 border-solid border-gray-light-3 text-[13px] flex-shrink-0'>
       <FilterBox>
         <Form.CheckboxGroup name='price'>
           <FilterBox.Title>Price</FilterBox.Title>

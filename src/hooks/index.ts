@@ -6,3 +6,4 @@ export * from './useScrollToTop';
 export * from './useSwrWithTrigger';
 export * from './useVisibilityControl';
 export * from './useControllable';
+export * from './usePagination';

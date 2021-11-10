@@ -69,7 +69,7 @@ export const useQuery = (options?: UseQueryOptions) => {
   );
 
   const set = React.useCallback(
-    (param1: string | Record<string, string | string[]>, param2?: string | string[]) => {
+    (param1: string | Record<string, string | string[]>, param2?: string | string[] | number) => {
       // can't use search from useLocation due to closure issue
       const currentQueryParams = initUrlQueryParams();
 

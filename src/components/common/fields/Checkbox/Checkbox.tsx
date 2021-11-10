@@ -34,10 +34,10 @@ export const Checkbox = React.forwardRef(
       <label
         className={classNames(
           'gl-checkbox',
-          'flex items-center cursor-pointer whitespace-pre-line',
+          'flex items-center cursor-pointer whitespace-pre-line hover:text-green',
           { 'text-error': error },
           { 'text-dark-gray-2': !className?.includes('text-black') },
-          { 'font-avantgardeBold': isChecked },
+          { 'font-bold': isChecked },
           className
         )}>
         <div className='flex items-center mr-2'>
@@ -53,7 +53,7 @@ export const Checkbox = React.forwardRef(
           />
           <div
             className={classNames(
-              'relative w-4 h-4 flex items-center justify-center rounded-sm border border-solid  border-gray',
+              'relative w-4 h-4 flex items-center justify-center rounded-sm border border-solid border-gray',
               {
                 'bg-green border-green': isChecked,
               }
