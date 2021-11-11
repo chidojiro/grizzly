@@ -13,17 +13,17 @@ export const Search = ({ className }: Props) => {
   return (
     <div
       className={classNames(
-        'h-11 flex rounded-sm overflow-hidden mx-7',
-        { 'ring ring-offset ring-offset-blue-light-1': isFocused },
+        'tw-h-11 tw-flex tw-rounded-sm tw-overflow-hidden tw-mx-7',
+        { 'tw-ring tw-ring-offset tw-ring-offset-blue-light-1': isFocused },
         className
       )}>
       <input
-        className='w-full px-4 font-medium text-black outline-none bg-gray placeholder-black::placeholder'
+        className='tw-w-full tw-px-4 tw-font-medium tw-text-black tw-outline-none tw-bg-gray'
         placeholder='Search Products'
         onBlur={() => setIsFocused(false)}
         onFocus={() => setIsFocused(true)}></input>
-      <div className='flex items-center justify-center flex-shrink-0 h-full px-3 cursor-pointer bg-green'>
-        <FontAwesomeIcon icon={faSearch} className='text-white' />
+      <div className='tw-flex tw-items-center tw-justify-center tw-flex-shrink-0 tw-h-full tw-px-3 tw-cursor-pointer tw-bg-green'>
+        <FontAwesomeIcon icon={faSearch} className='tw-text-white' />
       </div>
     </div>
   );

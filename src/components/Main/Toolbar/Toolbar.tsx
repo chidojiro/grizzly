@@ -24,26 +24,26 @@ export const Toolbar = () => {
   const { pathname } = useLocation();
 
   const toolbarRight = (
-    <div className='flex'>
+    <div className='tw-flex'>
       <Form.Select
-        name='pageSize'
+        name='size'
         label='Page Size'
         options={pageSizeOptions}
         defaultValue={pageSizeOptions[0].value}
-        className='flex-shrink-0 border-r border-solid rounded border-gray'
+        className='tw-flex-shrink-0 tw-border-r tw-border-solid tw-rounded tw-border-gray'
       />
       <Form.Select
         name='sortBy'
         options={sortByOptions}
         label='Sort By'
         defaultValue={sortByOptions[0].value}
-        className='flex-shrink-0 border-r border-solid rounded border-gray'
+        className='tw-flex-shrink-0 tw-border-r tw-border-solid tw-rounded tw-border-gray'
       />
     </div>
   );
 
   const baseClassName =
-    'flex items-center justify-between w-[calc(100%+15px)] transform translate-x-[-7.5px] px-[15px]';
+    'tw-flex tw-items-center tw-justify-between tw-w-[calc(100%+15px)] tw-transform tw-translate-x-[-7.5px] tw-px-[15px]';
 
   if (pathname === '/search')
     return (
@@ -57,10 +57,14 @@ export const Toolbar = () => {
     );
 
   return (
-    <div className={classNames('h-[70px] border-b border-solid border-gray shadow-sm bg-gray-light-3', baseClassName)}>
+    <div
+      className={classNames(
+        'tw-h-[70px] tw-border-b tw-border-solid tw-border-gray tw-shadow-sm tw-bg-gray-light-3',
+        baseClassName
+      )}>
       <h1>
         Lathes - Metalworking
-        <span className='text-green'></span>
+        <span className='tw-text-green'></span>
       </h1>
       {toolbarRight}
     </div>

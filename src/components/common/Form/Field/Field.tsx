@@ -38,8 +38,8 @@ export const Field = ({
   } = useController({ name, rules });
 
   React.useEffect(() => {
-    if (defaultValue) {
-      setValue(name, defaultValue, { shouldDirty: false });
+    if ((defaultValue || emptyValue) && !value) {
+      setValue(name, defaultValue || emptyValue, { shouldDirty: false });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

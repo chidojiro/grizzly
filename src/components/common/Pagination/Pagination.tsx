@@ -22,11 +22,15 @@ export const Pagination = (props: Props) => {
   };
 
   return (
-    <div className='search-pagination flex items-center h-[33px] gap-1 mx-auto w-fit'>
+    <div className='search-pagination tw-flex tw-items-center tw-h-[33px] tw-gap-1 tw-mx-auto tw-w-fit'>
       {items.map(({ type, disabled, onClick, page, selected }, idx) => (
         <button
           type='button'
-          className={classNames('btn btn-default !text-[13px]', { active: selected, 'search-page': type === 'page' })}
+          className={classNames('btn btn-default !tw-text-[13px]', {
+            active: selected,
+            'search-page': type === 'page',
+            'tw-cursor-default': disabled,
+          })}
           key={type + page}
           onClick={onClick}
           disabled={disabled}>

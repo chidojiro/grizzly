@@ -40,8 +40,19 @@ export function useControllable<T>({
 
   const UncontrolledState = React.useMemo(() => [value, _setValue], [_setValue, value]);
 
-  if (isControlled)
-    return [valueAs ? valueAs(valueProp as any) : valueProp, (e: any) => onChange?.(changeAs ? changeAs(e) : e)];
+  if (isControlled) {
+    const _value = valueAs ? valueAs(valueProp as any) : valueProp;
+
+    const _setValue = (e: any) => {
+      let _newValue = e;
+
+      if (isFunction(e)) _newValue = e(_value);
+
+      onChange?.(changeAs ? changeAs(_newValue) : _newValue);
+    };
+
+    return [_value, _setValue];
+  }
 
   return UncontrolledState;
 }

@@ -11,9 +11,9 @@ const StyledBadgeEdge = styled.div`
 
 export const Badge = () => {
   return (
-    <div className='absolute top-0 left-0 flex text-white text-[13px]'>
-      <div className='px-2 py-1 uppercase bg-red-light-1'>On Sale</div>
-      <StyledBadgeEdge className='origin-left transform scale-x-90 bg-red-light-1' />
+    <div className='tw-absolute tw-top-0 tw-left-0 tw-flex tw-text-white tw-text-[13px]'>
+      <div className='tw-px-2 tw-py-1 tw-uppercase tw-bg-red-light-1'>On Sale</div>
+      <StyledBadgeEdge className='tw-origin-left tw-transform tw-scale-x-90 tw-bg-red-light-1' />
     </div>
   );
 };

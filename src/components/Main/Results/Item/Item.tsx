@@ -16,18 +16,20 @@ export const Item = () => {
 
   return (
     <div
-      className='py-7.5 pr-4 border-b border-solid border-gray relative font-medium cursor-pointer'
+      className='tw-py-7.5 tw-pr-4 tw-border-b tw-border-solid tw-border-gray tw-relative tw-font-medium tw-cursor-pointer'
       onMouseOver={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
       <img src='https://cdn0.grizzly.com/pics/jpeg288/g/g0509g-161780729153902a3b854bdba72d6077.jpg' />
-      <div className='text-green font-bold text-[13px]'>In Stock</div>
+      <div className='tw-text-green tw-font-bold tw-text-[13px]'>In Stock</div>
       <StyleTitle
-        className={classNames('text-[16px] uppercase overflow-ellipsis overflow-hidden', { underline: isHovered })}>
+        className={classNames('tw-text-[16px] tw-uppercase tw-overflow-ellipsis tw-overflow-hidden', {
+          underline: isHovered,
+        })}>
         16" x 40" 3-Phase Gunsmithing Metal Lathe (G0509G)
       </StyleTitle>
-      <div className='flex text-xl text-red-dark-1'>
-        <span className='transform scale-50 translate-x-1 -translate-y-1'>$</span>12,500<span>.</span>
-        <span className='transform scale-50 -translate-x-1 -translate-y-1'>00</span>
+      <div className='tw-flex tw-text-xl tw-text-red-dark-1'>
+        <span className='tw-transform tw-scale-50 tw-translate-x-1 tw--translate-y-1'>$</span>12,500<span>.</span>
+        <span className='tw-transform tw-scale-50 tw--translate-x-1 tw--translate-y-1'>00</span>
       </div>
       <Badge />
     </div>

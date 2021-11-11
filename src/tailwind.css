@@ -33,7 +33,7 @@
   }
 
   html {
-    @apply box-border font-normal;
+    @apply tw-box-border tw-font-normal;
   }
 
   ::before,
@@ -108,12 +108,12 @@
   }
 
   p {
-    @apply mb-3;
+    @apply tw-mb-3;
   }
 }
 
 @layer utilities {
   .minimized {
-    @apply h-0 w-0 border-none outline-none m-0 p-0 absolute !important;
+    @apply tw-h-0 tw-w-0 tw-border-none tw-outline-none tw-m-0 tw-p-0 tw-absolute !important;
   }
 }

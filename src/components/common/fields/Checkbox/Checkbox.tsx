@@ -34,15 +34,15 @@ export const Checkbox = React.forwardRef(
       <label
         className={classNames(
           'gl-checkbox',
-          'flex items-center cursor-pointer whitespace-pre-line hover:text-green',
-          { 'text-error': error },
-          { 'text-dark-gray-2': !className?.includes('text-black') },
-          { 'font-bold': isChecked },
+          'tw-flex tw-items-center tw-cursor-pointer tw-whitespace-pre-line tw-hover:text-green',
+          { 'tw-text-error': error },
+          { 'tw-text-dark-gray-2': !className?.includes('tw-text-black') },
+          { 'tw-font-bold': isChecked },
           className
         )}>
-        <div className='flex items-center mr-2'>
+        <div className='tw-flex tw-items-center tw-mr-2'>
           <input
-            className='w-0 h-0 overflow-hidden'
+            className='tw-w-0 tw-h-0 tw-overflow-hidden'
             type='checkbox'
             {...restProps}
             ref={ref}
@@ -53,12 +53,12 @@ export const Checkbox = React.forwardRef(
           />
           <div
             className={classNames(
-              'relative w-4 h-4 flex items-center justify-center rounded-sm border border-solid border-gray',
+              'tw-relative tw-w-4 tw-h-4 tw-flex tw-items-center tw-justify-center tw-rounded-sm tw-border tw-border-solid tw-border-[#aaa]',
               {
-                'bg-green border-green': isChecked,
+                'tw-bg-green !tw-border-green': isChecked,
               }
             )}>
-            <FontAwesomeIcon icon={faCheck} className='text-white' />
+            <FontAwesomeIcon icon={faCheck} className='tw-text-white' />
           </div>
         </div>
         {label}

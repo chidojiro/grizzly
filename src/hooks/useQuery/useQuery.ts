@@ -46,8 +46,12 @@ export const useQuery = (options?: UseQueryOptions) => {
     [initPersistedQueryParams]
   );
 
-  const getAll = React.useCallback((key: string | string[]): string[] | Record<string, string[]> => {
+  const getAll = React.useCallback((key?: string | string[]): string[] | Record<string, string[]> => {
     const queryPrams = initUrlQueryParams();
+
+    if (!key) {
+      return Array.from(queryPrams.keys()).reduce((acc, cur) => ({ ...acc, [cur]: queryPrams.getAll(cur) }), {});
+    }
 
     if (typeof key === 'string') return queryPrams.getAll(key);
 
@@ -73,11 +77,11 @@ export const useQuery = (options?: UseQueryOptions) => {
       // can't use search from useLocation due to closure issue
       const currentQueryParams = initUrlQueryParams();
 
-      const addSingleValue = (param1: string, param2?: string | string[]) => {
+      const addSingleValue = (param1: string, param2?: string | string[] | number) => {
         if (!param2) return;
 
         if (!Array.isArray(param2)) {
-          currentQueryParams.set(param1, param2);
+          currentQueryParams.set(param1, param2.toString());
         } else {
           currentQueryParams.delete(param1);
           param2.forEach(p => currentQueryParams.append(param1, p));

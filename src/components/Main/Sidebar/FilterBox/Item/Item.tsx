@@ -6,8 +6,8 @@ type Props = Children;
 
 export const Item = ({ children }: Props) => {
   return (
-    <div className={classNames('flex items-center justify-between')}>
-      <div className='flex items-center cursor-pointer'>{children}</div>
+    <div className={classNames('tw-flex tw-items-center tw-justify-between')}>
+      <div className='tw-flex tw-items-center tw-cursor-pointer'>{children}</div>
     </div>
   );
 };

@@ -57,12 +57,12 @@ export const usePagination = ({
   const showingRange = resolveShowingRange();
 
   const next = React.useCallback(() => {
-    setPage(Math.min(page + 1, totalPage));
-  }, [page, setPage, totalPage]);
+    setPage((p: number) => Math.min(p + 1, totalPage));
+  }, [setPage, totalPage]);
 
   const prev = React.useCallback(() => {
-    setPage(Math.max(page - 1, 1));
-  }, [page, setPage]);
+    setPage((p: number) => Math.max(p - 1, 1));
+  }, [setPage]);
 
   const clickPage = React.useCallback(
     (page: number) => {

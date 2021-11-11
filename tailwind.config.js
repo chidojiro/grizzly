@@ -67,6 +67,7 @@ module.exports = {
   mode: 'jit',
   purge: ['./src/**/*.{ts,tsx}', './index.html'],
   darkMode: false, // or 'media' or 'class',
+  prefix: 'tw-',
   theme: {
     extend: {
       width: extendedSize,

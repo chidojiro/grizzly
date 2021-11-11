@@ -29,7 +29,7 @@ export const Select = React.forwardRef(
       <div
         className={classNames(
           'gl-select',
-          'relative cursor-default w-77 text-sm py-[5px] pl-[15px] bg-white h-[51px]',
+          'tw-relative tw-cursor-default tw-w-77 tw-text-sm tw-py-[5px] tw-pl-[15px] tw-bg-white tw-h-[51px]',
           className
         )}>
         <select
@@ -37,7 +37,7 @@ export const Select = React.forwardRef(
           ref={ref}
           value={value}
           onChange={setValue}
-          className='absolute top-0 left-0 z-50 w-full h-full opacity-0 after:hidden'
+          className='tw-absolute tw-top-0 tw-left-0 tw-z-50 tw-w-full tw-h-full tw-opacity-0 tw-after:hidden'
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}>
           {options.map(({ value, label }) => (
@@ -47,12 +47,15 @@ export const Select = React.forwardRef(
           ))}
         </select>
         <div
-          className={classNames('absolute top-0 left-0 w-full h-full transition-all py-[5px] pr-[15px] pl-[5px]', {
-            'ring ring-offset ring-offset-blue-light-1': isFocused,
-          })}>
-          <div className='text-gray-light-1'>{label}</div>
-          <div className='text-gray-dark-1'>{selectedOption?.label}</div>
-          <FontAwesomeIcon icon={faCaretDown} className='absolute top-1 right-1.5 text-gray-light-1' />
+          className={classNames(
+            'tw-absolute tw-top-0 tw-left-0 tw-w-full tw-h-full tw-transition-all tw-py-[5px] tw-pr-[15px] tw-pl-[5px]',
+            {
+              'ring ring-offset ring-offset-blue-light-1': isFocused,
+            }
+          )}>
+          <div className='tw-text-gray-light-1'>{label}</div>
+          <div className='tw-text-gray-dark-1'>{selectedOption?.label}</div>
+          <FontAwesomeIcon icon={faCaretDown} className='tw-absolute tw-top-1 tw-right-1.5 tw-text-gray-light-1' />
         </div>
       </div>
     );
