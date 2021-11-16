@@ -10,7 +10,7 @@ type UseControllableProps<T> = {
   changeAs?: (value: any) => T;
 };
 
-function useControllable<T>({
+export function useControllable<T>({
   value: valueProp,
   onChange,
   defaultValue,
@@ -56,5 +56,3 @@ function useControllable<T>({
 
   return UncontrolledState;
 }
-
-export default useControllable;
