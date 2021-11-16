@@ -1,6 +1,6 @@
 import { LocalStorageUtils } from 'utils';
 import React from 'react';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 
 type UseQueryOptions = {
   watchedQueryKeys: string[];
@@ -10,27 +10,30 @@ type UseQueryOptions = {
 export const useQuery = (options?: UseQueryOptions) => {
   const history = useHistory();
 
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
 
   const { watchedQueryKeys, global } = options || {};
 
   const PERSIST_STORAGE_KEY = global ? `QUERY:*` : `QUERY:${pathname}`;
 
-  const initUrlQueryParams = () => {
-    return new URLSearchParams(window.location.search);
-  };
+  const initUrlQueryParams = React.useCallback(() => {
+    return new URLSearchParams(search);
+  }, [search]);
 
   const initPersistedQueryParams = React.useCallback(() => {
     return new URLSearchParams(LocalStorageUtils.get(PERSIST_STORAGE_KEY, ''));
   }, [PERSIST_STORAGE_KEY]);
 
-  const get = React.useCallback((key: string | string[]): string | Record<string, string | null> | null => {
-    const queryPrams = initUrlQueryParams();
+  const get = React.useCallback(
+    (key: string | string[]): string | Record<string, string | null> | null => {
+      const queryPrams = initUrlQueryParams();
 
-    if (typeof key === 'string') return queryPrams.get(key);
+      if (typeof key === 'string') return queryPrams.get(key);
 
-    return key.reduce((acc, cur) => ({ ...acc, [cur]: queryPrams.get(cur) }), {} as Record<string, string | null>);
-  }, []);
+      return key.reduce((acc, cur) => ({ ...acc, [cur]: queryPrams.get(cur) }), {} as Record<string, string | null>);
+    },
+    [initUrlQueryParams]
+  );
 
   const getPersisted = React.useCallback(
     (key: string | string[]): string | Record<string, string | null> | null => {
@@ -46,17 +49,20 @@ export const useQuery = (options?: UseQueryOptions) => {
     [initPersistedQueryParams]
   );
 
-  const getAll = React.useCallback((key?: string | string[]): string[] | Record<string, string[]> => {
-    const queryPrams = initUrlQueryParams();
+  const getAll = React.useCallback(
+    (key?: string | string[]): string[] | Record<string, string[]> => {
+      const queryPrams = initUrlQueryParams();
 
-    if (!key) {
-      return Array.from(queryPrams.keys()).reduce((acc, cur) => ({ ...acc, [cur]: queryPrams.getAll(cur) }), {});
-    }
+      if (!key) {
+        return Array.from(queryPrams.keys()).reduce((acc, cur) => ({ ...acc, [cur]: queryPrams.getAll(cur) }), {});
+      }
 
-    if (typeof key === 'string') return queryPrams.getAll(key);
+      if (typeof key === 'string') return queryPrams.getAll(key);
 
-    return key.reduce((acc, cur) => ({ ...acc, [cur]: queryPrams.getAll(cur) }), {} as Record<string, string[]>);
-  }, []);
+      return key.reduce((acc, cur) => ({ ...acc, [cur]: queryPrams.getAll(cur) }), {} as Record<string, string[]>);
+    },
+    [initUrlQueryParams]
+  );
 
   const getAllPersisted = React.useCallback(
     (key: string | string[]): string[] | Record<string, string[]> => {
@@ -96,7 +102,7 @@ export const useQuery = (options?: UseQueryOptions) => {
 
       history.push({ pathname, search: currentQueryParams.toString() });
     },
-    [history, pathname]
+    [history, initUrlQueryParams, pathname]
   );
 
   const remove = React.useCallback(
@@ -116,7 +122,7 @@ export const useQuery = (options?: UseQueryOptions) => {
 
       history.push({ pathname, search: currentQueryParams.toString() });
     },
-    [PERSIST_STORAGE_KEY, history, initPersistedQueryParams, pathname, watchedQueryKeys]
+    [PERSIST_STORAGE_KEY, history, initPersistedQueryParams, initUrlQueryParams, pathname, watchedQueryKeys]
   );
 
   const clear = React.useCallback(() => {

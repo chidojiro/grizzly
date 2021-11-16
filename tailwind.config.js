@@ -23,6 +23,7 @@ const extendedSize = {
 
 const palette = {
   yellow: '#ffd032',
+  orange: '#f28b29',
   green: 'rgb(32, 148, 98)',
   'green-dark-1': '#096a5a',
   'red-dark-1': 'rgb(174, 1, 1)',

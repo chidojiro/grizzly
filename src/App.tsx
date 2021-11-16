@@ -1,17 +1,17 @@
 import { Form, Main } from 'components';
+import { SearchParamsProvider } from 'provider';
 import { useForm } from 'react-hook-form';
-import { BrowserRouter } from 'react-router-dom';
 import './tailwind.css';
 
 function App() {
-  const methods = useForm();
+  const methods = useForm({ defaultValues: { filters: {} } });
 
   return (
-    <BrowserRouter>
-      <Form methods={methods} className='tw-z-0 tw-max-w-full'>
+    <Form methods={methods} className='tw-z-0 tw-max-w-full'>
+      <SearchParamsProvider>
         <Main />
-      </Form>
-    </BrowserRouter>
+      </SearchParamsProvider>
+    </Form>
   );
 }
 

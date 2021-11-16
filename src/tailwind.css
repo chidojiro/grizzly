@@ -110,6 +110,10 @@
   p {
     @apply tw-mb-3;
   }
+
+  a {
+    @apply !tw-no-underline hover:tw-text-black;
+  }
 }
 
 @layer utilities {

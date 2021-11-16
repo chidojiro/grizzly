@@ -1,37 +1,43 @@
 import { Pagination } from 'components';
-import { useQuery } from 'hooks';
+import { useQuery, useSearch, useSearchParams } from 'hooks';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Results } from './Results';
 import { Sidebar } from './Sidebar';
 import { Toolbar } from './Toolbar';
-import querystring from 'querystring';
 
 export const Main = () => {
   const query = useQuery();
-
   const pageQuery = query.get('p');
-
+  const perPageQuery = query.get('size');
   const page = pageQuery ? +pageQuery : 1;
+  const perPage = perPageQuery ? +perPageQuery : 25;
+
+  const { data, isValidating } = useSearch();
+  const {
+    searchResponse: { totalResults },
+  } = data ?? { searchResponse: { totalResults: 0 } };
+
+  const { q } = useSearchParams();
+
   const handlePageChange = (page: number) => {
     query.set('p', page);
   };
 
-  const { watch, reset, setValue } = useFormContext();
+  const { watch, setValue } = useFormContext();
 
   const values = watch();
 
-  console.log(values);
-
   React.useEffect(() => {
-    const { size, sortBy, ...restValues } = values;
+    const { size, sortBy, filters } = values;
 
-    const fq = Object.keys(restValues).reduce((acc, curKey) => {
-      return acc + restValues[curKey].reduce((accCurKey: string, cur: string) => accCurKey + `(${curKey}:${cur})`, '');
+    const fq = Object.keys(filters).reduce((acc, curKey) => {
+      return acc + filters[curKey].reduce((accCurKey: string, cur: string) => accCurKey + `(${curKey}:${cur})`, '');
     }, '');
 
     query.set({ fq, size, sortBy });
-  }, [JSON.stringify(values)]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query, JSON.stringify(values)]);
 
   React.useEffect(() => {
     const size = query.get('size');
@@ -51,10 +57,18 @@ export const Main = () => {
       return acc;
     }, {});
 
-    console.log(fq, rawFilters, filters);
-
-    Object.keys(filters).forEach(key => setValue(key, filters[key]));
+    Object.keys(filters).forEach(key => setValue(`filters.${key}`, filters[key]));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (!data && isValidating) return null;
+
+  if (!data?.searchResponse.results?.length && !isValidating)
+    return (
+      <div className='tw-font-medium tw-text-[21px] tw-text-center tw-text-gray-light-1 mt-3'>
+        We're sorry, we couldn't find any results for {q}
+      </div>
+    );
 
   return (
     <div>
@@ -63,7 +77,7 @@ export const Main = () => {
         <Sidebar />
         <Results />
       </div>
-      <Pagination totalRecord={100} perPage={25} onChange={handlePageChange} page={page} />
+      <Pagination totalRecord={+totalResults || 0} perPage={perPage} onChange={handlePageChange} page={page} />
     </div>
   );
 };

@@ -1,6 +1,9 @@
 import styled from '@emotion/styled';
 import classNames from 'classnames';
 import React from 'react';
+import { SearchResult } from 'types';
+import { Price } from './Price';
+import { Availability } from './Availability';
 import { Badge } from './Badge';
 
 const StyleTitle = styled.div`
@@ -11,27 +14,47 @@ const StyleTitle = styled.div`
   -webkit-box-orient: vertical;
 `;
 
-export const Item = () => {
+type Props = {
+  data: SearchResult['values'];
+};
+
+export const Item = ({ data }: Props) => {
   const [isHovered, setIsHovered] = React.useState(false);
 
+  const {
+    image,
+    title,
+    url,
+    price: { single: originalPrice },
+    absolutediscount: { single: absolutediscount },
+  } = data;
+
+  const price = +originalPrice - +absolutediscount;
+
   return (
-    <div
+    <a
+      href={url.single}
       className='tw-py-7.5 tw-pr-4 tw-border-b tw-border-solid tw-border-gray tw-relative tw-font-medium tw-cursor-pointer'
       onMouseOver={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
-      <img src='https://cdn0.grizzly.com/pics/jpeg288/g/g0509g-161780729153902a3b854bdba72d6077.jpg' />
-      <div className='tw-text-green tw-font-bold tw-text-[13px]'>In Stock</div>
+      <img src={image.single} alt='' />
+      <Availability data={data} />
       <StyleTitle
-        className={classNames('tw-text-[16px] tw-uppercase tw-overflow-ellipsis tw-overflow-hidden', {
-          underline: isHovered,
+        className={classNames('tw-text-[16px] tw-uppercase tw-overflow-ellipsis tw-overflow-hidden tw-min-h-12', {
+          'tw-underline': isHovered,
         })}>
-        16" x 40" 3-Phase Gunsmithing Metal Lathe (G0509G)
+        {title.single}
       </StyleTitle>
-      <div className='tw-flex tw-text-xl tw-text-red-dark-1'>
-        <span className='tw-transform tw-scale-50 tw-translate-x-1 tw--translate-y-1'>$</span>12,500<span>.</span>
-        <span className='tw-transform tw-scale-50 tw--translate-x-1 tw--translate-y-1'>00</span>
-      </div>
-      <Badge />
-    </div>
+      {+absolutediscount ? (
+        <div className='tw-flex tw-flex-wrap tw-items-end'>
+          <Price price={+originalPrice} obsolete />
+          <Price price={price} className='tw-transform tw--translate-x-3' />
+        </div>
+      ) : (
+        <Price price={price} />
+      )}
+
+      <Badge data={data} />
+    </a>
   );
 };

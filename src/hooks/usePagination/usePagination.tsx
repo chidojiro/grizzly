@@ -75,7 +75,7 @@ export const usePagination = ({
     () => ({
       type: 'next',
       onClick: next,
-      disabled: page === totalPage,
+      disabled: page >= totalPage,
     }),
     [next, page, totalPage]
   );
@@ -129,9 +129,9 @@ export const usePagination = ({
     () => ({
       items: [
         prevItem,
-        showingRange[0] !== 1 && [firstPageItem, ellipsisItem],
+        ![1, undefined].includes(showingRange[0]) && [firstPageItem, ellipsisItem],
         showingRangeItems,
-        showingRange[showingRange.length - 1] !== totalPage && [ellipsisItem, lastPageItem],
+        ![totalPage, undefined].includes(showingRange[showingRange.length - 1]) && [ellipsisItem, lastPageItem],
         nextItem,
       ]
         .flat()

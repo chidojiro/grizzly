@@ -1,5 +1,5 @@
 import isFunction from 'lodash/isFunction';
-import { Fn } from 'types';
+import { Fn } from './../../types';
 import React from 'react';
 
 type UseControllableProps<T> = {
@@ -10,7 +10,7 @@ type UseControllableProps<T> = {
   changeAs?: (value: any) => T;
 };
 
-export function useControllable<T>({
+function useControllable<T>({
   value: valueProp,
   onChange,
   defaultValue,
@@ -18,21 +18,20 @@ export function useControllable<T>({
   changeAs,
 }: UseControllableProps<T>): any {
   const isControlled = valueProp !== undefined && valueProp !== null;
+  const prevValueRef = React.useRef(valueProp);
 
   const [value, setValue] = React.useState(defaultValue);
 
   const _setValue = React.useCallback(
     (event: T | React.ChangeEvent<any> | Fn) => {
       const _value = (event as React.ChangeEvent<any>).target?.value ?? event;
-      debugger;
 
       if (isFunction(event)) {
         setValue(event(value));
-
-        return;
+      } else {
+        setValue(_value);
       }
 
-      setValue(_value);
       onChange?.(event);
     },
     [onChange, value]
@@ -46,9 +45,10 @@ export function useControllable<T>({
     const _setValue = (e: any) => {
       let _newValue = e;
 
-      if (isFunction(e)) _newValue = e(_value);
+      if (isFunction(e)) _newValue = e(prevValueRef.current);
 
       onChange?.(changeAs ? changeAs(_newValue) : _newValue);
+      prevValueRef.current = _newValue;
     };
 
     return [_value, _setValue];
@@ -56,3 +56,5 @@ export function useControllable<T>({
 
   return UncontrolledState;
 }
+
+export default useControllable;

@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import { Form } from 'components';
-import { useQuery } from 'hooks';
-import { useLocation, useParams } from 'react-router';
+import { useLocation } from 'react-router';
 import { Option } from 'types';
 
 const sortByOptions: Option[] = [
