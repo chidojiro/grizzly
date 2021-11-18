@@ -20,6 +20,7 @@ export type Props = {
 
 type UsePaginationReturn = {
   items: PaginationItem[];
+  showingRange: { from: number; to: number; total: number };
 };
 
 export const usePagination = ({
@@ -125,7 +126,7 @@ export const usePagination = ({
     [clickPage, page, showingRange]
   );
 
-  const returnValue = React.useMemo(
+  const returnValue = React.useMemo<UsePaginationReturn>(
     () => ({
       items: [
         prevItem,
@@ -136,8 +137,21 @@ export const usePagination = ({
       ]
         .flat()
         .filter((item): item is PaginationItem => !!item),
+      showingRange: { from: (page - 1) * perPage + 1, to: Math.min(totalRecord, page * perPage), total: totalRecord },
     }),
-    [ellipsisItem, firstPageItem, lastPageItem, nextItem, prevItem, showingRange, showingRangeItems, totalPage]
+    [
+      ellipsisItem,
+      firstPageItem,
+      lastPageItem,
+      nextItem,
+      page,
+      perPage,
+      prevItem,
+      showingRange,
+      showingRangeItems,
+      totalPage,
+      totalRecord,
+    ]
   );
 
   return returnValue;

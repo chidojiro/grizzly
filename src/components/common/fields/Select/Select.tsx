@@ -50,7 +50,7 @@ export const Select = React.forwardRef(
           className={classNames(
             'tw-absolute tw-top-0 tw-left-0 tw-w-full tw-h-full tw-transition-all tw-py-[5px] tw-pr-[15px] tw-pl-[5px]',
             {
-              'ring ring-offset ring-offset-blue-light-1': isFocused,
+              'tw-ring tw-ring-blue-light-1 tw-ring-opacity-50': isFocused,
             }
           )}>
           <div className='tw-text-gray-light-1'>{label}</div>

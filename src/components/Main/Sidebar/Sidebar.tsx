@@ -1,23 +1,33 @@
-import { Checkbox, Form } from 'components';
-import { useSearch } from 'hooks';
-import { FilterBox } from './FilterBox';
+import { useSearch, useSearchParams } from 'hooks';
+import React from 'react';
+import { FilterInfo } from 'types';
+import { CheckboxGroupFilterBox } from './CheckboxGroupFilterBox';
 
 export const Sidebar = () => {
-  const { filtersOptions } = useSearch();
+  const { filtersInfo } = useSearch();
+
+  const { filters } = useSearchParams();
+
+  const [filterFieldsWithSomeSelected, filterFieldsWithNoneSelected] = filtersInfo.reduce<FilterInfo[][]>(
+    (acc, cur) => {
+      if (filters[cur.name]?.length) {
+        acc[0].push(cur);
+      } else {
+        acc[1].push(cur);
+      }
+
+      return acc;
+    },
+    [[], []]
+  );
 
   return (
     <div className='tw-w-[250px] tw-border-r-2 tw-border-solid tw-border-gray-light-3 tw-text-[13px] tw-flex-shrink-0'>
-      {Object.keys(filtersOptions).map(fieldName => (
-        <FilterBox key={fieldName}>
-          <Form.CheckboxGroup name={`filters.${fieldName}`} defaultValue={[]}>
-            <FilterBox.Title>{fieldName}</FilterBox.Title>
-            {filtersOptions[fieldName].map(option => (
-              <FilterBox.Item key={option}>
-                <Checkbox label={option} value={option} />
-              </FilterBox.Item>
-            ))}
-          </Form.CheckboxGroup>
-        </FilterBox>
+      {filterFieldsWithSomeSelected.map(({ label, name, options }) => (
+        <CheckboxGroupFilterBox key={name} name={`filters.${name}`} options={options} title={label} />
+      ))}
+      {filterFieldsWithNoneSelected.map(({ label, name, options }) => (
+        <CheckboxGroupFilterBox key={name} name={`filters.${name}`} options={options} title={label} />
       ))}
     </div>
   );

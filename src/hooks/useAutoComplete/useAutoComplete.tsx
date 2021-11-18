@@ -1,11 +1,19 @@
 import { SearchApis } from 'apis';
 import { metadata } from 'consts';
+import debounce from 'lodash/debounce';
 import React from 'react';
 import useSWR from 'swr';
 import { SearchAutoCompleteRequestPayload } from 'types';
 
 export const useAutoComplete = () => {
-  const [q, setQ] = React.useState('');
+  const [q, _setQ] = React.useState('');
+  const [debouncedQ, setDebouncedQ] = React.useState(q);
+
+  const debouncedSetQ = debounce((q: string) => setDebouncedQ(q), 300);
+  const setQ = React.useRef((q: string) => {
+    _setQ(q);
+    debouncedSetQ(q);
+  });
 
   const resolvePayload = (q: string): SearchAutoCompleteRequestPayload => {
     return {
@@ -23,14 +31,16 @@ export const useAutoComplete = () => {
           },
         },
         pipeline: { name: 'autocomplete' },
-        values: { q: 's', resultsPerPage: '5', fields: '' },
+        values: { q, resultsPerPage: '5', fields: '' },
       },
     };
   };
 
-  const { data, ...restSwrReturn } = useSWR(['/autocomplete', q], (q: string) =>
-    SearchApis.getSuggestions(resolvePayload(q))
+  const { data, ...restSwrReturn } = useSWR(
+    debouncedQ && ['/autocomplete', debouncedQ],
+    () => SearchApis.getSuggestions(resolvePayload(debouncedQ)),
+    {}
   );
 
-  return { ...restSwrReturn, data: data?.values['q.suggestions']?.split(',') || [], q, setQ };
+  return { ...restSwrReturn, data: data?.values?.['q.suggestions']?.split(',') || [], q, setQ: setQ.current };
 };

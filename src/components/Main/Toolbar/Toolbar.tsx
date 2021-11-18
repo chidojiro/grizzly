@@ -2,6 +2,9 @@ import classNames from 'classnames';
 import { Form } from 'components';
 import { useLocation } from 'react-router';
 import { Option } from 'types';
+import { navigating } from 'consts';
+import groupBy from 'lodash/groupBy';
+import { usePagination, useSearch, useSearchParams } from 'hooks';
 
 const sortByOptions: Option[] = [
   { value: 'relevance+desc', label: 'Sort: Best Match' },
@@ -19,8 +22,22 @@ const pageSizeOptions: Option[] = [
   { value: '100', label: '100 Items Per Page' },
 ];
 
+const navigatingGroupedByVirtualPath = groupBy(navigating, 'VirtualPath');
+
 export const Toolbar = () => {
   const { pathname } = useLocation();
+
+  const { data } = useSearch();
+
+  const {
+    searchResponse: { totalResults },
+  } = data || { searchResponse: {} };
+
+  const { page, perPage, q } = useSearchParams();
+
+  const { showingRange } = usePagination({ totalRecord: totalResults ? +totalResults : 0, page, perPage });
+
+  const foundNavigating = navigatingGroupedByVirtualPath[pathname]?.[0];
 
   const toolbarRight = (
     <div className='tw-flex'>
@@ -46,10 +63,10 @@ export const Toolbar = () => {
 
   if (pathname === '/search')
     return (
-      <div className={classNames('h-[51px] shadow-md bg-white', baseClassName)}>
-        <div className='text-sm'>
-          1 - 25 of 40 matches for{' '}
-          <span className='font-medium text-green'>"(categoryid:161) AND (category:"Router Bit Sets")"</span>
+      <div className={classNames('tw-h-[51px] tw-shadow-md tw-bg-white', baseClassName)}>
+        <div className='tw-text-sm'>
+          {showingRange.from} - {showingRange.to} of {showingRange.total} matches for{' '}
+          <span className='tw-font-medium tw-text-green'>"{q}"</span>
         </div>
         {toolbarRight}
       </div>
@@ -62,7 +79,7 @@ export const Toolbar = () => {
         baseClassName
       )}>
       <h1>
-        Lathes - Metalworking
+        {foundNavigating.DisplayText}
         <span className='tw-text-green'></span>
       </h1>
       {toolbarRight}

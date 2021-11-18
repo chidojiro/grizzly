@@ -34,7 +34,7 @@ export const Item = ({ data }: Props) => {
   return (
     <a
       href={url.single}
-      className='tw-py-7.5 tw-pr-4 tw-border-b tw-border-solid tw-border-gray tw-relative tw-font-medium tw-cursor-pointer'
+      className='tw-py-7.5 tw-pr-4 tw-border-b tw-border-solid tw-border-gray tw-relative tw-font-medium tw-cursor-pointer !tw-text-black hover:!tw-no-underline'
       onMouseOver={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
       <img src={image.single} alt='' />

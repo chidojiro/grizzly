@@ -2,16 +2,19 @@ import classNames from 'classnames';
 import { ClassName } from 'types';
 
 const formatNumber = (num: number) => {
-  const segments: number[] = [];
+  const segments: string[] = [];
 
-  const splitSegments = (remainingNum: number) => {
-    if (remainingNum < 1) return;
+  const splitSegments = (remainingNum: string) => {
+    if (remainingNum.length <= 3) {
+      segments.unshift(remainingNum);
+      return;
+    }
 
-    segments.unshift(remainingNum % 1000);
-    splitSegments(Math.floor(remainingNum / 1000));
+    segments.unshift(remainingNum.slice(remainingNum.length - 3));
+    splitSegments(remainingNum.slice(0, remainingNum.length - 3));
   };
 
-  splitSegments(num);
+  splitSegments(num.toString());
 
   return segments.join(',');
 };
@@ -22,7 +25,7 @@ type Props = ClassName & {
 };
 
 export const Price = ({ price, obsolete, className }: Props) => {
-  const [dollars, cent] = price.toString().split('.');
+  const [dollars, cent] = price.toFixed(2).toString().split('.');
 
   return (
     <div

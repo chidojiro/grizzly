@@ -7,3 +7,8 @@ export type Children = {
 };
 
 export type Fn = (...args: any[]) => any;
+
+export type Option = {
+  label: string;
+  value: string;
+};

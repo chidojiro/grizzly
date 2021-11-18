@@ -78,7 +78,7 @@ export const useQuery = (options?: UseQueryOptions) => {
     [initPersistedQueryParams]
   );
 
-  const set = React.useCallback(
+  const form = React.useCallback(
     (param1: string | Record<string, string | string[]>, param2?: string | string[] | number) => {
       // can't use search from useLocation due to closure issue
       const currentQueryParams = initUrlQueryParams();
@@ -100,9 +100,18 @@ export const useQuery = (options?: UseQueryOptions) => {
         Object.keys(param1).forEach(key => addSingleValue(key, param1[key]));
       }
 
-      history.push({ pathname, search: currentQueryParams.toString() });
+      return currentQueryParams.toString();
     },
-    [history, initUrlQueryParams, pathname]
+    [initUrlQueryParams]
+  );
+
+  const set = React.useCallback(
+    (param1: string | Record<string, string | string[]>, param2?: string | string[] | number) => {
+      const newQuery = form(param1, param2);
+
+      history.push({ pathname, search: newQuery });
+    },
+    [form, history, pathname]
   );
 
   const remove = React.useCallback(
@@ -136,6 +145,7 @@ export const useQuery = (options?: UseQueryOptions) => {
   const UseQueryReturn = React.useMemo(
     () => ({
       get,
+      form,
       set,
       remove,
       getPersisted,
@@ -144,7 +154,7 @@ export const useQuery = (options?: UseQueryOptions) => {
       getAll,
       getAllPersisted,
     }),
-    [get, set, remove, getPersisted, clear, clearPersisted, getAll, getAllPersisted]
+    [get, form, set, remove, getPersisted, clear, clearPersisted, getAll, getAllPersisted]
   );
 
   // sync query between URL and localStorage

@@ -1,24 +1,24 @@
 import { Pagination } from 'components';
+import { navigating } from 'consts';
 import { useQuery, useSearch, useSearchParams } from 'hooks';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
+import { useHistory, useLocation } from 'react-router';
 import { Results } from './Results';
 import { Sidebar } from './Sidebar';
 import { Toolbar } from './Toolbar';
+import { NoResults } from './NoResults';
 
 export const Main = () => {
   const query = useQuery();
-  const pageQuery = query.get('p');
-  const perPageQuery = query.get('size');
-  const page = pageQuery ? +pageQuery : 1;
-  const perPage = perPageQuery ? +perPageQuery : 25;
-
+  const { page, perPage, hasSelectedAnyFilters } = useSearchParams();
+  const history = useHistory();
   const { data, isValidating } = useSearch();
   const {
     searchResponse: { totalResults },
   } = data ?? { searchResponse: { totalResults: 0 } };
-
   const { q } = useSearchParams();
+  const { pathname } = useLocation();
 
   const handlePageChange = (page: number) => {
     query.set('p', page);
@@ -29,21 +29,29 @@ export const Main = () => {
   const values = watch();
 
   React.useEffect(() => {
+    const categoryPathNames = navigating.map(({ VirtualPath }) => VirtualPath);
     const { size, sortBy, filters } = values;
+
+    if (categoryPathNames.includes(pathname) && !hasSelectedAnyFilters) {
+      query.set({ size, sortBy });
+      return;
+    }
 
     const fq = Object.keys(filters).reduce((acc, curKey) => {
       return acc + filters[curKey].reduce((accCurKey: string, cur: string) => accCurKey + `(${curKey}:${cur})`, '');
     }, '');
 
-    query.set({ fq, size, sortBy });
+    const searchParams = query.form({ fq, size, sortBy, q });
+
+    history.push({ pathname: '/search', search: searchParams });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, JSON.stringify(values)]);
+  }, [JSON.stringify(values)]);
+
+  const size = query.get('size');
+  const sortBy = query.get('sortBy');
+  const fq = query.get('fq') as string;
 
   React.useEffect(() => {
-    const size = query.get('size');
-    const sortBy = query.get('sortBy');
-    const fq = query.get('fq') as string;
-
     setValue('size', size || '25');
     setValue('sortBy', sortBy || 'relevance+desc');
 
@@ -57,18 +65,10 @@ export const Main = () => {
       return acc;
     }, {});
 
-    Object.keys(filters).forEach(key => setValue(`filters.${key}`, filters[key]));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    setValue('filters', filters);
+  }, [fq, setValue, size, sortBy]);
 
-  if (!data && isValidating) return null;
-
-  if (!data?.searchResponse.results?.length && !isValidating)
-    return (
-      <div className='tw-font-medium tw-text-[21px] tw-text-center tw-text-gray-light-1 mt-3'>
-        We're sorry, we couldn't find any results for {q}
-      </div>
-    );
+  if (!data?.searchResponse.results?.length && !isValidating) return <NoResults q={q} />;
 
   return (
     <div>
