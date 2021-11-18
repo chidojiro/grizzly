@@ -2,9 +2,9 @@ import { useSearch } from 'hooks';
 import { Item } from './Item';
 
 export const Results = () => {
-  const { data, isValidating } = useSearch();
+  const { data } = useSearch();
 
-  if (!data && !isValidating) return null;
+  if (!data) return null;
 
   return (
     <div>

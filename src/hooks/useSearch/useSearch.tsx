@@ -3,8 +3,9 @@ import { categorySegments, filterFields, metadata } from 'consts';
 import { useSearchParams } from 'hooks';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
+import { useHistory } from 'react-router';
 import useSWR from 'swr';
-import { SearchQueryRequestPayload, FilterInfo } from 'types';
+import { SearchQueryRequestPayload, FilterInfo, SearchQueryResponsePayload } from 'types';
 
 const countQueries = filterFields.map(({ name }) => name);
 
@@ -12,6 +13,8 @@ export const useSearch = () => {
   const { page, perPage, sortBy, q, hasSelectedFilter } = useSearchParams();
   const isSimpleQ = !q.startsWith('(') && !q.endsWith(')');
   const _q = q.replaceAll(/[()"]/g, '').replace('category', 'category1');
+  const [data, setData] = React.useState<SearchQueryResponsePayload>();
+  const history = useHistory();
 
   const destructQ = () => {
     if (isSimpleQ) return {};
@@ -104,9 +107,20 @@ export const useSearch = () => {
     [count, filterQuery, page, perPage, q, sortBy]
   );
 
-  const swrReturn = useSWR(['/search', JSON.stringify(payload)], () => SearchApis.get(payload));
+  const swrReturn = useSWR(['/search', JSON.stringify(payload)], () => SearchApis.get(payload), {
+    onError: () => {
+      history.push('/search');
+      window.location.reload();
+    },
+  });
 
-  const aggregateFilters = swrReturn.data?.searchResponse?.aggregateFilters || {};
+  // somehow swr doesn't keep stale data
+  // this is a workaround for that
+  React.useEffect(() => {
+    if (swrReturn.data) setData(swrReturn.data);
+  }, [swrReturn]);
+
+  const aggregateFilters = data?.searchResponse?.aggregateFilters || {};
 
   const filtersInfo = Object.keys(aggregateFilters).reduce<FilterInfo[]>((acc, curField) => {
     const [type, field] = curField.split('.');
@@ -152,7 +166,7 @@ export const useSearch = () => {
     ] as FilterInfo[];
   }, []);
 
-  const returnValue = React.useMemo(() => ({ ...swrReturn, filtersInfo }), [filtersInfo, swrReturn]);
+  const returnValue = React.useMemo(() => ({ ...swrReturn, filtersInfo, data }), [data, filtersInfo, swrReturn]);
 
   return returnValue;
 };

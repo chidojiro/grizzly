@@ -13,7 +13,7 @@ export const Main = () => {
   const query = useQuery();
   const { page, perPage, hasSelectedAnyFilters } = useSearchParams();
   const history = useHistory();
-  const { data, isValidating } = useSearch();
+  const { data } = useSearch();
   const {
     searchResponse: { totalResults },
   } = data ?? { searchResponse: { totalResults: 0 } };
@@ -37,13 +37,15 @@ export const Main = () => {
       return;
     }
 
-    const fq = Object.keys(filters).reduce((acc, curKey) => {
-      return acc + filters[curKey].reduce((accCurKey: string, cur: string) => accCurKey + `(${curKey}:${cur})`, '');
-    }, '');
+    if (typeof q === 'string') {
+      const fq = Object.keys(filters).reduce((acc, curKey) => {
+        return acc + filters[curKey].reduce((accCurKey: string, cur: string) => accCurKey + `(${curKey}:${cur})`, '');
+      }, '');
 
-    const searchParams = query.form({ fq, size, sortBy, q });
+      const searchParams = query.form({ fq, size, sortBy, q });
 
-    history.push({ pathname: '/search', search: searchParams });
+      history.push({ pathname: '/search', search: searchParams });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(values)]);
 
@@ -68,7 +70,9 @@ export const Main = () => {
     setValue('filters', filters);
   }, [fq, setValue, size, sortBy]);
 
-  if (!data?.searchResponse.results?.length && !isValidating) return <NoResults q={q} />;
+  if (!data) return null;
+
+  if (!data.searchResponse.results?.length) return <NoResults q={q} />;
 
   return (
     <div>
