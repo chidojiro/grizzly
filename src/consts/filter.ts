@@ -1,57 +1,45 @@
-export const categorySegments = [
-  'category1',
-  'category2',
-  'category3',
-  'category4',
-  'category5',
-  'category6',
-  'category7',
-];
+export const priceRanges = {
+  '0-24.99': [0, 24.99],
+  '25-99.99': [25, 99.99],
+  '100-249.99': [100, 249.99],
+  '250-749.99': [250, 749.99],
+  '750-4999.99': [750, 4999.99],
+  '5000-9999.99': [5000, 9999.99],
+  '10000-24999.99': [10000, 24999.99],
+  '25000+': [25000],
+};
+
+export const priceBuckets = Object.keys(priceRanges)
+  .reduce<string[]>((acc, curKey) => {
+    const [from, to] = (priceRanges as any)[curKey];
+
+    if (!to) {
+      return [...acc, `price_${curKey}:price >= ${from}`];
+    }
+
+    return [...acc, `price_${curKey}:price >= ${from} AND price < ${to}`];
+  }, [])
+  .join(',');
 
 export const filterFields = [
+  {
+    name: 'altcategory',
+    label: 'altcategory',
+    single: false,
+  },
+  {
+    name: 'categoryid',
+    label: 'categoryid',
+    single: false,
+  },
   // {
-  //   name: 'price',
-  //   label: 'Price',
-  //   single: false,
-  //  },
+  //   name: 'filtercats',
+  //   label: 'filtercats',
+  //   single: true,
+  // },
   {
     name: 'brand',
     label: 'Brand',
-    single: true,
-  },
-  {
-    name: 'category1',
-    label: 'Category1',
-    single: true,
-  },
-  {
-    name: 'category2',
-    label: 'Category2',
-    single: true,
-  },
-  {
-    name: 'category3',
-    label: 'Category3',
-    single: true,
-  },
-  {
-    name: 'category4',
-    label: 'Category4',
-    single: true,
-  },
-  {
-    name: 'category5',
-    label: 'Category5',
-    single: true,
-  },
-  {
-    name: 'category6',
-    label: 'Category6',
-    single: true,
-  },
-  {
-    name: 'category7',
-    label: 'Category7',
     single: true,
   },
   {
@@ -59,11 +47,7 @@ export const filterFields = [
     label: 'Abrasive Type',
     single: false,
   },
-  {
-    name: 'altcategory',
-    label: 'altcategory',
-    single: false,
-  },
+
   {
     name: 'backing_type',
     label: 'Backing Type',
@@ -730,3 +714,5 @@ export const filterFields = [
     single: false,
   },
 ];
+
+export const count = filterFields.map(({ name }) => name).join(',');

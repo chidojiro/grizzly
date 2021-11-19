@@ -1,6 +1,6 @@
 import { Pagination } from 'components';
 import { navigating } from 'consts';
-import { useQuery, useSearch, useSearchParams } from 'hooks';
+import { useQuery, useScrollToTop, useSearch, useSearchParams } from 'hooks';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useHistory, useLocation } from 'react-router';
@@ -27,6 +27,8 @@ export const Main = () => {
   const { watch, setValue } = useFormContext();
 
   const values = watch();
+
+  useScrollToTop([page]);
 
   React.useEffect(() => {
     const categoryPathNames = navigating.map(({ VirtualPath }) => VirtualPath);

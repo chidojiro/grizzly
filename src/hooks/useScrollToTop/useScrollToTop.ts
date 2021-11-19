@@ -1,10 +1,11 @@
 import { useLocation } from 'react-router';
 import React from 'react';
 
-export const useScrollToTop = () => {
+export const useScrollToTop = (deps: any[]) => {
   const { pathname } = useLocation();
 
   React.useLayoutEffect(() => {
     window.scrollTo(0, 0);
-  }, [pathname]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps || [pathname]);
 };

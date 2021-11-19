@@ -1,76 +1,23 @@
 import { SearchApis } from 'apis';
-import { categorySegments, filterFields, metadata } from 'consts';
+import { count, filterFields, metadata, priceBuckets } from 'consts';
 import { useSearchParams } from 'hooks';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useHistory } from 'react-router';
 import useSWR from 'swr';
 import { SearchQueryRequestPayload, FilterInfo, SearchQueryResponsePayload } from 'types';
-
-const countQueries = filterFields.map(({ name }) => name);
+import { combineFilters, isSimpleQ } from './utils';
 
 export const useSearch = () => {
   const { page, perPage, sortBy, q, hasSelectedFilter } = useSearchParams();
-  const isSimpleQ = !q.startsWith('(') && !q.endsWith(')');
-  const _q = q.replaceAll(/[()"]/g, '').replace('category', 'category1');
   const [data, setData] = React.useState<SearchQueryResponsePayload>();
   const history = useHistory();
 
-  const destructQ = () => {
-    if (isSimpleQ) return {};
-
-    return _q.split(' AND ').reduce<{ [key: string]: string[] }>((acc, cur) => {
-      const [key, value] = cur.split(':');
-
-      acc[key] = (acc[key] || []).concat(value.split(' OR '));
-
-      return acc;
-    }, {});
-  };
-
-  const count = countQueries.join(',');
-
   const { watch } = useFormContext();
 
-  const filters = watch('filters');
+  const filters = watch('filters') as Record<string, string[]>;
 
-  const filtersGetFromQ = destructQ();
-  const combinedFilters = countQueries.reduce<{ [key: string]: string[] }>((acc, cur) => {
-    if (categorySegments.includes(cur))
-      return { ...acc, category: [filters.category || [], filtersGetFromQ.category || []].flat() };
-
-    return { ...acc, [cur]: [filters[cur] || [], filtersGetFromQ[cur] || []].flat() };
-  }, {});
-
-  const filterQueries = countQueries.reduce<string[]>((acc, curField) => {
-    if (curField === 'category1') {
-      const categoryOptions = combinedFilters.category;
-
-      return [
-        ...acc,
-        categoryOptions
-          .reduce<string[]>(
-            (accCategoryQueries, curCategoryQueries) => [
-              ...accCategoryQueries,
-              categorySegments.map(segment => `(${segment} = "${curCategoryQueries}")`).join(' OR '),
-            ],
-            []
-          )
-          .join(' OR '),
-      ];
-    } else if (categorySegments.includes(curField)) return [...acc, ''];
-
-    const fieldFilterQueries =
-      combinedFilters[curField]?.map((option: string) => {
-        const foundFilterField = filterFields.find(({ name }) => name === curField);
-
-        return foundFilterField?.single ? `(${curField} = "${option}")` : `(${curField} ~ ["${option}"])`;
-      }) || [];
-
-    return [...acc, fieldFilterQueries.join(' OR ')];
-  }, []);
-
-  const filterQuery = filterQueries.join(',');
+  const combinedFilters = combineFilters(q, filters);
 
   const payload: SearchQueryRequestPayload = React.useMemo(
     () => ({
@@ -90,21 +37,21 @@ export const useSearch = () => {
         pipeline: { name: 'query' },
         values: {
           fields: '',
-          q: isSimpleQ ? q : '',
+          q: isSimpleQ(q) ? q : '',
           resultsPerPage: perPage.toString(),
           sortBy: sortBy,
           page: page.toString(),
-          buckets: '',
-          count: count,
-          countFilters: filterQuery,
-          filter: '(price >= 1264 AND price <= 5000000)',
-          max: 'price',
-          min: 'price',
+          buckets: priceBuckets,
+          count,
+          countFilters: combinedFilters,
+          filter: '',
+          max: '',
+          min: '',
         },
       },
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [count, filterQuery, page, perPage, q, sortBy]
+    [count, combinedFilters, page, perPage, q, sortBy]
   );
 
   const swrReturn = useSWR(['/search', JSON.stringify(payload)], () => SearchApis.get(payload), {
@@ -125,35 +72,12 @@ export const useSearch = () => {
   const filtersInfo = Object.keys(aggregateFilters).reduce<FilterInfo[]>((acc, curField) => {
     const [type, field] = curField.split('.');
 
-    if (type !== 'count' || _q.includes(field) || field === 'altcategory') return acc;
+    if (type !== 'count' || !field || q.includes(field) || ['altcategory', 'categoryid'].includes(field)) return acc;
 
     const options = Object.keys(aggregateFilters[curField].count.counts || {})
       .filter(Boolean)
       .map(option => ({ label: option.replaceAll(' in.', '"'), value: option }))
       .filter(Boolean);
-
-    if (['category1', 'category2', 'category3', 'category4', 'category5', 'category6', 'category7'].includes(field)) {
-      const foundAccumulatedCategory = acc.find(({ name }) => name === 'category');
-
-      if (!foundAccumulatedCategory)
-        return [
-          ...acc,
-          {
-            name: 'category',
-            label: 'Category',
-            single: true,
-            options,
-          },
-        ];
-
-      const accumulatedCategoryOptions = acc.find(({ name }) => name === 'category')?.options || [];
-
-      Object.assign(foundAccumulatedCategory, {
-        options: Array.from(new Set([accumulatedCategoryOptions, options].flat())),
-      });
-
-      return acc;
-    }
 
     if (!hasSelectedFilter(field) && options.length < 2) return acc;
 
