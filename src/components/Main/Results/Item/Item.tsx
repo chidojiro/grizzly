@@ -25,11 +25,9 @@ export const Item = ({ data }: Props) => {
     image,
     title,
     url,
-    price: { single: originalPrice },
-    absolutediscount: { single: absolutediscount },
+    price: { single: price },
+    catalogprice: { single: catalogprice },
   } = data;
-
-  const price = +originalPrice - +absolutediscount;
 
   return (
     <a
@@ -45,13 +43,13 @@ export const Item = ({ data }: Props) => {
         })}>
         {title.single}
       </StyleTitle>
-      {+absolutediscount ? (
+      {catalogprice !== price ? (
         <div className='tw-flex tw-flex-wrap tw-items-end'>
-          <Price price={+originalPrice} obsolete />
-          <Price price={price} className='tw-transform tw--translate-x-3' />
+          <Price price={+catalogprice} className='tw-text-md tw-text-gray-light-1 tw-line-through' />
+          <Price price={+price} className='tw-text-xl tw-text-red-dark-1 tw-transform tw--translate-x-3' />
         </div>
       ) : (
-        <Price price={price} />
+        <Price price={+price} className='tw-text-xl tw-text-red-dark-1' />
       )}
 
       <Badge data={data} />

@@ -1,12 +1,12 @@
 import { SearchApis } from 'apis';
-import { count, filterFields, metadata, priceBuckets } from 'consts';
+import { count, filterAliases, filterFields, metadata, priceBuckets, tracking } from 'consts';
 import { useSearchParams } from 'hooks';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useHistory } from 'react-router';
 import useSWR from 'swr';
 import { SearchQueryRequestPayload, FilterInfo, SearchQueryResponsePayload } from 'types';
-import { combineFilters, isSimpleQ } from './utils';
+import { combineFilters, isSimpleQ, resolvePriceFilterString } from './utils';
 
 export const useSearch = () => {
   const { page, perPage, sortBy, q, hasSelectedFilter } = useSearchParams();
@@ -19,21 +19,13 @@ export const useSearch = () => {
 
   const combinedFilters = combineFilters(q, filters);
 
+  const priceFilter = resolvePriceFilterString(filters.price);
+
   const payload: SearchQueryRequestPayload = React.useMemo(
     () => ({
-      metadata: metadata,
+      metadata,
       request: {
-        tracking: {
-          query_id: '0kqlxq2a8jm6wq6s',
-          type: 'NONE',
-          sequence: 0,
-          field: '_id',
-          data: {
-            ga: 'GA1.1.1132377212.1636510238',
-            ' _ga': 'GA1.1.1132377212.1636510238',
-            ' _ga_V9SMSCPSQY': 'GS1.1.1636706577.7.1.1636707843.0',
-          },
-        },
+        tracking,
         pipeline: { name: 'query' },
         values: {
           fields: '',
@@ -44,22 +36,56 @@ export const useSearch = () => {
           buckets: priceBuckets,
           count,
           countFilters: combinedFilters,
-          filter: '',
+          filter: priceFilter,
           max: '',
           min: '',
         },
       },
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [count, combinedFilters, page, perPage, q, sortBy]
+    [count, combinedFilters, page, perPage, q, sortBy, priceFilter]
   );
 
-  const swrReturn = useSWR(['/search', JSON.stringify(payload)], () => SearchApis.get(payload), {
-    onError: () => {
-      history.push('/search');
-      window.location.reload();
-    },
+  const swrReturn = useSWR(q && ['/search', JSON.stringify(payload)], () => SearchApis.get(payload), {
+    // onError: () => {
+    //   history.push('/search');
+    //   window.location.reload();
+    // },
   });
+
+  const getPriceFilterInfoPayload: SearchQueryRequestPayload = React.useMemo(
+    () => ({
+      metadata,
+      request: {
+        tracking,
+        pipeline: { name: 'query' },
+        values: {
+          fields: '',
+          q: isSimpleQ(q) ? q : '',
+          resultsPerPage: '1',
+          sortBy: '',
+          page: '1',
+          buckets: priceBuckets,
+          count,
+          countFilters: combinedFilters,
+          filter: '(price > 0)',
+          max: '',
+          min: '',
+        },
+      },
+    }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [count, combinedFilters, page, perPage, q, sortBy, priceFilter]
+  );
+  const {
+    data: priceFilterInfo = {
+      label: 'Price',
+      name: 'price',
+      options: [],
+    },
+  } = useSWR(['/priceFilterInfo', JSON.stringify(getPriceFilterInfoPayload)], () =>
+    SearchApis.getPriceFilterInfo(getPriceFilterInfoPayload)
+  );
 
   // somehow swr doesn't keep stale data
   // this is a workaround for that
@@ -81,16 +107,28 @@ export const useSearch = () => {
 
     if (!hasSelectedFilter(field) && options.length < 2) return acc;
 
+    const foundFilterField = filterFields.find(({ name }) => name === field);
+    const fieldAlias = filterAliases[foundFilterField?.name || ''];
+
     return [
       ...acc,
       {
-        ...filterFields.find(({ name }) => name === field),
+        ...foundFilterField,
+        name: fieldAlias || foundFilterField?.name,
         options,
       },
     ] as FilterInfo[];
   }, []);
 
-  const returnValue = React.useMemo(() => ({ ...swrReturn, filtersInfo, data }), [data, filtersInfo, swrReturn]);
+  const sortedFiltersInfo = React.useMemo(
+    () => filtersInfo.sort((a, b) => ('' + a.name).localeCompare(b.name)),
+    [filtersInfo]
+  );
+
+  const returnValue = React.useMemo(
+    () => ({ ...swrReturn, filtersInfo: [priceFilterInfo, ...sortedFiltersInfo], data }),
+    [data, sortedFiltersInfo, priceFilterInfo, swrReturn]
+  );
 
   return returnValue;
 };

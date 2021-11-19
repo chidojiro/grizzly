@@ -24,22 +24,14 @@ type Props = ClassName & {
   obsolete?: boolean;
 };
 
-export const Price = ({ price, obsolete, className }: Props) => {
+export const Price = ({ price, className }: Props) => {
   const [dollars, cent] = price.toFixed(2).toString().split('.');
 
   return (
-    <div
-      className={classNames(
-        'tw-flex',
-        {
-          'tw-text-xl tw-text-red-dark-1': !obsolete,
-          'tw-text-md tw-text-gray-light-1 tw-line-through': obsolete,
-        },
-        className
-      )}>
-      <span className='tw-transform tw-scale-50 tw-translate-x-0.5 tw--translate-y-1'>$</span>
+    <span className={classNames(className)}>
+      <sup className='tw-text-[70%]'>$</sup>
       {formatNumber(+dollars)}
-      <span className='tw-transform tw-scale-50 tw--translate-x-1 tw--translate-y-1'>{cent || '00'}</span>
-    </div>
+      <sup className='tw-text-[70%]'>{cent || '00'}</sup>
+    </span>
   );
 };

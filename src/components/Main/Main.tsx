@@ -1,5 +1,5 @@
 import { Pagination } from 'components';
-import { navigating } from 'consts';
+import { filterFields, navigating } from 'consts';
 import { useQuery, useScrollToTop, useSearch, useSearchParams } from 'hooks';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -28,9 +28,11 @@ export const Main = () => {
 
   const values = watch();
 
-  useScrollToTop([page]);
+  useScrollToTop([page, JSON.stringify(values)]);
 
   React.useEffect(() => {
+    if (!q) return;
+
     const categoryPathNames = navigating.map(({ VirtualPath }) => VirtualPath);
     const { size, sortBy, filters } = values;
 

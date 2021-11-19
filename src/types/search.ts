@@ -33,7 +33,7 @@ export type SearchResult = {
     instock: FieldOfSingleValue;
     onspecial: FieldOfSingleValue;
     price: FieldOfSingleValue;
-    absolutediscount: FieldOfSingleValue;
+    catalogprice: FieldOfSingleValue;
     quantityavailable: FieldOfSingleValue;
     [key: string]: FieldOfRepeatedValue | FieldOfSingleValue;
   };

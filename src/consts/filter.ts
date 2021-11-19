@@ -6,7 +6,7 @@ export const priceRanges = {
   '750-4999.99': [750, 4999.99],
   '5000-9999.99': [5000, 9999.99],
   '10000-24999.99': [10000, 24999.99],
-  '25000+': [25000],
+  '25000-*': [25000],
 };
 
 export const priceBuckets = Object.keys(priceRanges)
@@ -21,6 +21,11 @@ export const priceBuckets = Object.keys(priceRanges)
   }, [])
   .join(',');
 
+export const filterAliases: Record<string, string> = {
+  filtercats: 'category',
+  category: 'filtercats',
+};
+
 export const filterFields = [
   {
     name: 'altcategory',
@@ -32,11 +37,11 @@ export const filterFields = [
     label: 'categoryid',
     single: false,
   },
-  // {
-  //   name: 'filtercats',
-  //   label: 'filtercats',
-  //   single: true,
-  // },
+  {
+    name: 'filtercats',
+    label: 'Category',
+    single: false,
+  },
   {
     name: 'brand',
     label: 'Brand',
