@@ -3,7 +3,6 @@ import { count, filterAliases, filterFields, metadata, priceBuckets, tracking } 
 import { useSearchParams } from 'hooks';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { useHistory } from 'react-router';
 import useSWR from 'swr';
 import { SearchQueryRequestPayload, FilterInfo, SearchQueryResponsePayload } from 'types';
 import { combineFilters, isSimpleQ, resolvePriceFilterString } from './utils';
@@ -11,7 +10,11 @@ import { combineFilters, isSimpleQ, resolvePriceFilterString } from './utils';
 export const useSearch = () => {
   const { page, perPage, sortBy, q, hasSelectedFilter } = useSearchParams();
   const [data, setData] = React.useState<SearchQueryResponsePayload>();
-  const history = useHistory();
+  const [priceFilterInfo, setPriceFilterInfo] = React.useState<FilterInfo>({
+    label: 'Price',
+    name: 'price',
+    options: [],
+  });
 
   const { watch } = useFormContext();
 
@@ -77,15 +80,15 @@ export const useSearch = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [count, combinedFilters, page, perPage, q, sortBy, priceFilter]
   );
-  const {
-    data: priceFilterInfo = {
-      label: 'Price',
-      name: 'price',
-      options: [],
-    },
-  } = useSWR(['/priceFilterInfo', JSON.stringify(getPriceFilterInfoPayload)], () =>
+  const { data: priceFilterInfoData } = useSWR(['/priceFilterInfo', JSON.stringify(getPriceFilterInfoPayload)], () =>
     SearchApis.getPriceFilterInfo(getPriceFilterInfoPayload)
   );
+
+  React.useEffect(() => {
+    if (priceFilterInfoData) {
+      setPriceFilterInfo(priceFilterInfoData);
+    }
+  }, [priceFilterInfoData]);
 
   // somehow swr doesn't keep stale data
   // this is a workaround for that

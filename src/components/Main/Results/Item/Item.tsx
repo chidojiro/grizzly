@@ -34,7 +34,8 @@ export const Item = ({ data }: Props) => {
       href={url.single}
       className='tw-py-7.5 tw-pr-4 tw-border-b tw-border-solid tw-border-gray tw-relative tw-font-medium tw-cursor-pointer !tw-text-black hover:!tw-no-underline'
       onMouseOver={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}>
+      onMouseLeave={() => setIsHovered(false)}
+      title={title.single}>
       <img src={image.single} alt='' />
       <Availability data={data} />
       <StyleTitle
@@ -46,7 +47,7 @@ export const Item = ({ data }: Props) => {
       {catalogprice !== price ? (
         <div className='tw-flex tw-flex-wrap tw-items-end'>
           <Price price={+catalogprice} className='tw-text-md tw-text-gray-light-1 tw-line-through' />
-          <Price price={+price} className='tw-text-xl tw-text-red-dark-1 tw-transform tw--translate-x-3' />
+          <Price price={+price} className='tw-text-xl tw-text-red-dark-1' />
         </div>
       ) : (
         <Price price={+price} className='tw-text-xl tw-text-red-dark-1' />
