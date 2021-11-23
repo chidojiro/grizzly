@@ -28,7 +28,7 @@ export const Price = ({ price, className }: Props) => {
   const [dollars, cent] = price.toFixed(2).toString().split('.');
 
   return (
-    <span className={className} css={[tw`text-[70%]`]}>
+    <span className={className}>
       <sup css={[tw`text-[70%]`]}>$</sup>
       {formatNumber(+dollars)}
       <sup css={[tw`text-[70%]`]}>{cent || '00'}</sup>

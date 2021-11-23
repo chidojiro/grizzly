@@ -65,12 +65,18 @@ export const Search = ({ className }: Props) => {
         <FontAwesomeIcon icon={faSearch} css={[tw`text-white`]} />
       </div>
       {!!suggestions?.length && (
-        <div css={[tw`w-full absolute bg-white text-[16px] top-[44px] shadow border border-solid border-gray`]}>
-          {suggestions.map(suggestion => (
+        <div
+          css={[
+            tw`w-full absolute bg-white text-[16px] top-[44px] shadow border border-solid border-gray`,
+            tw`sm:top-[38px]`,
+          ]}>
+          {suggestions.slice(0, 5).map(suggestion => (
             // eslint-disable-next-line jsx-a11y/anchor-is-valid
             <a
               onClick={() => submitQ(suggestion)}
-              css={[tw`cursor-pointer block py-1 px-4 font-medium border-b border-gray border-solid last:border-b-0`]}>
+              css={[
+                tw`cursor-pointer block py-1 px-4 font-medium border-0 border-b border-gray border-solid last:border-b-0`,
+              ]}>
               {suggestion}
             </a>
           ))}
