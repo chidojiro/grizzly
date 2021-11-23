@@ -6,10 +6,17 @@ type Props = {
   data: SearchResult['values'];
 };
 
-const StyledBadgeEdge = styled.div`
+const StyledBadgeRightEdge = styled.div`
   clip-path: polygon(100% 0, 0 100%, 100% 100%);
   width: 20px;
-  transform: scale(105%);
+  transform: scale(110%);
+`;
+
+const StyledBadgeLeftEdge = styled.div`
+  clip-path: polygon(0 0, 0% 100%, 100% 0);
+  width: 20px;
+  transform: scale(110%);
+  background-color: white;
 `;
 
 export const Badge = ({ data }: Props) => {
@@ -35,9 +42,16 @@ export const Badge = ({ data }: Props) => {
   if (!background || !label) return null;
 
   return (
-    <div css={[tw`absolute top-0 left-0 flex text-white text-[13px]`, background]}>
-      <div css={[tw`px-2 py-1 uppercase`]}>{label}</div>
-      <StyledBadgeEdge css={[tw`bg-white`]} />
+    <div
+      css={[
+        tw`absolute top-0 left-0 flex text-white text-[13px]`,
+        tw`sm:top-auto sm:left-auto sm:bottom-0 sm:right-0`,
+        tw`sm:text-[13px]`,
+        background,
+      ]}>
+      <StyledBadgeLeftEdge css={[tw`hidden sm:block`]} />
+      <div css={[tw`px-2 py-1 uppercase`, tw`sm:text-[13px]`]}>{label}</div>
+      <StyledBadgeRightEdge css={[tw`sm:hidden`]} />
     </div>
   );
 };

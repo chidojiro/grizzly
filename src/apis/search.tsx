@@ -6,7 +6,6 @@ import {
   FilterInfo,
 } from 'types';
 import axios from 'axios';
-import { metadata, priceBuckets } from 'consts';
 import { Price } from 'components/Main/Results/Item/Price';
 
 const get = (payload: SearchQueryRequestPayload): Promise<SearchQueryResponsePayload> => {

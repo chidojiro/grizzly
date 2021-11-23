@@ -4,15 +4,19 @@ export const isSimpleQ = (q: string) => !q.startsWith('(') && !q.endsWith(')');
 export const convertQToFilters = (q: string) => {
   if (isSimpleQ(q)) return {};
 
-  const _q = q.replaceAll(/[()"]/g, '');
+  const _q = q.replaceAll('(category', '(category1').replaceAll(/[()"]/g, '');
 
-  return _q.split(' AND ').reduce<{ [key: string]: string[] }>((acc, cur) => {
-    const [key, value] = cur.split(':');
+  return _q
+    .split(' AND ')
+    .map(frag => frag.split(' OR '))
+    .flat()
+    .reduce<{ [key: string]: string[] }>((acc, cur) => {
+      const [key, value] = cur.split(':');
 
-    acc[key] = (acc[key] || []).concat(value.split(' OR '));
+      acc[key] = (acc[key] || []).concat(value.split(' OR '));
 
-    return acc;
-  }, {});
+      return acc;
+    }, {});
 };
 
 const countQueries = filterFields.map(({ name }) => name);

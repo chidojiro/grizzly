@@ -23,31 +23,31 @@ export const Toolbar = () => {
   const foundNavigating = navigatingGroupedByVirtualPath[pathname]?.[0];
 
   const toolbarRight = (
-    <div css={[tw`flex`]}>
+    <div css={[tw`flex flex-1`, tw`border-0 sm:border-t border-solid border-gray`]}>
       <Form.Select
         name='size'
         label='Page Size'
         options={pageSizeOptions}
         defaultValue={pageSizeOptions[0].value}
-        css={[tw`flex-shrink-0 border-0 border-r border-solid rounded border-gray`]}
+        css={[tw`flex-shrink-0 border-0 border-r border-solid rounded border-gray w-1/2`, tw`sm:flex-1`]}
       />
       <Form.Select
         name='sortBy'
         options={sortByOptions}
         label='Sort By'
         defaultValue={sortByOptions[0].value}
-        css={[tw`flex-shrink-0 border-0 border-r border-solid rounded border-gray`]}
+        css={[tw`flex-shrink-0 border-0 border-r border-solid rounded border-gray w-1/2`, tw`sm:flex-1`]}
       />
     </div>
   );
 
-  const baseClassName = tw`flex items-center justify-between w-[calc(100% + 15px)] px-[15px]`;
+  const baseClassName = tw`flex items-center justify-between w-[calc(100% + 15px)] px-[15px] sm:px-0`;
   const baseStyles = { transform: 'translateX(-7.5px)' };
 
   if (pathname === '/search')
     return (
-      <div css={[tw`h-[51px] shadow-md bg-white`, baseClassName]} style={baseStyles}>
-        <div css={[tw`text-sm`]}>
+      <div css={[tw`h-[51px] shadow-md bg-white`, tw`sm:block sm:h-fit`, baseClassName]} style={baseStyles}>
+        <div css={[tw`text-sm flex-1`, tw`sm:text-[11px] sm:px-4 sm:py-1`]}>
           {showingRange.from} - {showingRange.to} of {showingRange.total} matches for{' '}
           <span css={[tw`font-medium text-green`]}>"{q}"</span>
         </div>
@@ -57,12 +57,13 @@ export const Toolbar = () => {
 
   return (
     <div
-      css={[tw`h-[70px] border-0 border-b border-solid border-gray shadow-sm bg-gray-light-3`, baseClassName]}
+      css={[
+        tw`h-[70px] border-0 border-b border-solid border-gray shadow-sm bg-gray-light-3`,
+        tw`sm:bg-white sm:block sm:h-fit`,
+        baseClassName,
+      ]}
       style={baseStyles}>
-      <h1>
-        {foundNavigating.DisplayText}
-        <span css={[tw`text-green`]}></span>
-      </h1>
+      <h1 tw='sm:text-[17px] sm:px-2 flex-1'>{foundNavigating.DisplayText}</h1>
       {toolbarRight}
     </div>
   );

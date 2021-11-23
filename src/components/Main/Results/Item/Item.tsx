@@ -37,21 +37,30 @@ export const Item = ({ data }: Props) => {
       title={title.single}
       css={[
         tw`py-7.5 pr-4 border-0 border-b border-solid border-gray relative font-medium cursor-pointer !text-black hover:!no-underline`,
+        tw`sm:flex sm:pt-[10px] sm:pr-[10px] sm:pb-[5px]`,
       ]}>
-      <img src={image.single} alt='' css={[tw`w-full`]} />
-      <Availability data={data} />
-      <StyleTitle
-        css={[tw`text-[16px] uppercase overflow-ellipsis overflow-hidden min-h-12`, isHovered && tw`underline`]}>
-        {title.single}
-      </StyleTitle>
-      {catalogprice !== price ? (
-        <div css={[tw`flex flex-wrap items-end`]}>
-          <Price price={+catalogprice} css={[tw`text-md text-gray-light-1 line-through`]} />
-          <Price price={+price} css={[tw`text-xl text-red-dark-1`]} />
-        </div>
-      ) : (
-        <Price price={+price} css={[tw`text-xl text-red-dark-1`]} />
-      )}
+      <div>
+        <img src={image.single} alt='' css={[tw`w-full`, tw`sm:w-[100px] sm:p-2`]} />
+        <Availability data={data} />
+      </div>
+      <div>
+        <StyleTitle
+          css={[
+            tw`text-[16px] uppercase overflow-ellipsis overflow-hidden min-h-12`,
+            tw`sm:text-sm`,
+            isHovered && tw`underline`,
+          ]}>
+          {title.single}
+        </StyleTitle>
+        {catalogprice !== price ? (
+          <div css={[tw`flex flex-wrap items-end`]}>
+            <Price price={+catalogprice} css={[tw`text-md text-gray-light-1 line-through`, tw`sm:text-sm`]} />
+            <Price price={+price} css={[tw`text-xl text-red-dark-1`, tw`sm:text-md`]} />
+          </div>
+        ) : (
+          <Price price={+price} css={[tw`text-xl text-red-dark-1`, tw`sm:text-md`]} />
+        )}
+      </div>
 
       <Badge data={data} />
     </a>

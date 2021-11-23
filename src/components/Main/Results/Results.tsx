@@ -9,7 +9,7 @@ export const Results = () => {
 
   return (
     <div>
-      <div css={[tw`grid grid-cols-5 pl-7.5`]}>
+      <div css={[tw`grid grid-cols-5 pl-7.5 sm:grid-cols-1 md:pl-0`]}>
         {data?.searchResponse?.results?.map(({ values }) => (
           <Item data={values} key={values.id.single} />
         ))}

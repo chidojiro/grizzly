@@ -101,7 +101,8 @@ export const useSearch = () => {
   const filtersInfo = Object.keys(aggregateFilters).reduce<FilterInfo[]>((acc, curField) => {
     const [type, field] = curField.split('.');
 
-    if (type !== 'count' || !field || q.includes(field) || ['altcategory', 'categoryid'].includes(field)) return acc;
+    if (type !== 'count' || !field || q.includes(field) || ['altcategory', 'categoryid', 'category1'].includes(field))
+      return acc;
 
     const options = Object.keys(aggregateFilters[curField].count.counts || {})
       .filter(Boolean)

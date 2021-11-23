@@ -23,7 +23,7 @@ export const Sidebar = () => {
   );
 
   return (
-    <div css={[tw`w-[250px] border-0 border-r-2 border-solid border-gray-light-3 text-[13px] flex-shrink-0`]}>
+    <div css={[tw`w-[250px] border-0 border-r-2 border-solid border-gray-light-3 text-[13px] flex-shrink-0 md:hidden`]}>
       {filterFieldsWithSomeSelected.map(({ label, name, options }) => (
         <CheckboxGroupFilterBox key={name} name={`filters.${name}`} options={options} title={label} />
       ))}

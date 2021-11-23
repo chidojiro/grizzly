@@ -49,7 +49,7 @@ export const Search = ({ className }: Props) => {
   return (
     <div
       className={className}
-      css={[tw`h-11 flex rounded-sm mx-7 relative overflow-visible z-[10000]`]}
+      css={[tw`h-11 flex rounded-sm mx-7 relative overflow-visible z-[10000]`, tw`sm:mx-0`]}
       style={{ outline: isFocused ? '3px solid rgba(0, 123, 255, 0.3)' : 'none' }}>
       <input
         placeholder='Search Products'

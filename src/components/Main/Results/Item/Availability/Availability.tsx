@@ -26,5 +26,9 @@ export const Availability = ({ data: { instock, quantityavailable } }: Props) =>
 
   if (!label) return null;
 
-  return <div css={[tw`font-bold text-[13px] rounded text-center w-fit`, color, background, padding]}>{label}</div>;
+  return (
+    <div css={[tw`font-bold text-[13px] rounded text-center w-fit`, tw`sm:text-[12px]`, color, background, padding]}>
+      {label}
+    </div>
+  );
 };

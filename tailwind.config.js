@@ -60,8 +60,8 @@ const fontFamily = {
 };
 
 const screens = {
-  md: { max: '992px' },
-  sm: { max: '768px' },
+  md: { max: '991px' },
+  sm: { max: '767px' },
 };
 
 module.exports = {

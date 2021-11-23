@@ -38,6 +38,11 @@ export const filterFields = [
     single: false,
   },
   {
+    name: 'category1',
+    label: 'category1',
+    single: true,
+  },
+  {
     name: 'filtercats',
     label: 'Category',
     single: false,
