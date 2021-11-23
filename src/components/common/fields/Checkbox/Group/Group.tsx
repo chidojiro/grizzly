@@ -1,8 +1,6 @@
 import { noop } from 'lodash';
 import React from 'react';
-import { Checkbox } from 'components';
 import { useControllable } from 'hooks';
-import { Option } from 'types';
 
 type OwnProps<T = any> = {
   onChange?: (value: T[]) => void;

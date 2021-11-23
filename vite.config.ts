@@ -12,7 +12,7 @@ export default defineConfig({
       import { jsx } from '@emotion/react';
     `,
   },
-  plugins: [react(), tsconfigPaths(), macrosPlugin()],
+  plugins: [reactRefresh(), macrosPlugin(), tsconfigPaths()],
   define: {
     'process.env': {},
   },

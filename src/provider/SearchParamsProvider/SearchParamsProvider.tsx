@@ -2,7 +2,7 @@ import { useQuery } from 'hooks';
 import React from 'react';
 import { Children } from 'types';
 
-import { navigating } from 'consts';
+import { navigating, sortByOptions } from 'consts';
 import groupBy from 'lodash/groupBy';
 import { useLocation } from 'react-router';
 import { useFormContext } from 'react-hook-form';
@@ -21,7 +21,7 @@ type SearchParamsProviderValue = {
 const DefaultSearchParams: SearchParamsProviderValue = {
   page: 1,
   perPage: 25,
-  sortBy: 'relevance+desc',
+  sortBy: sortByOptions[0].value,
   q: '',
   filters: {},
   hasSelectedAnyFilters: false,

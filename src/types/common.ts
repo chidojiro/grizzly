@@ -9,6 +9,6 @@ export type Children = {
 export type Fn = (...args: any[]) => any;
 
 export type Option = {
-  label: JSX.Element;
+  label: React.ReactNode;
   value: string;
 };

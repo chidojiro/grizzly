@@ -1,13 +1,13 @@
 import { Form, Main } from 'components';
 import { SearchParamsProvider } from 'provider';
 import { useForm } from 'react-hook-form';
-import './tailwind.css';
+import tw from 'twin.macro';
 
 function App() {
   const methods = useForm({ defaultValues: { filters: {} } });
 
   return (
-    <Form methods={methods} className='tw-z-0 tw-max-w-full'>
+    <Form methods={methods} css={[tw`z-0 max-w-full`]}>
       <SearchParamsProvider>
         <Main />
       </SearchParamsProvider>

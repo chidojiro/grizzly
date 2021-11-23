@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { PaginationItem, usePagination, UsePaginationProps } from 'hooks';
+import tw from 'twin.macro';
 
 type Props = UsePaginationProps;
 
@@ -22,18 +23,18 @@ export const Pagination = (props: Props) => {
   };
 
   return (
-    <div className='search-pagination tw-flex tw-items-center tw-h-[33px] tw-gap-1 tw-mx-auto tw-w-fit'>
+    <div className='search-pagination' css={[tw`flex items-center h-[33px] gap-1 mx-auto w-fit`]}>
       {items.map(({ type, disabled, onClick, page, selected }, idx) => (
         <button
           type='button'
-          className={classNames('btn btn-default !tw-text-[13px]', {
-            active: selected,
-            'search-page': type === 'page',
-            'tw-cursor-default': disabled,
-          })}
           key={type + page}
           onClick={onClick}
-          disabled={disabled}>
+          disabled={disabled}
+          className={classNames('btn btn-default', {
+            active: selected,
+            'search-page': type === 'page',
+          })}
+          css={[tw`!text-[13px]`, disabled && tw`cursor-default`]}>
           {resolveItemLabel(type, page)}
         </button>
       ))}

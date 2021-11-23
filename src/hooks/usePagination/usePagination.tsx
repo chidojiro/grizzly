@@ -29,7 +29,7 @@ export const usePagination = ({
   perPage = 15,
   onChange,
   pageRange = 3,
-  pageEndpointRange: pageEndpointRangeProp = 5,
+  pageEndpointRange: pageEndpointRangeProp = 3,
 }: Props): UsePaginationReturn => {
   const [page, setPage] = useControllable({ value: pageProp, onChange, defaultValue: 1 });
 
@@ -130,13 +130,13 @@ export const usePagination = ({
     () => ({
       items: [
         prevItem,
-        ![1, undefined].includes(showingRange[0]) && [firstPageItem, ellipsisItem],
-        showingRangeItems,
-        ![totalPage, undefined].includes(showingRange[showingRange.length - 1]) && [ellipsisItem, lastPageItem],
+        showingRange[0] > 1 && firstPageItem,
+        showingRange[0] > 2 && ellipsisItem,
+        ...showingRangeItems,
+        showingRange[showingRange.length - 1] < totalPage - 1 && ellipsisItem,
+        showingRange[showingRange.length - 1] < totalPage && lastPageItem,
         nextItem,
-      ]
-        .flat()
-        .filter((item): item is PaginationItem => !!item),
+      ].filter((item): item is PaginationItem => !!item),
       showingRange: { from: (page - 1) * perPage + 1, to: Math.min(totalRecord, page * perPage), total: totalRecord },
     }),
     [

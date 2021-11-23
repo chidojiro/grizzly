@@ -84,7 +84,7 @@ export const useQuery = (options?: UseQueryOptions) => {
       const currentQueryParams = initUrlQueryParams();
 
       const addSingleValue = (param1: string, param2?: string | string[] | number) => {
-        if (!param2) return;
+        if (param2 === null || param2 === undefined) return;
 
         if (!Array.isArray(param2)) {
           currentQueryParams.set(param1, param2.toString());

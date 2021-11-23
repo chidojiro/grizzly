@@ -1,5 +1,6 @@
 import { useSearch } from 'hooks';
 import { Item } from './Item';
+import tw from 'twin.macro';
 
 export const Results = () => {
   const { data } = useSearch();
@@ -8,7 +9,7 @@ export const Results = () => {
 
   return (
     <div>
-      <div className='tw-grid tw-grid-cols-5 tw-pl-7.5'>
+      <div css={[tw`grid grid-cols-5 pl-7.5`]}>
         {data?.searchResponse?.results?.map(({ values }) => (
           <Item data={values} key={values.id.single} />
         ))}

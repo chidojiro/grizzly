@@ -2,6 +2,7 @@ import { useSearch, useSearchParams } from 'hooks';
 import React from 'react';
 import { FilterInfo } from 'types';
 import { CheckboxGroupFilterBox } from './CheckboxGroupFilterBox';
+import tw from 'twin.macro';
 
 export const Sidebar = () => {
   const { filtersInfo } = useSearch();
@@ -22,7 +23,7 @@ export const Sidebar = () => {
   );
 
   return (
-    <div className='tw-w-[250px] tw-border-r-2 tw-border-solid tw-border-gray-light-3 tw-text-[13px] tw-flex-shrink-0'>
+    <div css={[tw`w-[250px] border-0 border-r-2 border-solid border-gray-light-3 text-[13px] flex-shrink-0`]}>
       {filterFieldsWithSomeSelected.map(({ label, name, options }) => (
         <CheckboxGroupFilterBox key={name} name={`filters.${name}`} options={options} title={label} />
       ))}

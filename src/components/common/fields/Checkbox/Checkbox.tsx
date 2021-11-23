@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import React from 'react';
 import { GroupContext, GroupProvider } from './Group/Group';
+import tw from 'twin.macro';
 
 export type Props = Omit<
   React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
@@ -32,17 +33,10 @@ export const Checkbox = React.forwardRef(
 
     return (
       <label
-        className={classNames(
-          'gl-checkbox',
-          'tw-flex tw-items-center tw-cursor-pointer tw-whitespace-pre-line tw-hover:text-green',
-          { 'tw-text-error': error },
-          { 'tw-text-dark-gray-2': !className?.includes('tw-text-black') },
-          { 'tw-font-bold': isChecked },
-          className
-        )}>
-        <div className='tw-flex tw-items-center tw-mr-2'>
+        className={classNames('gl-checkbox', className)}
+        css={[tw`flex items-center cursor-pointer whitespace-pre-line hover:text-green`, isChecked && tw`font-bold`]}>
+        <div css={[tw`flex items-center mr-2`]}>
           <input
-            className='tw-w-0 tw-h-0 tw-overflow-hidden'
             type='checkbox'
             {...restProps}
             ref={ref}
@@ -50,15 +44,14 @@ export const Checkbox = React.forwardRef(
             value={valueProp}
             checked={isChecked}
             onChange={handleChange}
+            css={[tw`w-0 h-0 overflow-hidden`]}
           />
           <div
-            className={classNames(
-              'tw-relative tw-w-4 tw-h-4 tw-flex tw-items-center tw-justify-center tw-rounded-sm tw-border tw-border-solid tw-border-[#aaa]',
-              {
-                'tw-bg-green !tw-border-green': isChecked,
-              }
-            )}>
-            <FontAwesomeIcon icon={faCheck} className='tw-text-white' />
+            css={[
+              tw`relative w-4 h-4 flex items-center justify-center rounded-sm border border-solid border-[#aaa]`,
+              isChecked && tw`bg-green !border-green`,
+            ]}>
+            <FontAwesomeIcon icon={faCheck} css={[tw`text-white`]} />
           </div>
         </div>
         {label}

@@ -50,10 +50,10 @@ const getPriceFilterInfo = async (payload: SearchQueryRequestPayload) => {
           {to === '*' ? (
             '+'
           ) : (
-            <>
+            <span>
               {' '}
               to <Price price={+to} />
-            </>
+            </span>
           )}
         </span>
       ),

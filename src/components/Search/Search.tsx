@@ -1,12 +1,12 @@
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
 import { useAutoComplete } from 'hooks';
 import React from 'react';
 import { ClassName } from 'types';
 import { navigating } from 'consts';
 import groupBy from 'lodash/groupBy';
 import { useHistory } from 'react-router-dom';
+import tw from 'twin.macro';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = ClassName & {};
@@ -48,31 +48,29 @@ export const Search = ({ className }: Props) => {
 
   return (
     <div
-      className={classNames(
-        'tw-h-11 tw-flex tw-rounded-sm tw-mx-7 tw-relative tw-overflow-visible tw-z-[10000]',
-        { 'tw-ring tw-ring-offset tw-ring-offset-blue-light-1': isFocused },
-        className
-      )}>
+      className={className}
+      css={[tw`h-11 flex rounded-sm mx-7 relative overflow-visible z-[10000]`]}
+      style={{ outline: isFocused ? '3px solid rgba(0, 123, 255, 0.3)' : 'none' }}>
       <input
-        className='tw-w-full tw-px-4 tw-font-medium tw-text-black tw-outline-none tw-bg-gray'
         placeholder='Search Products'
         value={q}
         onChange={handleQChange}
         onKeyDown={handleKeyDown}
         onBlur={() => setIsFocused(false)}
-        onFocus={() => setIsFocused(true)}></input>
+        onFocus={() => setIsFocused(true)}
+        css={[tw`border-0 w-full px-4 font-medium text-black outline-none bg-gray`]}></input>
       <div
-        className='tw-flex tw-items-center tw-justify-center tw-flex-shrink-0 tw-h-full tw-px-3 tw-cursor-pointer tw-bg-green'
-        onClick={() => submitQ()}>
-        <FontAwesomeIcon icon={faSearch} className='tw-text-white' />
+        onClick={() => submitQ()}
+        css={[tw`flex items-center justify-center flex-shrink-0 h-full px-3 cursor-pointer bg-green`]}>
+        <FontAwesomeIcon icon={faSearch} css={[tw`text-white`]} />
       </div>
       {!!suggestions?.length && (
-        <div className='tw-w-full tw-absolute tw-bg-white tw-text-[16px] tw-top-[44px] tw-shadow tw-border tw-border-solid tw-border-gray'>
+        <div css={[tw`w-full absolute bg-white text-[16px] top-[44px] shadow border border-solid border-gray`]}>
           {suggestions.map(suggestion => (
             // eslint-disable-next-line jsx-a11y/anchor-is-valid
             <a
               onClick={() => submitQ(suggestion)}
-              className='tw-cursor-pointer tw-block tw-py-1 tw-px-4 tw-font-medium tw-not tw-border-b tw-border-gray tw-border-solid last:border-b-0'>
+              css={[tw`cursor-pointer block py-1 px-4 font-medium border-b border-gray border-solid last:border-b-0`]}>
               {suggestion}
             </a>
           ))}

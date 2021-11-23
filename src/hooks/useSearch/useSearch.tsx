@@ -34,7 +34,7 @@ export const useSearch = () => {
           fields: '',
           q: isSimpleQ(q) ? q : '',
           resultsPerPage: perPage.toString(),
-          sortBy: sortBy,
+          sort: sortBy,
           page: page.toString(),
           buckets: priceBuckets,
           count,

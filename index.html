@@ -1,15 +1,21 @@
-<!DOCTYPE html>
+l<!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta itemprop="priceCurrency" content="USD" />
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
-    <meta name="description" content="Grizzly Industrial, Inc. is a national retail and internet company providing a wide variety of high-quality woodworking and metalworking machinery, power tools, hand tools and accessories.  By selling directly to end users we provide the best quality products at the best price to professionals and hobbyists." />
+    <meta
+      name="description"
+      content="Grizzly Industrial, Inc. is a national retail and internet company providing a wide variety of high-quality woodworking and metalworking machinery, power tools, hand tools and accessories.  By selling directly to end users we provide the best quality products at the best price to professionals and hobbyists."
+    />
 
     <meta property="og:title" content="Search" />
 
-    <meta property="og:description" content="Grizzly Industrial, Inc. is a national retail and internet company providing a wide variety of high-quality woodworking and metalworking machinery, power tools, hand tools and accessories.  By selling directly to end users we provide the best quality products at the best price to professionals and hobbyists." />
+    <meta
+      property="og:description"
+      content="Grizzly Industrial, Inc. is a national retail and internet company providing a wide variety of high-quality woodworking and metalworking machinery, power tools, hand tools and accessories.  By selling directly to end users we provide the best quality products at the best price to professionals and hobbyists."
+    />
 
     <meta property="og:image" content="https://cdn0.grizzly.com/graphics/grizzly-website-preview.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -21,1080 +27,1187 @@
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
-    <link rel="stylesheet" href="https://cdn0.grizzly.com/js/bootstrap.min.css" as="style">
+    <link rel="stylesheet" href="https://cdn0.grizzly.com/js/bootstrap.min.css" as="style" />
 
-    <link rel="stylesheet" href="https://www.grizzly.com/css/site.min.css?v=1qe2XZNSAu44evxEBVHM64Zj747_9Oi5A4VhR0Jgq3o" as="style">
+    <link
+      rel="stylesheet"
+      href="https://www.grizzly.com/css/site.min.css?v=1qe2XZNSAu44evxEBVHM64Zj747_9Oi5A4VhR0Jgq3o"
+      as="style"
+    />
     <script src="https://kit.fontawesome.com/52aa0e4194.js"></script>
     <script src="https://www.grizzly.com/js/modernizr.js"></script>
     <script src="https://www.grizzly.com/js/lazysizes.min.js" async></script>
     <script>
-        function fallbackImage(i)
-        {
-            i.onerror = "";
-            i.src = "https://cdn0.grizzly.com/pics/jpeg500/n/nophoto.jpg";
+      function fallbackImage(i) {
+        i.onerror = '';
+        i.src = 'https://cdn0.grizzly.com/pics/jpeg500/n/nophoto.jpg';
 
-            $(i).siblings("source").attr("srcset", "https://cdn0.grizzly.com/pics/jpeg500/n/nophoto.jpg")
+        $(i).siblings('source').attr('srcset', 'https://cdn0.grizzly.com/pics/jpeg500/n/nophoto.jpg');
 
-            return true;
-        }
-
+        return true;
+      }
     </script>
 
     <script type="application/ld+json">
-        {"@context":"https://schema.org","@type":"Organization","name":"Grizzly Industrial, Inc.","sameAs":["https://www.facebook.com/grizzlyindustrial","https://twitter.com/grizzly","https://www.youtube.com/user/GrizzlyMachinery"],"url":"https://www.grizzly.com/","contactPoint":{"@type":"ContactPoint","contactType":"customer service","telephone":"+1-800-523-4777"},"logo":{"@type":"ImageObject","url":"https://cdn0.grizzly.com/grizzly2/images/grizzly-search-logo.png"}}
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Grizzly Industrial, Inc.",
+        "sameAs": [
+          "https://www.facebook.com/grizzlyindustrial",
+          "https://twitter.com/grizzly",
+          "https://www.youtube.com/user/GrizzlyMachinery"
+        ],
+        "url": "https://www.grizzly.com/",
+        "contactPoint": { "@type": "ContactPoint", "contactType": "customer service", "telephone": "+1-800-523-4777" },
+        "logo": { "@type": "ImageObject", "url": "https://cdn0.grizzly.com/grizzly2/images/grizzly-search-logo.png" }
+      }
     </script>
 
-    
-    <script defer type="text/javascript" id="sig-api" data-order-session-id="f739ce6d-455f-7653-c601-b9bcdf965728" src="https://cdn-scripts.signifyd.com/api/script-tag.js"></script>
-</head>
-<body>
+    <script
+      defer
+      type="text/javascript"
+      id="sig-api"
+      data-order-session-id="f739ce6d-455f-7653-c601-b9bcdf965728"
+      src="https://cdn-scripts.signifyd.com/api/script-tag.js"
+    ></script>
+  </head>
+  <body>
     <script type="text/template" id="cart-summary-template">
-    <div class="cart-summary">
-        <h5>
-            <i class="fa fa-shopping-cart"></i><a href="/cart">Your Cart</a>
-            <a class="close" href="#">×</a>
-        </h5>
-        <div class="cart-summary-body">
-            {{#each items}}
-            <div class="cart-summary-item" id="cart-summary-item-{{id}}" data-itemnumber="{{product.sku}}"> 
-                <img class="cart-summary-item-image" src="{{global 'imageRoot'}}/pics/jpeg288/{{firstChar product.defaultImage}}/{{product.defaultImage}}.jpg" alt="{{product.name}}" onerror="fallbackImage(this);">
-                <div>
-                    <div class="cart-summary-item-name">
-                        {{product.name}}
-                    </div>
-                    {{#if value}}
-                    <div class="cart-summary-item-price">
-                        {{currency value}}
-                    </div>
-                    {{else}}
-                    <div class="cart-summary-item-price">
-                        {{currency price}}
+      <div class="cart-summary">
+          <h5>
+              <i class="fa fa-shopping-cart"></i><a href="/cart">Your Cart</a>
+              <a class="close" href="#">×</a>
+          </h5>
+          <div class="cart-summary-body">
+              {{#each items}}
+              <div class="cart-summary-item" id="cart-summary-item-{{id}}" data-itemnumber="{{product.sku}}">
+                  <img class="cart-summary-item-image" src="{{global 'imageRoot'}}/pics/jpeg288/{{firstChar product.defaultImage}}/{{product.defaultImage}}.jpg" alt="{{product.name}}" onerror="fallbackImage(this);">
+                  <div>
+                      <div class="cart-summary-item-name">
+                          {{product.name}}
+                      </div>
+                      {{#if value}}
+                      <div class="cart-summary-item-price">
+                          {{currency value}}
+                      </div>
+                      {{else}}
+                      <div class="cart-summary-item-price">
+                          {{currency price}}
 
-                        {{#if priceGroupDiscountPercent}}
-                            <span class="percent-off">({{ priceGroupDiscountPercent  }}% OFF)</span>
-                        {{/if}}
-                    </div>
-                    {{/if}}
-                    <div class="cart-summary-item-quantity">
-                        Qty: {{quantity}}
-                    </div>
-                    <input class="cart-summary-item-id" type="hidden" value="{{id}}">
-                </div>
-            </div>
-            {{/each}}
-        </div>
-        <div class="cart-summary-footer">
-            <span class="cart-summary-estimate"><div class="float-left">Estimated Total:</div> {{currency grandTotal}}</span>
-            <a href="/checkout" class="checkout-summary-btn">Checkout Now</a>
-        </div>
-    </div>
-</script>
-    
-        <noscript>
-            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-MM6KBV"
-                    height="0" width="0" style="display: none; visibility: hidden"></iframe>
-        </noscript>
-        <script>
-            (function (w, d, s, l, i) {
-                w[l] = w[l] || []; w[l].push({
-                    'gtm.start':
-                        new Date().getTime(), event: 'gtm.js'
-                }); var f = d.getElementsByTagName(s)[0],
-                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                        '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-            })(window, document, 'script', 'dataLayer', 'GTM-MM6KBV');
+                          {{#if priceGroupDiscountPercent}}
+                              <span class="percent-off">({{ priceGroupDiscountPercent  }}% OFF)</span>
+                          {{/if}}
+                      </div>
+                      {{/if}}
+                      <div class="cart-summary-item-quantity">
+                          Qty: {{quantity}}
+                      </div>
+                      <input class="cart-summary-item-id" type="hidden" value="{{id}}">
+                  </div>
+              </div>
+              {{/each}}
+          </div>
+          <div class="cart-summary-footer">
+              <span class="cart-summary-estimate"><div class="float-left">Estimated Total:</div> {{currency grandTotal}}</span>
+              <a href="/checkout" class="checkout-summary-btn">Checkout Now</a>
+          </div>
+      </div>
+    </script>
 
-            function gtag() { dataLayer.push(arguments) }
-            gtag('js', new Date());
-            gtag('config', 'GTM-MM6KBV');
-            gtag('config', 'AW-755330477');
-        </script>
+    <noscript>
+      <iframe
+        src="//www.googletagmanager.com/ns.html?id=GTM-MM6KBV"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          'gtm.start': new Date().getTime(),
+          event: 'gtm.js',
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-MM6KBV');
 
-    <div class="brow-banner tw-bg-red" style="background-image: none !important">
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'GTM-MM6KBV');
+      gtag('config', 'AW-755330477');
+    </script>
 
-    </div>
+    <div class="brow-banner bg-red" style="background-image: none !important"></div>
     <div class="site-wrapper">
-        <header id="header" class="container-fluid">
+      <header id="header" class="container-fluid">
+        <div class="header-top">
+          <a href="#" class="d-block d-lg-none mobile-nav-button"><i class="fa fa-bars"></i></a>
 
+          <a id="grizlogo" href="/">
+            <picture>
+              <source
+                media="(max-width: 767px)"
+                srcset="
+                  /img/logo/griz-logo-mobile@1x.webp,
+                  /img/logo/griz-logo-mobile@2x.webp 2x,
+                  /img/logo/griz-logo-mobile@3x.webp 3x
+                "
+                type="image/webp"
+              />
 
-            <div class="header-top">
+              <source
+                media="(max-width: 991px)"
+                srcset="/img/logo/griz-logo-tablet@2x.webp 2x, /img/logo/griz-logo-tablet@3x.webp 3x"
+                type="image/webp"
+              />
 
-                <a href="#" class="d-block d-lg-none mobile-nav-button"><i class="fa fa-bars"></i></a>
+              <source
+                media="(min-width: 992px)"
+                srcset="/img/logo/griz-logo@1x.webp, /img/logo/griz-logo@2x.webp 2x"
+                type="image/webp"
+              />
 
-                <a id="grizlogo" href="/">
-                    <picture>
-                        <source media="(max-width: 767px)"
-                                srcset="/img/logo/griz-logo-mobile@1x.webp,
-                                        /img/logo/griz-logo-mobile@2x.webp 2x,
-                                        /img/logo/griz-logo-mobile@3x.webp 3x" type="image/webp" />
+              <source
+                media="(max-width: 767px)"
+                srcset="
+                  /img/logo/griz-logo-mobile@1x.png,
+                  /img/logo/griz-logo-mobile@2x.png 2x,
+                  /img/logo/griz-logo-mobile@3x.png 3x
+                "
+                type="image/png"
+              />
 
-                        <source media="(max-width: 991px)"
-                                srcset="/img/logo/griz-logo-tablet@2x.webp 2x,
-                                        /img/logo/griz-logo-tablet@3x.webp 3x" type="image/webp" />
+              <source
+                media="(max-width: 991px)"
+                srcset="/img/logo/griz-logo-tablet@2x.png 2x, /img/logo/griz-logo-tablet@3x.png 3x"
+                type="image/png"
+              />
 
-                        <source media="(min-width: 992px)"
-                                srcset="/img/logo/griz-logo@1x.webp,
-                                        /img/logo/griz-logo@2x.webp 2x" type="image/webp" />
+              <source
+                media="(min-width: 992px)"
+                srcset="/img/logo/griz-logo@1x.png, /img/logo/griz-logo@2x.png 2x, /img/logo/griz-logo@3x.png 3x"
+                type="image/png"
+              />
 
-                        <source media="(max-width: 767px)"
-                                srcset="/img/logo/griz-logo-mobile@1x.png,
-                                        /img/logo/griz-logo-mobile@2x.png 2x,
-                                        /img/logo/griz-logo-mobile@3x.png 3x" type="image/png" />
+              <img src="https://www.grizzly.comimg/logo/griz-logo@1x.webp" alt="Grizzly Industrial Inc. Logo" />
+            </picture>
+          </a>
 
-                        <source media="(max-width: 991px)"
-                                srcset="/img/logo/griz-logo-tablet@2x.png 2x,
-                                        /img/logo/griz-logo-tablet@3x.png 3x" type="image/png" />
+          <div id="site-search"></div>
 
-                        <source media="(min-width: 992px)"
-                                srcset="/img/logo/griz-logo@1x.png,
-                                        /img/logo/griz-logo@2x.png 2x,
-                                        /img/logo/griz-logo@3x.png 3x" type="image/png" />
+          <div id="purveyors-header">
+            <span>Purveyors of</span> Fine Machinery<sup>®</sup>
+            <a id="email-signup-button" href="/sign-up?code=&source=footer">
+              <span><i class="fa fa-envelope"></i> Sign Up For Emails</span>
+            </a>
+          </div>
 
-                        <img src="https://www.grizzly.comimg/logo/griz-logo@1x.webp" alt="Grizzly Industrial Inc. Logo" />
-                    </picture>
+          <a href="/cart" class="mobile-cart-icon"
+            ><i class="fas fa-shopping-cart"></i> <span class="badge basket-count">0</span></a
+          >
+        </div>
+
+        <nav id="top-nav" class="navbar navbar-expand-lg" role="navigation">
+          <a href="" class="mobile-navigation-close d-block d-lg-none">&times;</a>
+          <div id="main-nav" class="collapse navbar-collapse">
+            <div class="mobile-navigation-header d-block d-lg-none">
+              <div class="mobile-user-info">
+                <i class="fa fa-user"></i>Welcome <span class="mobile-username"></span>
+              </div>
+              <div class="mobile-header-links">
+                <a href="/user/account">Account</a>
+                <a href="/user/login">Sign In</a>
+              </div>
+            </div>
+            <ul class="nav navbar-nav">
+              <li class="nav-item d-block d-lg-none">
+                <a href="/">Home</a>
+              </li>
+              <li id="woodworking-button" class="nav-item dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                  Woodworking <span class="d-inline-block d-lg-none d-xl-inline-block">Machines</span>
+                </a>
+                <div id="woodworking-menu" class="dropdown-menu" aria-labelledby="navbarDropdown" role="menu">
+                  <div class="mobile-nav-group d-block d-lg-none">
+                    <a href="#" class="mobile-nav-back"><i class="fa fa-arrow-left"></i>Back to Main Menu</a>
+                  </div>
+                  <h4 class="mobile-nav-group-header d-block d-lg-none">Woodworking Machines</h4>
+                  <div class="dropdown-menu-content">
+                    <a id="table-saws-nav-button" href="/table-saws">
+                      <span>Table Saws</span>
+                    </a>
+
+                    <a id="jointers-nav-button" href="/jointers">
+                      <span>Jointers</span>
+                    </a>
+
+                    <a id="bandsaws-nav-button" href="/woodworking-bandsaws">
+                      <span>Bandsaws</span>
+                    </a>
+
+                    <a id="planers-nav-button" href="/planers">
+                      <span>Planers</span>
+                    </a>
+
+                    <a id="drill-presses-nav-button" href="/drill-presses">
+                      <span>Drill Presses</span>
+                    </a>
+
+                    <a id="lathes-nav-button" href="/wood-lathes">
+                      <span>Lathes</span>
+                    </a>
+
+                    <a id="dust-collectors-nav-button" href="/dust-collectors">
+                      <span>Dust Collectors</span>
+                    </a>
+
+                    <a id="shapers-nav-button" href="/shapers">
+                      <span>Shapers</span>
+                    </a>
+
+                    <a id="belt-sanders-nav-button" href="/wide-belt-sanders">
+                      <span>Wide Belt Sanders</span>
+                    </a>
+
+                    <a id="edge-sanders-nav-button" href="/edge-sanders">
+                      <span>Edge Sanders</span>
+                    </a>
+
+                    <a id="combo-sanders-nav-button" href="/belt-disc-sanders">
+                      <span>Combo Sanders</span>
+                    </a>
+
+                    <a id="drum-sanders-nav-button" href="/drum-sanders">
+                      <span>Drum Sanders</span>
+                    </a>
+
+                    <a id="woodworking-cnc-nav-button" href="/woodworking-cnc">
+                      <span>CNC</span>
+                    </a>
+                  </div>
+                </div>
+              </li>
+
+              <li id="metalworking-button" class="nav-item dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                  Metalworking <span class="d-inline-block d-lg-none d-xl-inline-block">Machines</span>
                 </a>
 
-                <div id="site-search">
-                </div>
-
-
-                <div id="purveyors-header">
-                    <span>Purveyors of</span> Fine Machinery<sup>®</sup>
-                    <a id="email-signup-button" href="/sign-up?code=&source=footer">
-                        <span><i class="fa fa-envelope"></i> Sign Up For Emails</span>
+                <div id="metalworking-menu" class="dropdown-menu" aria-labelledby="navbarDropdown" role="menu">
+                  <div class="mobile-nav-group d-block d-lg-none">
+                    <a href="#" class="mobile-nav-back"><i class="fa fa-arrow-left"></i>Back to Main Menu</a>
+                  </div>
+                  <h4 class="mobile-nav-group-header d-block d-lg-none">Metalworking Machines</h4>
+                  <div class="dropdown-menu-content">
+                    <a id="metal-lathes-nav-button" href="/metal-lathes">
+                      <span>Lathes</span>
                     </a>
+
+                    <a id="metal-milling-nav-button" href="/milling-machines">
+                      <span>Mills</span>
+                    </a>
+
+                    <a id="metal-combo-lathes-nav-button" href="/combination-lathe-mills">
+                      <span>Combo Lathe Mills</span>
+                    </a>
+
+                    <a id="metal-drill-presses-nav-button" href="/drill-presses">
+                      <span>Drill Presses</span>
+                    </a>
+
+                    <a id="metal-bandsaws-nav-button" href="/metalworking-bandsaws">
+                      <span>Bandsaws</span>
+                    </a>
+
+                    <a id="metal-sheet-nav-button" href="/sheet-metal-machines">
+                      <span>Sheet Metal</span>
+                    </a>
+
+                    <a id="metal-grinders-nav-button" href="/metalworking-grinders">
+                      <span>Grinders</span>
+                    </a>
+
+                    <a id="metal-surface-grinders-nav-button" href="/surface-grinders">
+                      <span>Surface Grinders</span>
+                    </a>
+
+                    <a id="metal-welding-nav-button" href="/welding">
+                      <span>Welding</span>
+                    </a>
+
+                    <a id="metal-cnc-nav-button" href="/metalworking-cnc">
+                      <span>CNC</span>
+                    </a>
+
+                    <a id="metal-sanders-nav-button" href="/metalworking-sanders">
+                      <span>Sanders</span>
+                    </a>
+                  </div>
                 </div>
-
-                <a href="/cart" class="mobile-cart-icon"><i class="fas fa-shopping-cart"></i> <span class="badge basket-count">0</span></a>
-            </div>
-
-            <nav id="top-nav" class="navbar navbar-expand-lg" role="navigation">
-                <a href="" class="mobile-navigation-close d-block d-lg-none">&times;</a>
-                <div id="main-nav" class="collapse navbar-collapse">
-                    <div class="mobile-navigation-header d-block d-lg-none">
-                        <div class="mobile-user-info">
-                            <i class="fa fa-user"></i>Welcome <span class="mobile-username"></span>
-                        </div>
-                        <div class="mobile-header-links">
-                            <a href="/user/account">Account</a>
-                                <a href="/user/login">Sign In</a>
-                        </div>
+              </li>
+              <li id="category-wrapper" class="nav-item dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown"> Categories </a>
+                <div id="category-menu" class="dropdown-menu" role="menu">
+                  <div class="mobile-nav-group d-block d-lg-none">
+                    <a href="#" class="mobile-nav-back"><i class="fa fa-arrow-left"></i>Back to Main Menu</a>
+                  </div>
+                  <div class="category-items">
+                    <h4 class="mobile-nav-group-header d-block d-lg-none">Product Categories</h4>
+                    <a href="/best-sellers" data-child="#sub-menu-0" class="" role="menuitem"> Best Sellers </a>
+                    <a href="/abrasives" data-child="#sub-menu-1" class="has-children" role="menuitem"> Abrasives </a>
+                    <a href="/air-tools-and-compressors" data-child="#sub-menu-2" class="has-children" role="menuitem">
+                      Air Tools &amp; Compressors
+                    </a>
+                    <a href="/carving" data-child="#sub-menu-3" class="" role="menuitem"> Carving </a>
+                    <a href="/clamps-vises-and-jigs" data-child="#sub-menu-4" class="has-children" role="menuitem">
+                      Clamps, Vises &amp; Jigs
+                    </a>
+                    <a href="/CNC" data-child="#sub-menu-5" class="has-children" role="menuitem"> CNC </a>
+                    <a href="/cutting-tools-and-tooling" data-child="#sub-menu-6" class="has-children" role="menuitem">
+                      Cutting Tools &amp; Tooling
+                    </a>
+                    <a href="/drilling-and-boring" data-child="#sub-menu-8" class="has-children" role="menuitem">
+                      Drilling &amp; Boring
+                    </a>
+                    <a href="/gunsmithing-and-shooting" data-child="#sub-menu-9" class="has-children" role="menuitem">
+                      Gunsmithing &amp; Shooting
+                    </a>
+                    <a href="/hand-tools" data-child="#sub-menu-10" class="has-children" role="menuitem">
+                      Hand Tools
+                    </a>
+                    <a href="/home-and-shop" data-child="#sub-menu-11" class="has-children" role="menuitem">
+                      Home &amp; Shop
+                    </a>
+                    <a href="/hardware" data-child="#sub-menu-12" class="has-children" role="menuitem"> Hardware </a>
+                    <a href="/logging" data-child="#sub-menu-13" class="" role="menuitem"> Logging </a>
+                    <a href="/machinery" data-child="#sub-menu-14" class="has-children" role="menuitem"> Machinery </a>
+                    <a href="/measuring" data-child="#sub-menu-15" class="has-children" role="menuitem"> Measuring </a>
+                    <a href="/power-tools" data-child="#sub-menu-16" class="has-children" role="menuitem">
+                      Power Tools
+                    </a>
+                    <a
+                      href="/router-bits-and-shaper-cutters"
+                      data-child="#sub-menu-17"
+                      class="has-children"
+                      role="menuitem"
+                    >
+                      Router Bits &amp; Shaper Cutters
+                    </a>
+                    <a href="/Sandblasting" data-child="#sub-menu-18" class="has-children" role="menuitem">
+                      Sandblasting
+                    </a>
+                    <a href="/safety-and-ppe" data-child="#sub-menu-19" class="has-children" role="menuitem">
+                      Safety / PPE
+                    </a>
+                    <a href="/saw-blades" data-child="#sub-menu-20" class="has-children" role="menuitem">
+                      Saw Blades
+                    </a>
+                    <a
+                      href="/tool-storage-and-workbenches"
+                      data-child="#sub-menu-21"
+                      class="has-children"
+                      role="menuitem"
+                    >
+                      Tool Storage &amp; Workbenches
+                    </a>
+                    <a href="/welding" data-child="#sub-menu-22" class="has-children" role="menuitem"> Welding </a>
+                  </div>
+                  <div id="sub-menu-1" class="menu-flyout hidden-xs hidden-sm">
+                    <div class="mobile-nav-group">
+                      <a href="#" class="mobile-nav-back-2 d-block d-lg-none"
+                        ><i class="fa fa-arrow-left"></i>Back to Categories</a
+                      >
                     </div>
-                    <ul class="nav navbar-nav">
-                        <li class="nav-item d-block d-lg-none">
-                            <a href="/">Home</a>
-                        </li>
-                        <li id="woodworking-button" class="nav-item dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown">
-                                Woodworking <span class="d-inline-block d-lg-none d-xl-inline-block">Machines</span>
-                            </a>
-                            <div id="woodworking-menu" class="dropdown-menu" aria-labelledby="navbarDropdown" role="menu">
-
-                                <div class="mobile-nav-group d-block d-lg-none">
-                                    <a href="#" class="mobile-nav-back"><i class="fa fa-arrow-left"></i>Back to Main Menu</a>
-                                </div>
-                                <h4 class="mobile-nav-group-header d-block d-lg-none">Woodworking Machines</h4>
-                                <div class="dropdown-menu-content">
-                                    <a id="table-saws-nav-button" href='/table-saws'>
-                                        <span>Table Saws</span>
-                                    </a>
-
-                                    <a id="jointers-nav-button" href='/jointers'>
-                                        <span>Jointers</span>
-                                    </a>
-
-                                    <a id="bandsaws-nav-button" href='/woodworking-bandsaws'>
-                                        <span>Bandsaws</span>
-                                    </a>
-
-                                    <a id="planers-nav-button" href='/planers'>
-                                        <span>Planers</span>
-                                    </a>
-
-                                    <a id="drill-presses-nav-button" href='/drill-presses'>
-                                        <span>Drill Presses</span>
-                                    </a>
-
-                                    <a id="lathes-nav-button" href='/wood-lathes'>
-                                        <span>Lathes</span>
-                                    </a>
-
-                                    <a id="dust-collectors-nav-button" href='/dust-collectors'>
-                                        <span>Dust Collectors</span>
-                                    </a>
-
-                                    <a id="shapers-nav-button" href='/shapers'>
-                                        <span>Shapers</span>
-                                    </a>
-
-                                    <a id="belt-sanders-nav-button" href='/wide-belt-sanders'>
-                                        <span>Wide Belt Sanders</span>
-                                    </a>
-
-                                    <a id="edge-sanders-nav-button" href='/edge-sanders'>
-                                        <span>Edge Sanders</span>
-                                    </a>
-
-                                    <a id="combo-sanders-nav-button" href='/belt-disc-sanders'>
-                                        <span>Combo Sanders</span>
-                                    </a>
-
-                                    <a id="drum-sanders-nav-button" href='/drum-sanders'>
-                                        <span>Drum Sanders</span>
-                                    </a>
-
-                                    <a id="woodworking-cnc-nav-button" href='/woodworking-cnc'>
-                                        <span>CNC</span>
-                                    </a>
-                                </div>
-                            </div>
-
-                        </li>
-
-                        <li id="metalworking-button" class="nav-item dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown">
-                                Metalworking <span class="d-inline-block d-lg-none d-xl-inline-block">Machines</span>
-                            </a>
-
-                            <div id="metalworking-menu" class="dropdown-menu" aria-labelledby="navbarDropdown" role="menu">
-                                <div class="mobile-nav-group d-block d-lg-none">
-                                    <a href="#" class="mobile-nav-back"><i class="fa fa-arrow-left"></i>Back to Main Menu</a>
-                                </div>
-                                <h4 class="mobile-nav-group-header d-block d-lg-none">Metalworking Machines</h4>
-                                <div class="dropdown-menu-content">
-                                    <a id="metal-lathes-nav-button" href='/metal-lathes'>
-                                        <span>Lathes</span>
-                                    </a>
-
-                                    <a id="metal-milling-nav-button" href='/milling-machines'>
-                                        <span>Mills</span>
-                                    </a>
-
-                                    <a id="metal-combo-lathes-nav-button" href='/combination-lathe-mills'>
-                                        <span>Combo Lathe Mills</span>
-                                    </a>
-
-                                    <a id="metal-drill-presses-nav-button" href='/drill-presses'>
-                                        <span>Drill Presses</span>
-                                    </a>
-
-                                    <a id="metal-bandsaws-nav-button" href='/metalworking-bandsaws'>
-                                        <span>Bandsaws</span>
-                                    </a>
-
-                                    <a id="metal-sheet-nav-button" href='/sheet-metal-machines'>
-                                        <span>Sheet Metal</span>
-                                    </a>
-
-                                    <a id="metal-grinders-nav-button" href='/metalworking-grinders'>
-                                        <span>Grinders</span>
-                                    </a>
-
-                                    <a id="metal-surface-grinders-nav-button" href='/surface-grinders'>
-                                        <span>Surface Grinders</span>
-                                    </a>
-
-                                    <a id="metal-welding-nav-button" href='/welding'>
-                                        <span>Welding</span>
-                                    </a>
-
-                                    <a id="metal-cnc-nav-button" href='/metalworking-cnc'>
-                                        <span>CNC</span>
-                                    </a>
-
-                                    <a id="metal-sanders-nav-button" href='/metalworking-sanders'>
-                                        <span>Sanders</span>
-                                    </a>
-                                </div>
-                            </div>
-
-                        </li>
-                        <li id="category-wrapper" class="nav-item dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown">
-                                Categories
-                            </a>
-                            <div id="category-menu" class="dropdown-menu" role="menu">
-                                <div class="mobile-nav-group d-block d-lg-none">
-                                    <a href="#" class="mobile-nav-back"><i class="fa fa-arrow-left"></i>Back to Main Menu</a>
-                                </div>
-                                <div class="category-items">
-                                    <h4 class="mobile-nav-group-header d-block d-lg-none">Product Categories</h4>
-                                        <a href="/best-sellers" data-child="#sub-menu-0" class="" role="menuitem">
-                                            Best Sellers
-                                        </a>
-                                        <a href="/abrasives" data-child="#sub-menu-1" class=" has-children" role="menuitem">
-                                            Abrasives
-                                        </a>
-                                        <a href="/air-tools-and-compressors" data-child="#sub-menu-2" class=" has-children" role="menuitem">
-                                            Air Tools &amp; Compressors
-                                        </a>
-                                        <a href="/carving" data-child="#sub-menu-3" class="" role="menuitem">
-                                            Carving
-                                        </a>
-                                        <a href="/clamps-vises-and-jigs" data-child="#sub-menu-4" class=" has-children" role="menuitem">
-                                            Clamps, Vises &amp; Jigs
-                                        </a>
-                                        <a href="/CNC" data-child="#sub-menu-5" class=" has-children" role="menuitem">
-                                            CNC
-                                        </a>
-                                        <a href="/cutting-tools-and-tooling" data-child="#sub-menu-6" class=" has-children" role="menuitem">
-                                            Cutting Tools &amp; Tooling
-                                        </a>
-                                        <a href="/drilling-and-boring" data-child="#sub-menu-8" class=" has-children" role="menuitem">
-                                            Drilling &amp; Boring
-                                        </a>
-                                        <a href="/gunsmithing-and-shooting" data-child="#sub-menu-9" class=" has-children" role="menuitem">
-                                            Gunsmithing &amp; Shooting
-                                        </a>
-                                        <a href="/hand-tools" data-child="#sub-menu-10" class=" has-children" role="menuitem">
-                                            Hand Tools
-                                        </a>
-                                        <a href="/home-and-shop" data-child="#sub-menu-11" class=" has-children" role="menuitem">
-                                            Home &amp; Shop
-                                        </a>
-                                        <a href="/hardware" data-child="#sub-menu-12" class=" has-children" role="menuitem">
-                                            Hardware
-                                        </a>
-                                        <a href="/logging" data-child="#sub-menu-13" class="" role="menuitem">
-                                            Logging
-                                        </a>
-                                        <a href="/machinery" data-child="#sub-menu-14" class=" has-children" role="menuitem">
-                                            Machinery
-                                        </a>
-                                        <a href="/measuring" data-child="#sub-menu-15" class=" has-children" role="menuitem">
-                                            Measuring
-                                        </a>
-                                        <a href="/power-tools" data-child="#sub-menu-16" class=" has-children" role="menuitem">
-                                            Power Tools
-                                        </a>
-                                        <a href="/router-bits-and-shaper-cutters" data-child="#sub-menu-17" class=" has-children" role="menuitem">
-                                            Router Bits &amp; Shaper Cutters
-                                        </a>
-                                        <a href="/Sandblasting" data-child="#sub-menu-18" class=" has-children" role="menuitem">
-                                            Sandblasting
-                                        </a>
-                                        <a href="/safety-and-ppe" data-child="#sub-menu-19" class=" has-children" role="menuitem">
-                                            Safety / PPE
-                                        </a>
-                                        <a href="/saw-blades" data-child="#sub-menu-20" class=" has-children" role="menuitem">
-                                            Saw Blades
-                                        </a>
-                                        <a href="/tool-storage-and-workbenches" data-child="#sub-menu-21" class=" has-children" role="menuitem">
-                                            Tool Storage &amp; Workbenches
-                                        </a>
-                                        <a href="/welding" data-child="#sub-menu-22" class=" has-children" role="menuitem">
-                                            Welding
-                                        </a>
-                                </div>
-                                    <div id="sub-menu-1" class="menu-flyout hidden-xs hidden-sm ">
-
-                                        <div class="mobile-nav-group">
-                                            <a href="#" class="mobile-nav-back-2 d-block d-lg-none"><i class="fa fa-arrow-left"></i>Back to Categories</a>
-                                        </div>
-                                        <div class="category-items">
-                                                <a href="/abrasives-and-sanding">Abrasives &amp; Sanding</a>
-                                                <a href="/grinding-wheels-and-discs">Grinding Wheels &amp; Discs</a>
-                                                <a href="/hard-sleeves">Hard Sleeves</a>
-                                                <a href="/sanding-belts">Sanding Belts</a>
-                                                <a href="/sanding-rolls">Sanding Rolls</a>
-                                                <a href="/sanding-sheets">Sanding Sheets</a>
-                                        </div>
-                                    </div>
-                                    <div id="sub-menu-2" class="menu-flyout hidden-xs hidden-sm ">
-
-                                        <div class="mobile-nav-group">
-                                            <a href="#" class="mobile-nav-back-2 d-block d-lg-none"><i class="fa fa-arrow-left"></i>Back to Categories</a>
-                                        </div>
-                                        <div class="category-items">
-                                                <a href="/air-accessories">Air Accessories</a>
-                                                <a href="/air-compressors">Air Compressors</a>
-                                                <a href="/air-hose-reels">Air Hose Reels</a>
-                                                <a href="/air-hoses">Air Hoses</a>
-                                                <a href="/combo-kit-nailer-and-staplers">Combo Kit Nailer/Staplers</a>
-                                                <a href="/die-grinders">Die Grinders</a>
-                                                <a href="/filters-and-regulators">Filters &amp; Regulators</a>
-                                                <a href="/fitting-and-couplers">Fittings &amp; Couplers</a>
-                                                <a href="/framing-coils">Framing Coils</a>
-                                                <a href="/impact-wrenches">Impact Wrenches</a>
-                                                <a href="/miscellaneous-pneumatic-tools">Miscellaneous Pneumatic Tools</a>
-                                                <a href="/nail-guns">Nail Guns</a>
-                                                <a href="/nailers-and-staplers">Nailers &amp; Staplers</a>
-                                                <a href="/pneumatic-nails-and-staples">Pneumatic Nails &amp; Staples</a>
-                                                <a href="/pneumatic-tools">Pneumatic Tools</a>
-                                                <a href="/pneumatic-sanders">Sanders</a>
-                                                <a href="/spray-gun-accessories">Spray Gun Accessories</a>
-                                                <a href="/spray-guns">Spray Guns</a>
-                                                <a href="/sprayers">Sprayers</a>
-                                                <a href="/staple-guns">Staple Guns</a>
-                                        </div>
-                                    </div>
-                                    <div id="sub-menu-4" class="menu-flyout hidden-xs hidden-sm ">
-
-                                        <div class="mobile-nav-group">
-                                            <a href="#" class="mobile-nav-back-2 d-block d-lg-none"><i class="fa fa-arrow-left"></i>Back to Categories</a>
-                                        </div>
-                                        <div class="category-items">
-                                                <a href="/bar-clamps">Bar Clamps</a>
-                                                <a href="/bench-vises">Bench Vises</a>
-                                                <a href="/c-clamps">C-Clamps</a>
-                                                <a href="/clamps">Clamps</a>
-                                                <a href="/dovetail-jigs">Dovetail Jigs</a>
-                                                <a href="/drill-press-vises">Drill Press Vises</a>
-                                                <a href="/jigs-and-fixtures">Jigs &amp; Fixtures</a>
-                                                <a href="/kreg-jig">Kreg Jig</a>
-                                                <a href="/milling-vises">Milling Vises</a>
-                                                <a href="/miscellaneous-jigs-and-fixtures">Miscellaneous Jigs &amp; Fixtures</a>
-                                                <a href="/parallel-clamps">Parallel Clamps</a>
-                                                <a href="/specialty-clamps">Specialty Clamps</a>
-                                                <a href="/straight-edge-clamps">Straight Edge Clamps</a>
-                                                <a href="/vises">Vises</a>
-                                                <a href="/wood-vises">Wood Vises</a>
-                                        </div>
-                                    </div>
-                                    <div id="sub-menu-5" class="menu-flyout hidden-xs hidden-sm ">
-
-                                        <div class="mobile-nav-group">
-                                            <a href="#" class="mobile-nav-back-2 d-block d-lg-none"><i class="fa fa-arrow-left"></i>Back to Categories</a>
-                                        </div>
-                                        <div class="category-items">
-                                                <a href="/CNC-lasers">CNC Lasers</a>
-                                                <a href="/CNC-lathes">CNC Lathes</a>
-                                                <a href="/CNC-mills">CNC Mills</a>
-                                                <a href="/CNC-routers">CNC Routers</a>
-                                                <a href="/cnc-router-accessories">CNC Router Accessories</a>
-                                                <a href="/CNC-accessories">CNC Accessories</a>
-                                        </div>
-                                    </div>
-                                    <div id="sub-menu-6" class="menu-flyout hidden-xs hidden-sm ">
-
-                                        <div class="mobile-nav-group">
-                                            <a href="#" class="mobile-nav-back-2 d-block d-lg-none"><i class="fa fa-arrow-left"></i>Back to Categories</a>
-                                        </div>
-                                        <div class="category-items">
-                                                <a href="/boring-bars">Boring Bars</a>
-                                                <a href="/clamping-kits">Clamping Kits</a>
-                                                <a href="/collets">Collets</a>
-                                                <a href="/cutting-tools">Cutting Tools</a>
-                                                <a href="/dies">Dies</a>
-                                                <a href="/end-mill-holders">End Mill Holders</a>
-                                                <a href="/end-mills">End Mills</a>
-                                                <a href="/inserts">Inserts</a>
-                                                <a href="/lathe-centers">Lathe Centers</a>
-                                                <a href="/lathe-chucks">Lathe Chucks</a>
-                                                <a href="/live-centers">Live Centers</a>
-                                                <a href="/milling-vises">Milling Vises</a>
-                                                <a href="/rotary-burrs">Rotary Burrs</a>
-                                                <a href="/rotary-tables">Rotary Tables</a>
-                                                <a href="/slitting-saws">Slitting Saws</a>
-                                                <a href="/spiral-cutterheads">Spiral Cutterheads</a>
-                                                <a href="/tap-and-die-sets">Tap &amp; Die Sets</a>
-                                                <a href="/tooling">Tooling</a>
-                                        </div>
-                                    </div>
-                                    <div id="sub-menu-8" class="menu-flyout hidden-xs hidden-sm ">
-
-                                        <div class="mobile-nav-group">
-                                            <a href="#" class="mobile-nav-back-2 d-block d-lg-none"><i class="fa fa-arrow-left"></i>Back to Categories</a>
-                                        </div>
-                                        <div class="category-items">
-                                                <a href="/auger-bits">Auger Bits</a>
-                                                <a href="/countersinks">Countersinks</a>
-                                                <a href="/drill-bits">Drill Bits</a>
-                                                <a href="/drill-chucks-and-arbors">Drill Chucks &amp; Arbors</a>
-                                                <a href="/forstner-bits">Forstner Bits</a>
-                                                <a href="/hammer-drills">Hammer Drills</a>
-                                                <a href="/hole-saws">Hole Saws</a>
-                                                <a href="/lumberjack-cutters">Lumberjack Cutters</a>
-                                                <a href="/power-bits">Power Bits</a>
-                                                <a href="/reamers">Reamers</a>
-                                                <a href="/spade-bits">Spade Bits</a>
-                                                <a href="/tenon-cutters">Tenon Cutters</a>
-                                        </div>
-                                    </div>
-                                    <div id="sub-menu-9" class="menu-flyout hidden-xs hidden-sm ">
-
-                                        <div class="mobile-nav-group">
-                                            <a href="#" class="mobile-nav-back-2 d-block d-lg-none"><i class="fa fa-arrow-left"></i>Back to Categories</a>
-                                        </div>
-                                        <div class="category-items">
-                                                <a href="/chambering-reamers">Chambering Reamers</a>
-                                                <a href="/go-and-no-go-gauges">Go/No Go Gauges</a>
-                                                <a href="/gun-safes">Gun Safes</a>
-                                                <a href="/gunsmithing-and-shooting">Gunsmithing &amp; Shooting</a>
-                                                <a href="/hearing-protection">Hearing Protection</a>
-                                                <a href="/miscellaneous-gunsmithing-accessories">Miscellaneous Gunsmithing Accessories</a>
-                                                <a href="/rifle-barrels">Rifle Barrels</a>
-                                                <a href="/shooting-accessories">Shooting Accessories</a>
-                                        </div>
-                                    </div>
-                                    <div id="sub-menu-10" class="menu-flyout hidden-xs hidden-sm ">
-
-                                        <div class="mobile-nav-group">
-                                            <a href="#" class="mobile-nav-back-2 d-block d-lg-none"><i class="fa fa-arrow-left"></i>Back to Categories</a>
-                                        </div>
-                                        <div class="category-items">
-                                                <a href="/chisels-and-gouges">Chisels and Gouges</a>
-                                                <a href="/cutlery">Cutlery</a>
-                                                <a href="/files">Files</a>
-                                                <a href="/hammers-and-mallets">Hammers &amp; Mallets</a>
-                                                <a href="/hand-planes">Hand Planes</a>
-                                                <a href="/hand-saws">Hand Saws</a>
-                                                <a href="/miscellaneous-hand-tools">Miscellaneous Hand Tools</a>
-                                                <a href="/pliers-and-snips">Pliers &amp; Snips</a>
-                                                <a href="/sharpening-stones">Sharpening Stones</a>
-                                        </div>
-                                    </div>
-                                    <div id="sub-menu-11" class="menu-flyout hidden-xs hidden-sm ">
-
-                                        <div class="mobile-nav-group">
-                                            <a href="#" class="mobile-nav-back-2 d-block d-lg-none"><i class="fa fa-arrow-left"></i>Back to Categories</a>
-                                        </div>
-                                        <div class="category-items">
-                                                <a href="/adhesives">Adhesives</a>
-                                                <a href="/automotive-equipment">Automotive Equipment</a>
-                                                <a href="/books-plans-and-dvds">Books, Plans, &amp; DVDs</a>
-                                                <a href="/casters">Casters</a>
-                                                <a href="/contractor-home-and-shop">Contractor, Home &amp; Shop</a>
-                                                <a href="/cutlery">Cutlery</a>
-                                                <a href="/fasteners">Fasteners</a>
-                                                <a href="/finishing">Finishing</a>
-                                                <a href="/gifts">Gifts</a>
-                                                <a href="/luthier-supplies">Luthier Supplies</a>
-                                                <a href="/material-handling">Material Handling</a>
-                                                <a href="/mobile-bases">Mobile Bases</a>
-                                                <a href="/pen-making">Pen Making</a>
-                                                <a href="/presses">Presses</a>
-                                                <a href="/router-tables">Router Tables</a>
-                                                <a href="/shop-accessories">Shop Accessories</a>
-                                                <a href="/wheels">Wheels</a>
-                                        </div>
-                                    </div>
-                                    <div id="sub-menu-12" class="menu-flyout hidden-xs hidden-sm ">
-
-                                        <div class="mobile-nav-group">
-                                            <a href="#" class="mobile-nav-back-2 d-block d-lg-none"><i class="fa fa-arrow-left"></i>Back to Categories</a>
-                                        </div>
-                                        <div class="category-items">
-                                                <a href="/drawer-pulls">Drawer Pulls</a>
-                                                <a href="/drawer-slides">Drawer Slides</a>
-                                                <a href="/hinges">Hinges</a>
-                                                <a href="/miscellaneous-hardware">Miscellaneous Hardware</a>
-                                                <a href="/shelf-supports">Shelf Supports</a>
-                                        </div>
-                                    </div>
-                                    <div id="sub-menu-14" class="menu-flyout hidden-xs hidden-sm ">
-
-                                        <div class="mobile-nav-group">
-                                            <a href="#" class="mobile-nav-back-2 d-block d-lg-none"><i class="fa fa-arrow-left"></i>Back to Categories</a>
-                                        </div>
-                                        <div class="category-items">
-                                                <a href="/metalworking-bandsaws">Bandsaws - Metalworking</a>
-                                                <a href="/woodworking-bandsaws">Bandsaws - Woodworking</a>
-                                                <a href="/boring-machines">Boring Machines</a>
-                                                <a href="/combination-lathe-mills">Combination Lathe-Mills</a>
-                                                <a href="/drill-presses">Drill Presses</a>
-                                                <a href="/dust-collection-accessories">Dust Collection Accessories</a>
-                                                <a href="/dust-collectors">Dust Collectors</a>
-                                                <a href="/jointers">Jointers</a>
-                                                <a href="/metal-lathes">Lathes - Metalworking</a>
-                                                <a href="/wood-lathes">Lathes - Woodworking</a>
-                                                <a href="/machine-accessories">Machine Accessories</a>
-                                                <a href="/metalworking-machines-misc">Metalworking Machines - Misc</a>
-                                                <a href="/milling-machines">Milling Machines</a>
-                                                <a href="/motors-switches-and-electrical">Motors, Switches, &amp; Electrical</a>
-                                                <a href="/planers">Planers</a>
-                                                <a href="/sanders">Sanders</a>
-                                                <a href="/shapers">Shapers</a>
-                                                <a href="/sheet-metal-machines">Sheet Metal Machines</a>
-                                                <a href="/surface-grinders">Surface Grinders</a>
-                                                <a href="/tablesaws">Table Saws</a>
-                                                <a href="/woodworking-machines-misc">Woodworking Machines - Misc</a>
-                                        </div>
-                                    </div>
-                                    <div id="sub-menu-15" class="menu-flyout hidden-xs hidden-sm ">
-
-                                        <div class="mobile-nav-group">
-                                            <a href="#" class="mobile-nav-back-2 d-block d-lg-none"><i class="fa fa-arrow-left"></i>Back to Categories</a>
-                                        </div>
-                                        <div class="category-items">
-                                                <a href="/calipers">Calipers</a>
-                                                <a href="/dros">DROs</a>
-                                                <a href="/dial-gauges-and-indicators">Dial Gauges &amp; Indicators</a>
-                                                <a href="/granite-plates-and-stands">Granite Plates &amp; Stands</a>
-                                                <a href="/magnetic-bases">Magnetic Bases</a>
-                                                <a href="/measuring-tools">Measuring Tools</a>
-                                                <a href="/measuring-instruments">Measuring Instruments</a>
-                                                <a href="/micrometers">Micrometers</a>
-                                                <a href="/rules-and-squares">Rules &amp; Squares</a>
-                                        </div>
-                                    </div>
-                                    <div id="sub-menu-16" class="menu-flyout hidden-xs hidden-sm ">
-
-                                        <div class="mobile-nav-group">
-                                            <a href="#" class="mobile-nav-back-2 d-block d-lg-none"><i class="fa fa-arrow-left"></i>Back to Categories</a>
-                                        </div>
-                                        <div class="category-items">
-                                                <a href="/batteries-and-chargers">Batteries &amp; Chargers</a>
-                                                <a href="/circular-saws">Circular Saws</a>
-                                                <a href="/cordless-tools">Cordless Tools</a>
-                                                <a href="/cut-off-saws">Cut Off Saws</a>
-                                                <a href="/drills">Drills</a>
-                                                <a href="/heat-guns">Heat Guns</a>
-                                                <a href="/jig-saws">Jig Saws</a>
-                                                <a href="/multitools-accessories">Multi-Tools Accessories</a>
-                                                <a href="/oscillating-multi-tools">Oscillating Multi-Tools</a>
-                                                <a href="/power-tool-accessories">Power Tool Accessories</a>
-                                                <a href="/reciprocating-saws">Reciprocating Saws</a>
-                                                <a href="/routers">Routers</a>
-                                                <a href="/sanders">Sanders</a>
-                                        </div>
-                                    </div>
-                                    <div id="sub-menu-17" class="menu-flyout hidden-xs hidden-sm ">
-
-                                        <div class="mobile-nav-group">
-                                            <a href="#" class="mobile-nav-back-2 d-block d-lg-none"><i class="fa fa-arrow-left"></i>Back to Categories</a>
-                                        </div>
-                                        <div class="category-items">
-                                                <a href="/bead-and-flute-cutters">Bead &amp; Flute Cutters</a>
-                                                <a href="/bull-nose-bits">Bull Nose Bits</a>
-                                                <a href="/bushings-and-spacers">Bushings &amp; Spacers</a>
-                                                <a href="/dovetail-cutters">Dovetail Cutters</a>
-                                                <a href="/ogee-cutters">Ogee Cutters</a>
-                                                <a href="/plunge-bits">Plunge Bits</a>
-                                                <a href="/profile-knives">Profile Knives</a>
-                                                <a href="/rabbeting-cutters">Rabbeting Cutters</a>
-                                                <a href="/raised-panel-cutter">Raised Panel Cutter</a>
-                                                <a href="/rosette-cutters">Rosette Cutters</a>
-                                                <a href="/roundover-bits">Roundover Bits</a>
-                                                <a href="/router-bits">Router Bits</a>
-                                                <a href="/router-bit-sets">Router Bit Sets</a>
-                                                <a href="/rub-collars">Rub Collars</a>
-                                                <a href="/shaper-cutters">Shaper Cutters</a>
-                                                <a href="/specialty-cutters">Specialty Cutters</a>
-                                                <a href="/spiral-cutterheads">Spiral Cutterheads</a>
-                                                <a href="/stile-and-rail-cutters">Stile &amp; Rail Cutters</a>
-                                                <a href="/straight-bits">Straight Bits</a>
-                                                <a href="/tongue-and-groove">Tongue &amp; Groove</a>
-                                        </div>
-                                    </div>
-                                    <div id="sub-menu-18" class="menu-flyout hidden-xs hidden-sm ">
-
-                                        <div class="mobile-nav-group">
-                                            <a href="#" class="mobile-nav-back-2 d-block d-lg-none"><i class="fa fa-arrow-left"></i>Back to Categories</a>
-                                        </div>
-                                        <div class="category-items">
-                                                <a href="/sand-for-sandblasters">Sand for Sandblasters</a>
-                                                <a href="/sandblasters">Sandblasters</a>
-                                        </div>
-                                    </div>
-                                    <div id="sub-menu-19" class="menu-flyout hidden-xs hidden-sm ">
-
-                                        <div class="mobile-nav-group">
-                                            <a href="#" class="mobile-nav-back-2 d-block d-lg-none"><i class="fa fa-arrow-left"></i>Back to Categories</a>
-                                        </div>
-                                        <div class="category-items">
-                                                <a href="/eye-protection">Eye Protection</a>
-                                                <a href="/gloves">Gloves</a>
-                                                <a href="/hearing-protection">Hearing Protection</a>
-                                                <a href="/respirators">Respirators</a>
-                                                <a href="/safety-equipment">Safety Equipment</a>
-                                                <a href="/security-equipment">Security Equipment</a>
-                                        </div>
-                                    </div>
-                                    <div id="sub-menu-20" class="menu-flyout hidden-xs hidden-sm ">
-
-                                        <div class="mobile-nav-group">
-                                            <a href="#" class="mobile-nav-back-2 d-block d-lg-none"><i class="fa fa-arrow-left"></i>Back to Categories</a>
-                                        </div>
-                                        <div class="category-items">
-                                                <a href="/bandsaw-blades">Bandsaw Blades</a>
-                                                <a href="/circular-saw-blades">Circular Saw Blades</a>
-                                                <a href="/dado-blades">Dado Blades</a>
-                                                <a href="/freud">Freud</a>
-                                                <a href="/forrest">Forrest</a>
-                                                <a href="/inserts-for-spiral-cutterheads">Inserts for Spiral Cutterheads</a>
-                                                <a href="/oscillating-saw-blades">Oscillating Saw Blades</a>
-                                                <a href="/jigsaw-blades">Jigsaw Blades</a>
-                                                <a href="/reciprocating-blades">Reciprocating Blades</a>
-                                                <a href="/circular-saw-blades">Tablesaw Blades</a>
-                                        </div>
-                                    </div>
-                                    <div id="sub-menu-21" class="menu-flyout hidden-xs hidden-sm ">
-
-                                        <div class="mobile-nav-group">
-                                            <a href="#" class="mobile-nav-back-2 d-block d-lg-none"><i class="fa fa-arrow-left"></i>Back to Categories</a>
-                                        </div>
-                                        <div class="category-items">
-                                                <a href="/tool-boxes">Tool Boxes</a>
-                                                <a href="/tool-storage">Tool Storage</a>
-                                                <a href="/workbenches">Workbenches</a>
-                                        </div>
-                                    </div>
-                                    <div id="sub-menu-22" class="menu-flyout hidden-xs hidden-sm ">
-
-                                        <div class="mobile-nav-group">
-                                            <a href="#" class="mobile-nav-back-2 d-block d-lg-none"><i class="fa fa-arrow-left"></i>Back to Categories</a>
-                                        </div>
-                                        <div class="category-items">
-                                                <a href="/miscellaneous-welding-and-cutting">Miscellaneous Welding &amp; Cutting</a>
-                                                <a href="/welders">Welders</a>
-                                                <a href="/welding-carts">Welding Carts</a>
-                                                <a href="/welding-table-accessories">Welding Table Accessories</a>
-                                                <a href="/welding-tables">Welding Tables</a>
-                                        </div>
-                                    </div>
-                            </div>
-                        </li>
-                        <li id="blades-button" class="nav-item dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown">
-                                Blades
-                            </a>
-                            <div id="blades-menu" class="dropdown-menu" aria-labelledby="navbarDropdown" role="menu">
-                                <div class="mobile-nav-group d-block d-lg-none">
-                                    <a href="#" class="mobile-nav-back"><i class="fa fa-arrow-left"></i>Back to Main Menu</a>
-                                </div>
-                                <h4 class="mobile-nav-group-header d-block d-lg-none">Blades</h4>
-                                <div class="dropdown-menu-content">
-                                    <a id="wbs-blades-nav-button" href='/search?q=(categoryid:165020)+AND+(blade_use:Woodworking)'>
-                                        <span>Woodworking Bandsaw Blades</span>
-                                    </a>
-
-                                    <a id="mbs-blades-nav-button" href='/search?q=(categoryid:165020)+AND+(blade_use:Metalworking)'>
-                                        <span>Metalworking Bandsaw Blades</span>
-                                    </a>
-
-                                    <a id="ts-blades-nav-button" href='/circular-saw-blades'>
-                                        <span>Table Saw Blades</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li id="pt-button" class="nav-item dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown">
-                                Power Tools
-                            </a>
-                            <div id="pt-menu" class="dropdown-menu" role="menu">
-                                <div class="mobile-nav-group d-block d-lg-none">
-                                    <a href="#" class="mobile-nav-back"><i class="fa fa-arrow-left"></i>Back to Main Menu</a>
-                                </div>
-                                <h4 class="mobile-nav-group-header d-block d-lg-none">Power Tools</h4>
-                                <div class="dropdown-menu-content">
-                                    <h4>Cordless Tools</h4>
-
-                                    <a id="batteries-nav-button" href='/search?q=(categoryid:300180)'>
-                                        <span>Batteries &amp<br />Chargers</span>
-                                    </a>
-
-                                    <a id="cordless-circular-nav-button" href='/search?q=(category:%22Power+Tools%22)+AND+(power_source:Cordless)+AND+(category:%22Circular+Saws%22)'>
-                                        <span>Cordless<br />Circular Saws</span>
-                                    </a>
-
-                                    <a id="cordless-combo-nav-button" href='/search?q=(category:%22Power+Tools%22)+AND+(power_source:Cordless)+AND+(category:%22Combo-Tool+Kits%22)'>
-                                        <span>Cordless<br />Combo Tool Kits</span>
-                                    </a>
-
-                                    <a id="cordless-drills-nav-button" href='/search?q=(category:%22Power+Tools%22)+AND+(power_source:Cordless)+AND+(category:Drills)'>
-                                        <span>Cordless<br />Drills</span>
-                                    </a>
-
-                                    <a id="cordless-grinders-nav-button" href='/search?q=(category:%22Power+Tools%22)+AND+(power_source:Cordless)+AND+(category:Grinders)'>
-                                        <span>Cordless<br />Grinders</span>
-                                    </a>
-
-                                    <a id="cordless-impact-nav-button" href='/search?q=(category:%22Power+Tools%22)+AND+(power_source:Cordless)+AND+(category:%22Impact+Drivers%22)'>
-                                        <span>Cordless<br />Impact Drivers</span>
-                                    </a>
-
-                                    <a id="cordless-multi-nav-button" href='/search?q=(category:%22Power+Tools%22)+AND+(power_source:Cordless)+AND+(category:%22Oscillating+Multi-Tools%22)'>
-                                        <span>Cordless<br />Multi-Tools</span>
-                                    </a>
-
-                                    <a id="cordless-recip-nav-button" href='/search?q=(category:%22Power+Tools%22)+AND+(power_source:Cordless)+AND+(category:%22Reciprocating+Saws%22)'>
-                                        <span>Cordless<br />Reciprocating Saws</span>
-                                    </a>
-
-                                    <a id="cordless-jig-nav-button" href='/search?q=(category:%22Power+Tools%22)+AND+(power_source:Cordless)+AND+(category:%22Jig+Saws%22)'>
-                                        <span>Cordless<br />Jig Saws</span>
-                                    </a>
-
-                                    <a id="all-cordless" href='/search?q=(category:%22Power+Tools%22)+AND+(power_source:Cordless)'>
-                                        <span>View All</span>
-                                    </a>
-
-
-                                    <h4 id="corded-tools-title">Corded Tools</h4>
-
-                                    <a id="grizzly-pro-button" href='/search?q=(brand:%22Grizzly+PRO%22)+AND+*&sortBy=popularity+desc'>
-                                        <span>Grizzly PRO</span>
-                                    </a>
-
-                                    <a id="corded-circular" href='/search?q=(power_source:Corded)+AND+(category:%22Power+Tools%22)+AND+(category:%22Circular+Saws%22)'>
-                                        <span>
-                                            Corded<br />Circular Saws
-                                        </span>
-                                    </a>
-
-                                    <a id="corded-drills" href='/search?q=(power_source:Corded)+AND+(category:%22Power+Tools%22)+AND+(category:Drills)'>
-                                        <span>
-                                            Corded<br />Drills
-                                        </span>
-                                    </a>
-
-                                    <a id="corded-grinders" href='/search?q=(power_source:Corded)+AND+(category:%22Power+Tools%22)+AND+(category:Grinders)'>
-                                        <span>
-                                            Corded<br />Grinders
-                                        </span>
-                                    </a>
-
-                                    <a id="corded-jigsaws" href='/search?q=(power_source:Corded)+AND+(category:%22Power+Tools%22)+AND+(category:%22Jig+Saws%22)'>
-                                        <span>
-                                            Corded<br />Jigsaws
-                                        </span>
-                                    </a>
-
-                                    <a id="corded-multi" href='/search?q=(power_source:Corded)+AND+(category:%22Power+Tools%22)+AND+(category:%22Oscillating+Multi-Tools%22)'>
-                                        <span>
-                                            Corded<br />Multi-Tools
-                                        </span>
-                                    </a>
-
-                                    <a id="corded-reciprocating" href='/search?q=(power_source:Corded)+AND+(category:%22Power+Tools%22)+AND+(category:%22Reciprocating+Saws%22)'>
-                                        <span>
-                                            Corded<br />Reciprocating Saws
-                                        </span>
-                                    </a>
-
-                                    <a id="all-corded" href='/search?q=(power_source:Corded)'>
-                                        <span>View All</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li id="router-bits-button" class="nav-item dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown">
-                                Router Bits
-                            </a>
-                            <div id="router-bits-menu" class="dropdown-menu" role="menu">
-                                <div class="mobile-nav-group d-block d-lg-none">
-                                    <a href="#" class="mobile-nav-back"><i class="fa fa-arrow-left"></i>Back to Main Menu</a>
-                                </div>
-                                <div class="dropdown-menu-content">
-                                    <h4>Router Bits</h4>
-
-                                    <a id="router-bit-sets" href='/search?q=(categoryid:161)+AND+(category:%22Router+Bit+Sets%22)'>
-                                        <span>Router Bit Sets</span>
-                                    </a>
-
-                                    <a id="laminate-bits" href='/search?q=(categoryid:161)+AND+(category:%22Laminate+Trim+Bits%22)'>
-                                        <span>Laminate Bits</span>
-                                    </a>
-
-                                    <a id="straight-bits" href='/search?q=(categoryid:161)+AND+(category:%22Straight+Bits%22)'>
-                                        <span>Straight Bits</span>
-                                    </a>
-
-                                    <a id="stile-bits" href='/search?q=(categoryid:161)+AND+(category:%22Stile+%26+Rail+Bits%22)'>
-                                        <span>Stile and Rail Bits</span>
-                                    </a>
-
-                                    <a id="roundover-bits" href='/search?q=(categoryid:161)+AND+(category:%22Roundover+Bits%22)'>
-                                        <span>Roundover Bits</span>
-                                    </a>
-
-                                    <a id="rosette-cutters" href='/search?q=(categoryid:161)+AND+(category:%22Rosette+Cutters%22)'>
-                                        <span>Rosette Cutters</span>
-                                    </a>
-
-
-                                    <a id="dovetail-bits" href='/search?q=(categoryid:161)+AND+(category:%22Dovetail+Bits%22)'>
-                                        <span>Dovetail Bits</span>
-                                    </a>
-
-                                    <a id="all-bits" href='/search?q=(categoryid:161)'>
-                                        <span>View All</span>
-                                    </a>
-
-                                    <h4>Shaper Cutters</h4>
-
-
-                                    <a id="stile-cutters" href='/search?q=(categoryid:162)+AND+(category:%22Stile+%26+Rail+Cutters%22)'>
-                                        <span>
-                                            Stile and Rail Cutters
-                                        </span>
-                                    </a>
-
-                                    <a id="profile-knives" href='/search?q=(categoryid:162)+AND+(category:%22Profile+Knives%22)'>
-                                        <span>
-                                            Profile Knives
-                                        </span>
-                                    </a>
-
-                                    <a id="tongue-and-groove-cutters" href='/search?q=(categoryid:162)+AND+(category:%22Tongue+%26+Groove+Cutters%22)'>
-                                        <span>
-                                            Tongue & Groove Cutters
-                                        </span>
-                                    </a>
-
-                                    <a id="raised-panel-cutters" href='/search?q=(categoryid:162)+AND+(category:%22Raised+Panel+Cutters%22)'>
-                                        <span>
-                                            Raised Panel Cutters
-                                        </span>
-                                    </a>
-
-                                    <a id="all-cutters" href='/search?q=(categoryid:162)'>
-                                        <span>View All</span>
-                                    </a>
-
-                                </div>
-                            </div>
-                        </li>
-                        <li class="horizontal-divide nav-item"><a class="nav-item" href="/deals">Deals</a></li>
-                        <li class="horizontal-divide nav-item"><a class="nav-item" href="/schools">Schools</a></li>
-                        <li id="catalog-nav-item" class="horizontal-divide nav-item"><a class="nav-item" href="/parts">Parts</a></li>
-
-                        <li class="nav-item d-block d-lg-none"><a href="/contact">Contact Us</a></li>
-                    </ul>
-
+                    <div class="category-items">
+                      <a href="/abrasives-and-sanding">Abrasives &amp; Sanding</a>
+                      <a href="/grinding-wheels-and-discs">Grinding Wheels &amp; Discs</a>
+                      <a href="/hard-sleeves">Hard Sleeves</a>
+                      <a href="/sanding-belts">Sanding Belts</a>
+                      <a href="/sanding-rolls">Sanding Rolls</a>
+                      <a href="/sanding-sheets">Sanding Sheets</a>
+                    </div>
+                  </div>
+                  <div id="sub-menu-2" class="menu-flyout hidden-xs hidden-sm">
+                    <div class="mobile-nav-group">
+                      <a href="#" class="mobile-nav-back-2 d-block d-lg-none"
+                        ><i class="fa fa-arrow-left"></i>Back to Categories</a
+                      >
+                    </div>
+                    <div class="category-items">
+                      <a href="/air-accessories">Air Accessories</a>
+                      <a href="/air-compressors">Air Compressors</a>
+                      <a href="/air-hose-reels">Air Hose Reels</a>
+                      <a href="/air-hoses">Air Hoses</a>
+                      <a href="/combo-kit-nailer-and-staplers">Combo Kit Nailer/Staplers</a>
+                      <a href="/die-grinders">Die Grinders</a>
+                      <a href="/filters-and-regulators">Filters &amp; Regulators</a>
+                      <a href="/fitting-and-couplers">Fittings &amp; Couplers</a>
+                      <a href="/framing-coils">Framing Coils</a>
+                      <a href="/impact-wrenches">Impact Wrenches</a>
+                      <a href="/miscellaneous-pneumatic-tools">Miscellaneous Pneumatic Tools</a>
+                      <a href="/nail-guns">Nail Guns</a>
+                      <a href="/nailers-and-staplers">Nailers &amp; Staplers</a>
+                      <a href="/pneumatic-nails-and-staples">Pneumatic Nails &amp; Staples</a>
+                      <a href="/pneumatic-tools">Pneumatic Tools</a>
+                      <a href="/pneumatic-sanders">Sanders</a>
+                      <a href="/spray-gun-accessories">Spray Gun Accessories</a>
+                      <a href="/spray-guns">Spray Guns</a>
+                      <a href="/sprayers">Sprayers</a>
+                      <a href="/staple-guns">Staple Guns</a>
+                    </div>
+                  </div>
+                  <div id="sub-menu-4" class="menu-flyout hidden-xs hidden-sm">
+                    <div class="mobile-nav-group">
+                      <a href="#" class="mobile-nav-back-2 d-block d-lg-none"
+                        ><i class="fa fa-arrow-left"></i>Back to Categories</a
+                      >
+                    </div>
+                    <div class="category-items">
+                      <a href="/bar-clamps">Bar Clamps</a>
+                      <a href="/bench-vises">Bench Vises</a>
+                      <a href="/c-clamps">C-Clamps</a>
+                      <a href="/clamps">Clamps</a>
+                      <a href="/dovetail-jigs">Dovetail Jigs</a>
+                      <a href="/drill-press-vises">Drill Press Vises</a>
+                      <a href="/jigs-and-fixtures">Jigs &amp; Fixtures</a>
+                      <a href="/kreg-jig">Kreg Jig</a>
+                      <a href="/milling-vises">Milling Vises</a>
+                      <a href="/miscellaneous-jigs-and-fixtures">Miscellaneous Jigs &amp; Fixtures</a>
+                      <a href="/parallel-clamps">Parallel Clamps</a>
+                      <a href="/specialty-clamps">Specialty Clamps</a>
+                      <a href="/straight-edge-clamps">Straight Edge Clamps</a>
+                      <a href="/vises">Vises</a>
+                      <a href="/wood-vises">Wood Vises</a>
+                    </div>
+                  </div>
+                  <div id="sub-menu-5" class="menu-flyout hidden-xs hidden-sm">
+                    <div class="mobile-nav-group">
+                      <a href="#" class="mobile-nav-back-2 d-block d-lg-none"
+                        ><i class="fa fa-arrow-left"></i>Back to Categories</a
+                      >
+                    </div>
+                    <div class="category-items">
+                      <a href="/CNC-lasers">CNC Lasers</a>
+                      <a href="/CNC-lathes">CNC Lathes</a>
+                      <a href="/CNC-mills">CNC Mills</a>
+                      <a href="/CNC-routers">CNC Routers</a>
+                      <a href="/cnc-router-accessories">CNC Router Accessories</a>
+                      <a href="/CNC-accessories">CNC Accessories</a>
+                    </div>
+                  </div>
+                  <div id="sub-menu-6" class="menu-flyout hidden-xs hidden-sm">
+                    <div class="mobile-nav-group">
+                      <a href="#" class="mobile-nav-back-2 d-block d-lg-none"
+                        ><i class="fa fa-arrow-left"></i>Back to Categories</a
+                      >
+                    </div>
+                    <div class="category-items">
+                      <a href="/boring-bars">Boring Bars</a>
+                      <a href="/clamping-kits">Clamping Kits</a>
+                      <a href="/collets">Collets</a>
+                      <a href="/cutting-tools">Cutting Tools</a>
+                      <a href="/dies">Dies</a>
+                      <a href="/end-mill-holders">End Mill Holders</a>
+                      <a href="/end-mills">End Mills</a>
+                      <a href="/inserts">Inserts</a>
+                      <a href="/lathe-centers">Lathe Centers</a>
+                      <a href="/lathe-chucks">Lathe Chucks</a>
+                      <a href="/live-centers">Live Centers</a>
+                      <a href="/milling-vises">Milling Vises</a>
+                      <a href="/rotary-burrs">Rotary Burrs</a>
+                      <a href="/rotary-tables">Rotary Tables</a>
+                      <a href="/slitting-saws">Slitting Saws</a>
+                      <a href="/spiral-cutterheads">Spiral Cutterheads</a>
+                      <a href="/tap-and-die-sets">Tap &amp; Die Sets</a>
+                      <a href="/tooling">Tooling</a>
+                    </div>
+                  </div>
+                  <div id="sub-menu-8" class="menu-flyout hidden-xs hidden-sm">
+                    <div class="mobile-nav-group">
+                      <a href="#" class="mobile-nav-back-2 d-block d-lg-none"
+                        ><i class="fa fa-arrow-left"></i>Back to Categories</a
+                      >
+                    </div>
+                    <div class="category-items">
+                      <a href="/auger-bits">Auger Bits</a>
+                      <a href="/countersinks">Countersinks</a>
+                      <a href="/drill-bits">Drill Bits</a>
+                      <a href="/drill-chucks-and-arbors">Drill Chucks &amp; Arbors</a>
+                      <a href="/forstner-bits">Forstner Bits</a>
+                      <a href="/hammer-drills">Hammer Drills</a>
+                      <a href="/hole-saws">Hole Saws</a>
+                      <a href="/lumberjack-cutters">Lumberjack Cutters</a>
+                      <a href="/power-bits">Power Bits</a>
+                      <a href="/reamers">Reamers</a>
+                      <a href="/spade-bits">Spade Bits</a>
+                      <a href="/tenon-cutters">Tenon Cutters</a>
+                    </div>
+                  </div>
+                  <div id="sub-menu-9" class="menu-flyout hidden-xs hidden-sm">
+                    <div class="mobile-nav-group">
+                      <a href="#" class="mobile-nav-back-2 d-block d-lg-none"
+                        ><i class="fa fa-arrow-left"></i>Back to Categories</a
+                      >
+                    </div>
+                    <div class="category-items">
+                      <a href="/chambering-reamers">Chambering Reamers</a>
+                      <a href="/go-and-no-go-gauges">Go/No Go Gauges</a>
+                      <a href="/gun-safes">Gun Safes</a>
+                      <a href="/gunsmithing-and-shooting">Gunsmithing &amp; Shooting</a>
+                      <a href="/hearing-protection">Hearing Protection</a>
+                      <a href="/miscellaneous-gunsmithing-accessories">Miscellaneous Gunsmithing Accessories</a>
+                      <a href="/rifle-barrels">Rifle Barrels</a>
+                      <a href="/shooting-accessories">Shooting Accessories</a>
+                    </div>
+                  </div>
+                  <div id="sub-menu-10" class="menu-flyout hidden-xs hidden-sm">
+                    <div class="mobile-nav-group">
+                      <a href="#" class="mobile-nav-back-2 d-block d-lg-none"
+                        ><i class="fa fa-arrow-left"></i>Back to Categories</a
+                      >
+                    </div>
+                    <div class="category-items">
+                      <a href="/chisels-and-gouges">Chisels and Gouges</a>
+                      <a href="/cutlery">Cutlery</a>
+                      <a href="/files">Files</a>
+                      <a href="/hammers-and-mallets">Hammers &amp; Mallets</a>
+                      <a href="/hand-planes">Hand Planes</a>
+                      <a href="/hand-saws">Hand Saws</a>
+                      <a href="/miscellaneous-hand-tools">Miscellaneous Hand Tools</a>
+                      <a href="/pliers-and-snips">Pliers &amp; Snips</a>
+                      <a href="/sharpening-stones">Sharpening Stones</a>
+                    </div>
+                  </div>
+                  <div id="sub-menu-11" class="menu-flyout hidden-xs hidden-sm">
+                    <div class="mobile-nav-group">
+                      <a href="#" class="mobile-nav-back-2 d-block d-lg-none"
+                        ><i class="fa fa-arrow-left"></i>Back to Categories</a
+                      >
+                    </div>
+                    <div class="category-items">
+                      <a href="/adhesives">Adhesives</a>
+                      <a href="/automotive-equipment">Automotive Equipment</a>
+                      <a href="/books-plans-and-dvds">Books, Plans, &amp; DVDs</a>
+                      <a href="/casters">Casters</a>
+                      <a href="/contractor-home-and-shop">Contractor, Home &amp; Shop</a>
+                      <a href="/cutlery">Cutlery</a>
+                      <a href="/fasteners">Fasteners</a>
+                      <a href="/finishing">Finishing</a>
+                      <a href="/gifts">Gifts</a>
+                      <a href="/luthier-supplies">Luthier Supplies</a>
+                      <a href="/material-handling">Material Handling</a>
+                      <a href="/mobile-bases">Mobile Bases</a>
+                      <a href="/pen-making">Pen Making</a>
+                      <a href="/presses">Presses</a>
+                      <a href="/router-tables">Router Tables</a>
+                      <a href="/shop-accessories">Shop Accessories</a>
+                      <a href="/wheels">Wheels</a>
+                    </div>
+                  </div>
+                  <div id="sub-menu-12" class="menu-flyout hidden-xs hidden-sm">
+                    <div class="mobile-nav-group">
+                      <a href="#" class="mobile-nav-back-2 d-block d-lg-none"
+                        ><i class="fa fa-arrow-left"></i>Back to Categories</a
+                      >
+                    </div>
+                    <div class="category-items">
+                      <a href="/drawer-pulls">Drawer Pulls</a>
+                      <a href="/drawer-slides">Drawer Slides</a>
+                      <a href="/hinges">Hinges</a>
+                      <a href="/miscellaneous-hardware">Miscellaneous Hardware</a>
+                      <a href="/shelf-supports">Shelf Supports</a>
+                    </div>
+                  </div>
+                  <div id="sub-menu-14" class="menu-flyout hidden-xs hidden-sm">
+                    <div class="mobile-nav-group">
+                      <a href="#" class="mobile-nav-back-2 d-block d-lg-none"
+                        ><i class="fa fa-arrow-left"></i>Back to Categories</a
+                      >
+                    </div>
+                    <div class="category-items">
+                      <a href="/metalworking-bandsaws">Bandsaws - Metalworking</a>
+                      <a href="/woodworking-bandsaws">Bandsaws - Woodworking</a>
+                      <a href="/boring-machines">Boring Machines</a>
+                      <a href="/combination-lathe-mills">Combination Lathe-Mills</a>
+                      <a href="/drill-presses">Drill Presses</a>
+                      <a href="/dust-collection-accessories">Dust Collection Accessories</a>
+                      <a href="/dust-collectors">Dust Collectors</a>
+                      <a href="/jointers">Jointers</a>
+                      <a href="/metal-lathes">Lathes - Metalworking</a>
+                      <a href="/wood-lathes">Lathes - Woodworking</a>
+                      <a href="/machine-accessories">Machine Accessories</a>
+                      <a href="/metalworking-machines-misc">Metalworking Machines - Misc</a>
+                      <a href="/milling-machines">Milling Machines</a>
+                      <a href="/motors-switches-and-electrical">Motors, Switches, &amp; Electrical</a>
+                      <a href="/planers">Planers</a>
+                      <a href="/sanders">Sanders</a>
+                      <a href="/shapers">Shapers</a>
+                      <a href="/sheet-metal-machines">Sheet Metal Machines</a>
+                      <a href="/surface-grinders">Surface Grinders</a>
+                      <a href="/tablesaws">Table Saws</a>
+                      <a href="/woodworking-machines-misc">Woodworking Machines - Misc</a>
+                    </div>
+                  </div>
+                  <div id="sub-menu-15" class="menu-flyout hidden-xs hidden-sm">
+                    <div class="mobile-nav-group">
+                      <a href="#" class="mobile-nav-back-2 d-block d-lg-none"
+                        ><i class="fa fa-arrow-left"></i>Back to Categories</a
+                      >
+                    </div>
+                    <div class="category-items">
+                      <a href="/calipers">Calipers</a>
+                      <a href="/dros">DROs</a>
+                      <a href="/dial-gauges-and-indicators">Dial Gauges &amp; Indicators</a>
+                      <a href="/granite-plates-and-stands">Granite Plates &amp; Stands</a>
+                      <a href="/magnetic-bases">Magnetic Bases</a>
+                      <a href="/measuring-tools">Measuring Tools</a>
+                      <a href="/measuring-instruments">Measuring Instruments</a>
+                      <a href="/micrometers">Micrometers</a>
+                      <a href="/rules-and-squares">Rules &amp; Squares</a>
+                    </div>
+                  </div>
+                  <div id="sub-menu-16" class="menu-flyout hidden-xs hidden-sm">
+                    <div class="mobile-nav-group">
+                      <a href="#" class="mobile-nav-back-2 d-block d-lg-none"
+                        ><i class="fa fa-arrow-left"></i>Back to Categories</a
+                      >
+                    </div>
+                    <div class="category-items">
+                      <a href="/batteries-and-chargers">Batteries &amp; Chargers</a>
+                      <a href="/circular-saws">Circular Saws</a>
+                      <a href="/cordless-tools">Cordless Tools</a>
+                      <a href="/cut-off-saws">Cut Off Saws</a>
+                      <a href="/drills">Drills</a>
+                      <a href="/heat-guns">Heat Guns</a>
+                      <a href="/jig-saws">Jig Saws</a>
+                      <a href="/multitools-accessories">Multi-Tools Accessories</a>
+                      <a href="/oscillating-multi-tools">Oscillating Multi-Tools</a>
+                      <a href="/power-tool-accessories">Power Tool Accessories</a>
+                      <a href="/reciprocating-saws">Reciprocating Saws</a>
+                      <a href="/routers">Routers</a>
+                      <a href="/sanders">Sanders</a>
+                    </div>
+                  </div>
+                  <div id="sub-menu-17" class="menu-flyout hidden-xs hidden-sm">
+                    <div class="mobile-nav-group">
+                      <a href="#" class="mobile-nav-back-2 d-block d-lg-none"
+                        ><i class="fa fa-arrow-left"></i>Back to Categories</a
+                      >
+                    </div>
+                    <div class="category-items">
+                      <a href="/bead-and-flute-cutters">Bead &amp; Flute Cutters</a>
+                      <a href="/bull-nose-bits">Bull Nose Bits</a>
+                      <a href="/bushings-and-spacers">Bushings &amp; Spacers</a>
+                      <a href="/dovetail-cutters">Dovetail Cutters</a>
+                      <a href="/ogee-cutters">Ogee Cutters</a>
+                      <a href="/plunge-bits">Plunge Bits</a>
+                      <a href="/profile-knives">Profile Knives</a>
+                      <a href="/rabbeting-cutters">Rabbeting Cutters</a>
+                      <a href="/raised-panel-cutter">Raised Panel Cutter</a>
+                      <a href="/rosette-cutters">Rosette Cutters</a>
+                      <a href="/roundover-bits">Roundover Bits</a>
+                      <a href="/router-bits">Router Bits</a>
+                      <a href="/router-bit-sets">Router Bit Sets</a>
+                      <a href="/rub-collars">Rub Collars</a>
+                      <a href="/shaper-cutters">Shaper Cutters</a>
+                      <a href="/specialty-cutters">Specialty Cutters</a>
+                      <a href="/spiral-cutterheads">Spiral Cutterheads</a>
+                      <a href="/stile-and-rail-cutters">Stile &amp; Rail Cutters</a>
+                      <a href="/straight-bits">Straight Bits</a>
+                      <a href="/tongue-and-groove">Tongue &amp; Groove</a>
+                    </div>
+                  </div>
+                  <div id="sub-menu-18" class="menu-flyout hidden-xs hidden-sm">
+                    <div class="mobile-nav-group">
+                      <a href="#" class="mobile-nav-back-2 d-block d-lg-none"
+                        ><i class="fa fa-arrow-left"></i>Back to Categories</a
+                      >
+                    </div>
+                    <div class="category-items">
+                      <a href="/sand-for-sandblasters">Sand for Sandblasters</a>
+                      <a href="/sandblasters">Sandblasters</a>
+                    </div>
+                  </div>
+                  <div id="sub-menu-19" class="menu-flyout hidden-xs hidden-sm">
+                    <div class="mobile-nav-group">
+                      <a href="#" class="mobile-nav-back-2 d-block d-lg-none"
+                        ><i class="fa fa-arrow-left"></i>Back to Categories</a
+                      >
+                    </div>
+                    <div class="category-items">
+                      <a href="/eye-protection">Eye Protection</a>
+                      <a href="/gloves">Gloves</a>
+                      <a href="/hearing-protection">Hearing Protection</a>
+                      <a href="/respirators">Respirators</a>
+                      <a href="/safety-equipment">Safety Equipment</a>
+                      <a href="/security-equipment">Security Equipment</a>
+                    </div>
+                  </div>
+                  <div id="sub-menu-20" class="menu-flyout hidden-xs hidden-sm">
+                    <div class="mobile-nav-group">
+                      <a href="#" class="mobile-nav-back-2 d-block d-lg-none"
+                        ><i class="fa fa-arrow-left"></i>Back to Categories</a
+                      >
+                    </div>
+                    <div class="category-items">
+                      <a href="/bandsaw-blades">Bandsaw Blades</a>
+                      <a href="/circular-saw-blades">Circular Saw Blades</a>
+                      <a href="/dado-blades">Dado Blades</a>
+                      <a href="/freud">Freud</a>
+                      <a href="/forrest">Forrest</a>
+                      <a href="/inserts-for-spiral-cutterheads">Inserts for Spiral Cutterheads</a>
+                      <a href="/oscillating-saw-blades">Oscillating Saw Blades</a>
+                      <a href="/jigsaw-blades">Jigsaw Blades</a>
+                      <a href="/reciprocating-blades">Reciprocating Blades</a>
+                      <a href="/circular-saw-blades">Tablesaw Blades</a>
+                    </div>
+                  </div>
+                  <div id="sub-menu-21" class="menu-flyout hidden-xs hidden-sm">
+                    <div class="mobile-nav-group">
+                      <a href="#" class="mobile-nav-back-2 d-block d-lg-none"
+                        ><i class="fa fa-arrow-left"></i>Back to Categories</a
+                      >
+                    </div>
+                    <div class="category-items">
+                      <a href="/tool-boxes">Tool Boxes</a>
+                      <a href="/tool-storage">Tool Storage</a>
+                      <a href="/workbenches">Workbenches</a>
+                    </div>
+                  </div>
+                  <div id="sub-menu-22" class="menu-flyout hidden-xs hidden-sm">
+                    <div class="mobile-nav-group">
+                      <a href="#" class="mobile-nav-back-2 d-block d-lg-none"
+                        ><i class="fa fa-arrow-left"></i>Back to Categories</a
+                      >
+                    </div>
+                    <div class="category-items">
+                      <a href="/miscellaneous-welding-and-cutting">Miscellaneous Welding &amp; Cutting</a>
+                      <a href="/welders">Welders</a>
+                      <a href="/welding-carts">Welding Carts</a>
+                      <a href="/welding-table-accessories">Welding Table Accessories</a>
+                      <a href="/welding-tables">Welding Tables</a>
+                    </div>
+                  </div>
                 </div>
-
-                <div id="top-links" class="d-none d-md-flex">
-                    <a href="https://support.grizzly.com" class="d-none d-md-flex" id="support-link">Support</a>
-                    <span class="dropdown">
-                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-user"></i><span class="caret"></span>
-                        </a>
-                        <span class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-
-                            <a href="/user/account" class="d-none d-lg-block"><i class="fa fa-key"></i> Your Account</a>
-                            <a href="/user/orders" class="d-none d-lg-block"><i class="fas fa-boxes"></i> Your Orders</a>
-                            <a href="/user/payments" class="d-none d-lg-block"><i class="fas fa-credit-card"></i> Your Saved Payments</a>
-                            <a href="/user/addresses" class="d-none d-lg-block"><i class="fas fa-house-user"></i> Your Saved Addresses</a>
-                            <a href="/user/wishlist" class="d-none d-lg-block"><i class="fa fa-gift"></i> Your Wish List</a>
-                            <a href="/orders/lookup" class="d-none d-lg-block"><i class="fab fa-searchengin"></i> Order Lookup</a>
-
-                                <a href="/user/login" class="d-none d-md-block"><i class="fa fa-sign-in"></i> Sign In</a>
-                        </span>
-                    </span>
-                    <a class="cart-icon-link" href="/cart">
-                        <i class="fa fa-shopping-cart"></i> <span class="badge basket-count">0</span>
+              </li>
+              <li id="blades-button" class="nav-item dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown"> Blades </a>
+                <div id="blades-menu" class="dropdown-menu" aria-labelledby="navbarDropdown" role="menu">
+                  <div class="mobile-nav-group d-block d-lg-none">
+                    <a href="#" class="mobile-nav-back"><i class="fa fa-arrow-left"></i>Back to Main Menu</a>
+                  </div>
+                  <h4 class="mobile-nav-group-header d-block d-lg-none">Blades</h4>
+                  <div class="dropdown-menu-content">
+                    <a id="wbs-blades-nav-button" href="/search?q=(categoryid:165020)+AND+(blade_use:Woodworking)">
+                      <span>Woodworking Bandsaw Blades</span>
                     </a>
-                    <a class="mobile-signup-link d-block d-lg-none" href="/sign-up?code=&amp;source=footer"><i class="fa fa-envelope"></i> Sign Up to Receive Emails and Specials</a>
 
+                    <a id="mbs-blades-nav-button" href="/search?q=(categoryid:165020)+AND+(blade_use:Metalworking)">
+                      <span>Metalworking Bandsaw Blades</span>
+                    </a>
+
+                    <a id="ts-blades-nav-button" href="/circular-saw-blades">
+                      <span>Table Saw Blades</span>
+                    </a>
+                  </div>
                 </div>
-            </nav>
-        </header>
+              </li>
+              <li id="pt-button" class="nav-item dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown"> Power Tools </a>
+                <div id="pt-menu" class="dropdown-menu" role="menu">
+                  <div class="mobile-nav-group d-block d-lg-none">
+                    <a href="#" class="mobile-nav-back"><i class="fa fa-arrow-left"></i>Back to Main Menu</a>
+                  </div>
+                  <h4 class="mobile-nav-group-header d-block d-lg-none">Power Tools</h4>
+                  <div class="dropdown-menu-content">
+                    <h4>Cordless Tools</h4>
 
+                    <a id="batteries-nav-button" href="/search?q=(categoryid:300180)">
+                      <span>Batteries &amp<br />Chargers</span>
+                    </a>
 
-        <main role="main" class="pb-3 container-fluid">
-        </main>
-        <section class="container">
-            
-        </section>
+                    <a
+                      id="cordless-circular-nav-button"
+                      href="/search?q=(category:%22Power+Tools%22)+AND+(power_source:Cordless)+AND+(category:%22Circular+Saws%22)"
+                    >
+                      <span>Cordless<br />Circular Saws</span>
+                    </a>
+
+                    <a
+                      id="cordless-combo-nav-button"
+                      href="/search?q=(category:%22Power+Tools%22)+AND+(power_source:Cordless)+AND+(category:%22Combo-Tool+Kits%22)"
+                    >
+                      <span>Cordless<br />Combo Tool Kits</span>
+                    </a>
+
+                    <a
+                      id="cordless-drills-nav-button"
+                      href="/search?q=(category:%22Power+Tools%22)+AND+(power_source:Cordless)+AND+(category:Drills)"
+                    >
+                      <span>Cordless<br />Drills</span>
+                    </a>
+
+                    <a
+                      id="cordless-grinders-nav-button"
+                      href="/search?q=(category:%22Power+Tools%22)+AND+(power_source:Cordless)+AND+(category:Grinders)"
+                    >
+                      <span>Cordless<br />Grinders</span>
+                    </a>
+
+                    <a
+                      id="cordless-impact-nav-button"
+                      href="/search?q=(category:%22Power+Tools%22)+AND+(power_source:Cordless)+AND+(category:%22Impact+Drivers%22)"
+                    >
+                      <span>Cordless<br />Impact Drivers</span>
+                    </a>
+
+                    <a
+                      id="cordless-multi-nav-button"
+                      href="/search?q=(category:%22Power+Tools%22)+AND+(power_source:Cordless)+AND+(category:%22Oscillating+Multi-Tools%22)"
+                    >
+                      <span>Cordless<br />Multi-Tools</span>
+                    </a>
+
+                    <a
+                      id="cordless-recip-nav-button"
+                      href="/search?q=(category:%22Power+Tools%22)+AND+(power_source:Cordless)+AND+(category:%22Reciprocating+Saws%22)"
+                    >
+                      <span>Cordless<br />Reciprocating Saws</span>
+                    </a>
+
+                    <a
+                      id="cordless-jig-nav-button"
+                      href="/search?q=(category:%22Power+Tools%22)+AND+(power_source:Cordless)+AND+(category:%22Jig+Saws%22)"
+                    >
+                      <span>Cordless<br />Jig Saws</span>
+                    </a>
+
+                    <a id="all-cordless" href="/search?q=(category:%22Power+Tools%22)+AND+(power_source:Cordless)">
+                      <span>View All</span>
+                    </a>
+
+                    <h4 id="corded-tools-title">Corded Tools</h4>
+
+                    <a id="grizzly-pro-button" href="/search?q=(brand:%22Grizzly+PRO%22)+AND+*&sortBy=popularity+desc">
+                      <span>Grizzly PRO</span>
+                    </a>
+
+                    <a
+                      id="corded-circular"
+                      href="/search?q=(power_source:Corded)+AND+(category:%22Power+Tools%22)+AND+(category:%22Circular+Saws%22)"
+                    >
+                      <span> Corded<br />Circular Saws </span>
+                    </a>
+
+                    <a
+                      id="corded-drills"
+                      href="/search?q=(power_source:Corded)+AND+(category:%22Power+Tools%22)+AND+(category:Drills)"
+                    >
+                      <span> Corded<br />Drills </span>
+                    </a>
+
+                    <a
+                      id="corded-grinders"
+                      href="/search?q=(power_source:Corded)+AND+(category:%22Power+Tools%22)+AND+(category:Grinders)"
+                    >
+                      <span> Corded<br />Grinders </span>
+                    </a>
+
+                    <a
+                      id="corded-jigsaws"
+                      href="/search?q=(power_source:Corded)+AND+(category:%22Power+Tools%22)+AND+(category:%22Jig+Saws%22)"
+                    >
+                      <span> Corded<br />Jigsaws </span>
+                    </a>
+
+                    <a
+                      id="corded-multi"
+                      href="/search?q=(power_source:Corded)+AND+(category:%22Power+Tools%22)+AND+(category:%22Oscillating+Multi-Tools%22)"
+                    >
+                      <span> Corded<br />Multi-Tools </span>
+                    </a>
+
+                    <a
+                      id="corded-reciprocating"
+                      href="/search?q=(power_source:Corded)+AND+(category:%22Power+Tools%22)+AND+(category:%22Reciprocating+Saws%22)"
+                    >
+                      <span> Corded<br />Reciprocating Saws </span>
+                    </a>
+
+                    <a id="all-corded" href="/search?q=(power_source:Corded)">
+                      <span>View All</span>
+                    </a>
+                  </div>
+                </div>
+              </li>
+              <li id="router-bits-button" class="nav-item dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown"> Router Bits </a>
+                <div id="router-bits-menu" class="dropdown-menu" role="menu">
+                  <div class="mobile-nav-group d-block d-lg-none">
+                    <a href="#" class="mobile-nav-back"><i class="fa fa-arrow-left"></i>Back to Main Menu</a>
+                  </div>
+                  <div class="dropdown-menu-content">
+                    <h4>Router Bits</h4>
+
+                    <a id="router-bit-sets" href="/search?q=(categoryid:161)+AND+(category:%22Router+Bit+Sets%22)">
+                      <span>Router Bit Sets</span>
+                    </a>
+
+                    <a id="laminate-bits" href="/search?q=(categoryid:161)+AND+(category:%22Laminate+Trim+Bits%22)">
+                      <span>Laminate Bits</span>
+                    </a>
+
+                    <a id="straight-bits" href="/search?q=(categoryid:161)+AND+(category:%22Straight+Bits%22)">
+                      <span>Straight Bits</span>
+                    </a>
+
+                    <a id="stile-bits" href="/search?q=(categoryid:161)+AND+(category:%22Stile+%26+Rail+Bits%22)">
+                      <span>Stile and Rail Bits</span>
+                    </a>
+
+                    <a id="roundover-bits" href="/search?q=(categoryid:161)+AND+(category:%22Roundover+Bits%22)">
+                      <span>Roundover Bits</span>
+                    </a>
+
+                    <a id="rosette-cutters" href="/search?q=(categoryid:161)+AND+(category:%22Rosette+Cutters%22)">
+                      <span>Rosette Cutters</span>
+                    </a>
+
+                    <a id="dovetail-bits" href="/search?q=(categoryid:161)+AND+(category:%22Dovetail+Bits%22)">
+                      <span>Dovetail Bits</span>
+                    </a>
+
+                    <a id="all-bits" href="/search?q=(categoryid:161)">
+                      <span>View All</span>
+                    </a>
+
+                    <h4>Shaper Cutters</h4>
+
+                    <a id="stile-cutters" href="/search?q=(categoryid:162)+AND+(category:%22Stile+%26+Rail+Cutters%22)">
+                      <span> Stile and Rail Cutters </span>
+                    </a>
+
+                    <a id="profile-knives" href="/search?q=(categoryid:162)+AND+(category:%22Profile+Knives%22)">
+                      <span> Profile Knives </span>
+                    </a>
+
+                    <a
+                      id="tongue-and-groove-cutters"
+                      href="/search?q=(categoryid:162)+AND+(category:%22Tongue+%26+Groove+Cutters%22)"
+                    >
+                      <span> Tongue & Groove Cutters </span>
+                    </a>
+
+                    <a
+                      id="raised-panel-cutters"
+                      href="/search?q=(categoryid:162)+AND+(category:%22Raised+Panel+Cutters%22)"
+                    >
+                      <span> Raised Panel Cutters </span>
+                    </a>
+
+                    <a id="all-cutters" href="/search?q=(categoryid:162)">
+                      <span>View All</span>
+                    </a>
+                  </div>
+                </div>
+              </li>
+              <li class="horizontal-divide nav-item"><a class="nav-item" href="/deals">Deals</a></li>
+              <li class="horizontal-divide nav-item"><a class="nav-item" href="/schools">Schools</a></li>
+              <li id="catalog-nav-item" class="horizontal-divide nav-item">
+                <a class="nav-item" href="/parts">Parts</a>
+              </li>
+
+              <li class="nav-item d-block d-lg-none"><a href="/contact">Contact Us</a></li>
+            </ul>
+          </div>
+
+          <div id="top-links" class="d-none d-md-flex">
+            <a href="https://support.grizzly.com" class="d-none d-md-flex" id="support-link">Support</a>
+            <span class="dropdown">
+              <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user"></i><span class="caret"></span>
+              </a>
+              <span class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <a href="/user/account" class="d-none d-lg-block"><i class="fa fa-key"></i> Your Account</a>
+                <a href="/user/orders" class="d-none d-lg-block"><i class="fas fa-boxes"></i> Your Orders</a>
+                <a href="/user/payments" class="d-none d-lg-block"
+                  ><i class="fas fa-credit-card"></i> Your Saved Payments</a
+                >
+                <a href="/user/addresses" class="d-none d-lg-block"
+                  ><i class="fas fa-house-user"></i> Your Saved Addresses</a
+                >
+                <a href="/user/wishlist" class="d-none d-lg-block"><i class="fa fa-gift"></i> Your Wish List</a>
+                <a href="/orders/lookup" class="d-none d-lg-block"><i class="fab fa-searchengin"></i> Order Lookup</a>
+
+                <a href="/user/login" class="d-none d-md-block"><i class="fa fa-sign-in"></i> Sign In</a>
+              </span>
+            </span>
+            <a class="cart-icon-link" href="/cart">
+              <i class="fa fa-shopping-cart"></i> <span class="badge basket-count">0</span>
+            </a>
+            <a class="mobile-signup-link d-block d-lg-none" href="/sign-up?code=&amp;source=footer"
+              ><i class="fa fa-envelope"></i> Sign Up to Receive Emails and Specials</a
+            >
+          </div>
+        </nav>
+      </header>
+
+      <main role="main" class="pb-3 container-fluid"></main>
+      <section class="container"></section>
     </div>
     <footer id="footer" class="container-fluid">
+      <div class="row">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-9 col-12">
+              <nav class="row" id="footer-nav">
+                <div class="col-3 col-xxs-4">
+                  <a href="https://support.grizzly.com">Customer Service</a>
+                  <a href="/user/wishlist">Wish List</a>
+                  <a href="/gift-certificates">Gift Certificates</a>
+                  <a href="/parts">Parts Store</a>
 
-        <div class="row">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-9 col-12">
+                  <a href="/schools">Schools Program</a>
+                  <a href="https://www.clicklease.com/grizzly">Financing</a>
+                </div>
+                <div class="col-3 col-xxs-4">
+                  <a href="/warehouse-events">Warehouse Events</a>
+                  <a href="/products/as-is">Scratch &amp; Dent</a>
+                  <a
+                    href="https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=f39172a2-5f72-4bc9-9b8b-61e8adc3018f&ccId=19000101_000001&type=MP&lang=en_US"
+                    >Employment</a
+                  >
+                  <a href="/products/documents">Manuals</a>
+                  <a href="https://www.youtube.com/c/GrizzlyIndustrialInc/featured" target="_blank">Videos</a>
+                </div>
+                <div class="col-3 col-xxs-4">
+                  <a href="https://support.grizzly.com/hc/en-us/categories/4403071730071-Contact-Us">Contact Grizzly</a>
+                  <a href="https://support.grizzly.com/hc/en-us/articles/4407162492823-Privacy-Policy"
+                    >Privacy Notice</a
+                  >
+                  <a href="/recalls">Recalls</a>
+                  <a href="https://support.grizzly.com/hc/en-us/articles/4404706826263-Showroom-Locations-Hours"
+                    >Showrooms</a
+                  >
+                  <a href="/inside-grizzly">Inside Grizzly</a>
+                </div>
+                <div class="col-3 col-xxs-4 footer-last">
+                  <a href="https://support.grizzly.com/hc/en-us/sections/4404654633239-Shipping-Delivery"
+                    >Shipping Policy</a
+                  >
+                  <a href="https://support.grizzly.com/hc/en-us/sections/4404700256919-Return-Policy">Return Policy</a>
+                  <a href="/products/compare">Comparison Charts</a>
+                  <a href="/catalog/2021/main">Online Catalog</a>
+                  <a href="/forms/catalog-request">Free Print Catalog</a>
+                  <a href="/forms/warranty">Warranty Registration</a>
+                </div>
+              </nav>
+            </div>
 
-                        <nav class="row" id="footer-nav">
-                            <div class="col-3 col-xxs-4">
-
-                                <a href="https://support.grizzly.com">Customer Service</a>
-                                <a href="/user/wishlist">Wish List</a>
-                                <a href="/gift-certificates">Gift Certificates</a>
-                                <a href="/parts">Parts Store</a>
-
-                                <a href="/schools">Schools Program</a>
-                                <a href="https://www.clicklease.com/grizzly">Financing</a>
-
-
-                            </div>
-                            <div class="col-3 col-xxs-4">
-                                <a href="/warehouse-events">Warehouse Events</a>
-                                <a href="/products/as-is">Scratch &amp; Dent</a>
-                                <a href="https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=f39172a2-5f72-4bc9-9b8b-61e8adc3018f&ccId=19000101_000001&type=MP&lang=en_US">Employment</a>
-                                <a href="/products/documents">Manuals</a>
-                                <a href="https://www.youtube.com/c/GrizzlyIndustrialInc/featured" target="_blank">Videos</a>
-
-                            </div>
-                            <div class="col-3 col-xxs-4">
-                                <a href="https://support.grizzly.com/hc/en-us/categories/4403071730071-Contact-Us">Contact Grizzly</a>
-                                <a href="https://support.grizzly.com/hc/en-us/articles/4407162492823-Privacy-Policy">Privacy Notice</a>
-                                <a href="/recalls">Recalls</a>
-                                <a href="https://support.grizzly.com/hc/en-us/articles/4404706826263-Showroom-Locations-Hours">Showrooms</a>
-                                <a href="/inside-grizzly">Inside Grizzly</a>
-                            </div>
-                            <div class="col-3 col-xxs-4 footer-last">
-                                <a href="https://support.grizzly.com/hc/en-us/sections/4404654633239-Shipping-Delivery">Shipping Policy</a>
-                                <a href="https://support.grizzly.com/hc/en-us/sections/4404700256919-Return-Policy">Return Policy</a>
-                                <a href="/products/compare">Comparison Charts</a>
-                                <a href="/catalog/2021/main">Online Catalog</a>
-                                <a href="/forms/catalog-request">Free Print Catalog</a>
-                                <a href="/forms/warranty">Warranty Registration</a>
-
-                            </div>
-                        </nav>
-
-                    </div>
-
-                    <div class="col-sm-3 col-12 d-block">
-
-                        <div id="sociallinks">
-    <a href="https://www.facebook.com/grizzlyindustrial"  rel="noreferrer" target="_blank">
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-             width="130px" height="130px" viewBox="0 0 130 130" enable-background="new 0 0 130 130" xml:space="preserve">
-        <g>
-        <g id="Base_icon_copy_11_9_">
-        <path fill="#0481D9" d="M125.8,1H4.2C2.433,1,1,2.433,1,4.2v121.6c0,1.768,1.433,3.2,3.2,3.2h121.6c1.768,0,3.2-1.433,3.2-3.2V4.2
-			            C129,2.433,127.567,1,125.8,1z" />
-
-	            </g>
-        <g id="Shape_8">
-        <path fill="#FFFFFF" d="M69.989,48.039h8.838V37.093h-8.838c-7.312,0-13.259,6.444-13.259,14.364v5.524h-8.84v10.98h8.84v26.587
-			            h11.049V67.961h11.048v-10.98H67.779v-5.627C67.779,49.457,68.949,48.039,69.989,48.039z" />
-
-	            </g>
-            </g>
-        </svg>
-    </a>
-    <a href="https://twitter.com/grizzly" rel="noreferrer" target="_blank">
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-             width="130px" height="130px" viewBox="0 0 130 130" enable-background="new 0 0 130 130" xml:space="preserve">
-            <g>
-                <g id="Base_icon">
-                    <path fill="#29C5F6" d="M125.8,1H4.2C2.433,1,1,2.433,1,4.2v121.6c0,1.768,1.433,3.2,3.2,3.2h121.6c1.768,0,3.2-1.433,3.2-3.2V4.2
-			            C129,2.433,127.567,1,125.8,1z" />
-
-                </g>
-                <g id="Shape_164">
-                    <path fill="#FFFFFF" d="M90.247,48.26c4.567-2.982,4.971-7.074,4.971-7.074c-1.478,2.038-8.061,3.125-8.061,3.125
+            <div class="col-sm-3 col-12 d-block">
+              <div id="sociallinks">
+                <a href="https://www.facebook.com/grizzlyindustrial" rel="noreferrer" target="_blank">
+                  <svg
+                    version="1.1"
+                    id="Layer_1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px"
+                    y="0px"
+                    width="130px"
+                    height="130px"
+                    viewBox="0 0 130 130"
+                    enable-background="new 0 0 130 130"
+                    xml:space="preserve"
+                  >
+                    <g>
+                      <g id="Base_icon_copy_11_9_">
+                        <path
+                          fill="#0481D9"
+                          d="M125.8,1H4.2C2.433,1,1,2.433,1,4.2v121.6c0,1.768,1.433,3.2,3.2,3.2h121.6c1.768,0,3.2-1.433,3.2-3.2V4.2
+			            C129,2.433,127.567,1,125.8,1z"
+                        />
+                      </g>
+                      <g id="Shape_8">
+                        <path
+                          fill="#FFFFFF"
+                          d="M69.989,48.039h8.838V37.093h-8.838c-7.312,0-13.259,6.444-13.259,14.364v5.524h-8.84v10.98h8.84v26.587
+			            h11.049V67.961h11.048v-10.98H67.779v-5.627C67.779,49.457,68.949,48.039,69.989,48.039z"
+                        />
+                      </g>
+                    </g>
+                  </svg>
+                </a>
+                <a href="https://twitter.com/grizzly" rel="noreferrer" target="_blank">
+                  <svg
+                    version="1.1"
+                    id="Layer_1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px"
+                    y="0px"
+                    width="130px"
+                    height="130px"
+                    viewBox="0 0 130 130"
+                    enable-background="new 0 0 130 130"
+                    xml:space="preserve"
+                  >
+                    <g>
+                      <g id="Base_icon">
+                        <path
+                          fill="#29C5F6"
+                          d="M125.8,1H4.2C2.433,1,1,2.433,1,4.2v121.6c0,1.768,1.433,3.2,3.2,3.2h121.6c1.768,0,3.2-1.433,3.2-3.2V4.2
+			            C129,2.433,127.567,1,125.8,1z"
+                        />
+                      </g>
+                      <g id="Shape_164">
+                        <path
+                          fill="#FFFFFF"
+                          d="M90.247,48.26c4.567-2.982,4.971-7.074,4.971-7.074c-1.478,2.038-8.061,3.125-8.061,3.125
 			            c-5.643-6.659-14.107-3.125-14.107-3.125c-9.94,3.534-8.463,15.083-8.463,15.083c-17.33-0.271-26.736-13.588-26.736-13.588
 			            c-5.173,10.87,3.562,17.461,3.562,17.461c-1.949,0.204-5.441-1.359-5.441-1.359c-0.134,9.989,10.21,13.524,10.21,13.524
 			            c-0.94,0.135-5.375,0.135-5.375,0.135c2.286,8.153,11.957,8.97,11.957,8.97c-9.403,7.067-18.808,5.844-18.808,5.844
 			            c9.27,7.066,18.455,6.321,24.72,5.437C74.074,90.515,82.32,79.237,82.32,79.237c10.882-13.997,7.255-25.821,9.002-26.5
-			            c0.028-0.011,0.058-0.024,0.088-0.039c1.8-0.819,5.957-6.077,5.957-6.077C94.412,48.251,90.247,48.26,90.247,48.26z" />
-
-                </g>
-            </g>
-        </svg>
-    </a>
-    <a href="https://www.pinterest.com/grizzlyindustrial/" rel="noreferrer" target="_blank">
-        <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-             width="130.000000pt" height="130.000000pt" fill="#ffffff" viewBox="0 0 130.000000 130.000000"
-             preserveAspectRatio="xMidYMid meet">
-            <metadata>
-                Created by potrace 1.16, written by Peter Selinger 2001-2019
-            </metadata>
-            <g id="Base_icon">
-                <path fill="#FFFFFF" d="M125.8,1H4.2C2.433,1,1,2.433,1,4.2v121.6c0,1.768,1.433,3.2,3.2,3.2h121.6c1.768,0,3.2-1.433,3.2-3.2V4.2
-			            C129,2.433,127.567,1,125.8,1z" />
-
-            </g>
-            <g transform="translate(0.000000,130.000000) scale(0.021667,-0.021667)"
-               fill="#bd071d" stroke="none">
-                <path d="M0 3000 l0 -3000 3000 0 3000 0 0 3000 0 3000 -3000 0 -3000 0 0
+			            c0.028-0.011,0.058-0.024,0.088-0.039c1.8-0.819,5.957-6.077,5.957-6.077C94.412,48.251,90.247,48.26,90.247,48.26z"
+                        />
+                      </g>
+                    </g>
+                  </svg>
+                </a>
+                <a href="https://www.pinterest.com/grizzlyindustrial/" rel="noreferrer" target="_blank">
+                  <svg
+                    version="1.0"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="130.000000pt"
+                    height="130.000000pt"
+                    fill="#ffffff"
+                    viewBox="0 0 130.000000 130.000000"
+                    preserveAspectRatio="xMidYMid meet"
+                  >
+                    <metadata>Created by potrace 1.16, written by Peter Selinger 2001-2019</metadata>
+                    <g id="Base_icon">
+                      <path
+                        fill="#FFFFFF"
+                        d="M125.8,1H4.2C2.433,1,1,2.433,1,4.2v121.6c0,1.768,1.433,3.2,3.2,3.2h121.6c1.768,0,3.2-1.433,3.2-3.2V4.2
+			            C129,2.433,127.567,1,125.8,1z"
+                      />
+                    </g>
+                    <g
+                      transform="translate(0.000000,130.000000) scale(0.021667,-0.021667)"
+                      fill="#bd071d"
+                      stroke="none"
+                    >
+                      <path
+                        d="M0 3000 l0 -3000 3000 0 3000 0 0 3000 0 3000 -3000 0 -3000 0 0
                     -3000z m3280 2329 c1000 -119 1819 -875 2019 -1864 34 -169 44 -272 44 -465 0
                     -102 -6 -225 -12 -275 -70 -533 -285 -981 -651 -1359 -585 -604 -1435 -845
                     -2255 -640 -55 14 -104 29 -108 33 -5 5 17 52 48 106 148 257 194 374 290 740
@@ -1111,21 +1224,41 @@
                     -80 -403 -466 -285 -827 l25 -78 -140 -593 c-77 -326 -145 -631 -151 -677 -12
                     -87 -7 -492 7 -538 7 -22 5 -23 -22 -17 -53 13 -288 135 -395 204 -591 386
                     -967 987 -1060 1697 -15 116 -15 434 0 550 70 533 285 981 651 1359 511 527
-                    1229 782 1960 695z"/>
-            </g>
-        </svg>
-    </a>
-    <a href="http://www.youtube.com/subscription_center?add_user=grizzlymachinery"  rel="noreferrer" target="_blank">
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-             width="130px" height="130px" viewBox="0 0 130 130" enable-background="new 0 0 130 130" xml:space="preserve">
-        <g>
-        <g id="Base_icon_copy_4">
-        <path fill="#EB5350" d="M125.8,1H4.2C2.433,1,1,2.433,1,4.2v121.6c0,1.768,1.433,3.2,3.2,3.2h121.6c1.768,0,3.2-1.433,3.2-3.2V4.2
-			            C129,2.433,127.567,1,125.8,1z" />
-
-	            </g>
-        <g id="Shape_11_copy">
-        <path fill="#FFFFFF" d="M45.015,75.737h3.428v17.04h3.312v-17.04h3.428v-2.896H45.015V75.737z M61.931,89.24
+                    1229 782 1960 695z"
+                      />
+                    </g>
+                  </svg>
+                </a>
+                <a
+                  href="http://www.youtube.com/subscription_center?add_user=grizzlymachinery"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <svg
+                    version="1.1"
+                    id="Layer_1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px"
+                    y="0px"
+                    width="130px"
+                    height="130px"
+                    viewBox="0 0 130 130"
+                    enable-background="new 0 0 130 130"
+                    xml:space="preserve"
+                  >
+                    <g>
+                      <g id="Base_icon_copy_4">
+                        <path
+                          fill="#EB5350"
+                          d="M125.8,1H4.2C2.433,1,1,2.433,1,4.2v121.6c0,1.768,1.433,3.2,3.2,3.2h121.6c1.768,0,3.2-1.433,3.2-3.2V4.2
+			            C129,2.433,127.567,1,125.8,1z"
+                        />
+                      </g>
+                      <g id="Shape_11_copy">
+                        <path
+                          fill="#FFFFFF"
+                          d="M45.015,75.737h3.428v17.04h3.312v-17.04h3.428v-2.896H45.015V75.737z M61.931,89.24
 			            c-0.276,0.317-0.58,0.582-0.913,0.785c-0.33,0.209-0.607,0.312-0.819,0.312c-0.276,0-0.476-0.078-0.603-0.237
 			            c-0.12-0.152-0.183-0.403-0.183-0.751V78.065h-2.938v12.3c0,0.878,0.175,1.529,0.516,1.972c0.345,0.438,0.854,0.655,1.537,0.655
 			            c0.551,0,1.12-0.154,1.703-0.47c0.593-0.311,1.152-0.763,1.7-1.362v1.617h2.939V78.065h-2.939V89.24z M72.668,77.89
@@ -1151,433 +1284,409 @@
 			            c0.87,0.784,1.308,1.793,1.308,3.029V59.479z M82.623,63.515h-3.312v-1.791c-0.604,0.659-1.238,1.164-1.902,1.508
 			            c-0.658,0.343-1.299,0.516-1.918,0.516c-0.771,0-1.343-0.242-1.732-0.725c-0.385-0.482-0.58-1.205-0.58-2.171v-13.54h3.307v12.42
 			            c0,0.386,0.075,0.662,0.213,0.832c0.136,0.173,0.362,0.261,0.671,0.261c0.242,0,0.554-0.115,0.927-0.341
-			            c0.368-0.229,0.71-0.519,1.016-0.875V47.312h3.312V63.515z" />
-
-	            </g>
-            </g>
-        </svg>
-
-    </a>
-    <a href="http://www.instagram.com/grizzlyindustrial"  rel="noreferrer" target="_blank">
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-             width="130px" height="130px" viewBox="0 0 130 130" enable-background="new 0 0 130 130" xml:space="preserve">
-        <g>
-        <g id="Base_icon_copy_11_7_">
-        <path fill="#3B82B9" d="M125.8,1H4.2C2.433,1,1,2.433,1,4.2v121.6c0,1.768,1.433,3.2,3.2,3.2h121.6c1.768,0,3.2-1.433,3.2-3.2V4.2
-				        C129,2.433,127.567,1,125.8,1z" />
-
-		        </g>
-        <g id="Instagram_icon">
-        <path fill="#FFFFFF" d="M88.368,35.471H43.245c-4.29,0-7.803,3.5-7.803,7.78v45.143c0,4.278,3.513,7.777,7.803,7.777h45.123
+			            c0.368-0.229,0.71-0.519,1.016-0.875V47.312h3.312V63.515z"
+                        />
+                      </g>
+                    </g>
+                  </svg>
+                </a>
+                <a href="http://www.instagram.com/grizzlyindustrial" rel="noreferrer" target="_blank">
+                  <svg
+                    version="1.1"
+                    id="Layer_1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px"
+                    y="0px"
+                    width="130px"
+                    height="130px"
+                    viewBox="0 0 130 130"
+                    enable-background="new 0 0 130 130"
+                    xml:space="preserve"
+                  >
+                    <g>
+                      <g id="Base_icon_copy_11_7_">
+                        <path
+                          fill="#3B82B9"
+                          d="M125.8,1H4.2C2.433,1,1,2.433,1,4.2v121.6c0,1.768,1.433,3.2,3.2,3.2h121.6c1.768,0,3.2-1.433,3.2-3.2V4.2
+				        C129,2.433,127.567,1,125.8,1z"
+                        />
+                      </g>
+                      <g id="Instagram_icon">
+                        <path
+                          fill="#FFFFFF"
+                          d="M88.368,35.471H43.245c-4.29,0-7.803,3.5-7.803,7.78v45.143c0,4.278,3.513,7.777,7.803,7.777h45.123
 				        c4.292,0,7.8-3.499,7.8-7.777V43.251C96.168,38.971,92.66,35.471,88.368,35.471z M78.827,44.997c0-1.264,1.035-2.301,2.306-2.301
 				        h5.51c1.266,0,2.305,1.037,2.305,2.301v5.502c0,1.266-1.039,2.299-2.305,2.299h-5.51c-1.271,0-2.306-1.033-2.306-2.299V44.997z
 				            M65.806,52.814c7.185,0,13.01,5.816,13.01,12.993c0,7.176-5.825,12.991-13.01,12.991c-7.186,0-13.011-5.815-13.011-12.991
 				        C52.795,58.63,58.62,52.814,65.806,52.814z M90.428,87.971c0,1.327-1.083,2.406-2.413,2.406H43.663
 				        c-1.328,0-2.413-1.079-2.413-2.406V61.463h6.257c-0.327,1.39-0.52,2.832-0.52,4.32c0,10.392,8.436,18.814,18.841,18.814
-				        c10.406,0,18.84-8.423,18.84-18.814c0-1.492-0.211-2.929-0.54-4.32h6.3V87.971z" />
-
-		        </g>
-	        </g>
-        </svg>
-    </a>
-</div>
-                        <span class="footer-phone d-none d-md-inline-block"> 1-800-523-4777</span>
-                        <a class=" d-none d-md-inline-block" id="sign-up-link" href="/sign-up?code=&source=footer">Sign up to receive Grizzly.com&nbsp;emails and specials</a>
-                    </div>
-                </div>
+				        c10.406,0,18.84-8.423,18.84-18.814c0-1.492-0.211-2.929-0.54-4.32h6.3V87.971z"
+                        />
+                      </g>
+                    </g>
+                  </svg>
+                </a>
+              </div>
+              <span class="footer-phone d-none d-md-inline-block"> 1-800-523-4777</span>
+              <a class="d-none d-md-inline-block" id="sign-up-link" href="/sign-up?code=&source=footer"
+                >Sign up to receive Grizzly.com&nbsp;emails and specials</a
+              >
             </div>
+          </div>
         </div>
+      </div>
     </footer>
     <div class="col-12" id="footer-copyright">
-        <span id="copyright">&copy; Copyright 2021 Grizzly Industrial&reg;, Inc.</span>
+      <span id="copyright">&copy; Copyright 2021 Grizzly Industrial&reg;, Inc.</span>
     </div>
 
     <script src="https://cdn0.grizzly.com/js/grizzly3p.js"></script>
     <script>
-        jQuery.event.special.touchstart = {
-            setup: function (_, ns, handle) {
-                this.addEventListener("touchstart", handle, { passive: true });
-            }
-        };
+      jQuery.event.special.touchstart = {
+        setup: function (_, ns, handle) {
+          this.addEventListener('touchstart', handle, { passive: true });
+        },
+      };
     </script>
     <script src="https://www.grizzly.com/js/categorymenu.js"></script>
     <script type="text/template" id="loader-template">
-        <div class="loader-container">
-            <div class="loader"></div>
-            <div class="loader-text">{{this}}</div>
-        </div>
+      <div class="loader-container">
+          <div class="loader"></div>
+          <div class="loader-text">{{this}}</div>
+      </div>
     </script>
     <script src="https://www.grizzly.com/js/site.js?v=CV2hH_liltIubtqZOcooZCiM9_X1vxW450t270p6BQ4"></script>
 
-        <script type="text/javascript">
-            var biJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
-            (function (d, s, id, tid, vid) {
-                var js, ljs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return; js = d.createElement(s); js.id = id;
-                js.src = biJsHost + "cdn.listrakbi.com/scripts/script.js?m=" + tid + "&v=" + vid;
-                ljs.parentNode.insertBefore(js, ljs);
-            })(document, 'script', 'ltkSDK', 'XNrhKEBmwOnw', '1');
-        </script>
-
+    <script type="text/javascript">
+      var biJsHost = 'https:' == document.location.protocol ? 'https://' : 'http://';
+      (function (d, s, id, tid, vid) {
+        var js,
+          ljs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = biJsHost + 'cdn.listrakbi.com/scripts/script.js?m=' + tid + '&v=' + vid;
+        ljs.parentNode.insertBefore(js, ljs);
+      })(document, 'script', 'ltkSDK', 'XNrhKEBmwOnw', '1');
+    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.2/handlebars.min.js"></script>
     <script>
-        window.imageRoot = 'https://cdn0.grizzly.com';
-
-
+      window.imageRoot = 'https://cdn0.grizzly.com';
     </script>
     <script>
-        Handlebars.registerHelper("x", function(expression, options) {
-          var result;
+      Handlebars.registerHelper('x', function (expression, options) {
+        var result;
 
-          // you can change the context, or merge it with options.data, options.hash
-          var context = this;
+        // you can change the context, or merge it with options.data, options.hash
+        var context = this;
 
-          // yup, i use 'with' here to expose the context's properties as block variables
-          // you don't need to do {{x 'this.age + 2'}}
-          // but you can also do {{x 'age + 2'}}
-          // HOWEVER including an UNINITIALIZED var in a expression will return undefined as the result.
-          with(context) {
-            result = (function() {
-              try {
-                return eval(expression);
-              } catch (e) {
-                console.log('•Expression: {{x \'' + expression + '\'}}\n•JS-Error: ', e, '\n•Context: ', context);
-              }
-            }).call(context); // to make eval's lexical this=context
-          }
-          return result;
-        });
-        Handlebars.registerHelper('shortDate', function (value)
-        {
-            var date = new Date(value);
+        // yup, i use 'with' here to expose the context's properties as block variables
+        // you don't need to do {{x 'this.age + 2'}}
+        // but you can also do {{x 'age + 2'}}
+        // HOWEVER including an UNINITIALIZED var in a expression will return undefined as the result.
+        with (context) {
+          result = function () {
+            try {
+              return eval(expression);
+            } catch (e) {
+              console.log("•Expression: {{x '" + expression + "'}}\n•JS-Error: ", e, '\n•Context: ', context);
+            }
+          }.call(context); // to make eval's lexical this=context
+        }
+        return result;
+      });
+      Handlebars.registerHelper('shortDate', function (value) {
+        var date = new Date(value);
 
-            if(value === null || date === "Invalid Date" || isNaN(date))
-                return '';
+        if (value === null || date === 'Invalid Date' || isNaN(date)) return '';
 
-            return moment(date).format("MM/DD/YYYY hh:mm A");
-        });
-        Handlebars.registerHelper('miniDate', function (value) {
-            var date = new Date(value);
+        return moment(date).format('MM/DD/YYYY hh:mm A');
+      });
+      Handlebars.registerHelper('miniDate', function (value) {
+        var date = new Date(value);
 
-            if (value === null || date === "Invalid Date" || isNaN(date))
-                return '';
+        if (value === null || date === 'Invalid Date' || isNaN(date)) return '';
 
-            return moment(date).format("MM/DD/YYYY");
-        });
-        Handlebars.registerHelper('times', function(n, block) {
-            var accum = '';
-            for(var i = 0; i < n; ++i)
-                accum += block.fn(i);
-            return accum;
-        });
-        Handlebars.registerHelper('firstChar', function (value)
-        {
-            if (!value || !value.length)
-                return '';
+        return moment(date).format('MM/DD/YYYY');
+      });
+      Handlebars.registerHelper('times', function (n, block) {
+        var accum = '';
+        for (var i = 0; i < n; ++i) accum += block.fn(i);
+        return accum;
+      });
+      Handlebars.registerHelper('firstChar', function (value) {
+        if (!value || !value.length) return '';
 
-            return value.substring(0, 1).toLowerCase();
-        });
-        Handlebars.registerHelper('lowerCase', function (value)
-        {
-            if (!value || !value.length)
-                return '';
+        return value.substring(0, 1).toLowerCase();
+      });
+      Handlebars.registerHelper('lowerCase', function (value) {
+        if (!value || !value.length) return '';
 
-            return value.toLowerCase();
-        });
-        Handlebars.registerHelper('global', function (value)
-        {
-            if (!value || !value.length)
-                return '';
+        return value.toLowerCase();
+      });
+      Handlebars.registerHelper('global', function (value) {
+        if (!value || !value.length) return '';
 
-            return window[value];
-        });
-        Handlebars.registerHelper("xif", function (expression, options) {
-            return Handlebars.helpers["x"].apply(this, [expression, options]) ? options.fn(this) : options.inverse(this);
-        });
+        return window[value];
+      });
+      Handlebars.registerHelper('xif', function (expression, options) {
+        return Handlebars.helpers['x'].apply(this, [expression, options]) ? options.fn(this) : options.inverse(this);
+      });
 
-        Number.prototype.format = function (n, x)
-        {
-            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
-            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
-        };
+      Number.prototype.format = function (n, x) {
+        var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+        return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+      };
 
-        Handlebars.registerHelper('currency', function (value)
-        {
-            if (isNaN(value))
-                return '';
+      Handlebars.registerHelper('currency', function (value) {
+        if (isNaN(value)) return '';
 
-            var formatted = value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-            var split = formatted.split('.');
+        var formatted = value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        var split = formatted.split('.');
 
-            var html = '<div class="product-price">' +
-                '<span class="currency-sign">$</span>' +
-                split[0] +
-                '<span class="currency-decimal" >.</span>' +
-                '<span class="currency-cents">' + split[1] + '</span >' +
-                '</div>';
+        var html =
+          '<div class="product-price">' +
+          '<span class="currency-sign">$</span>' +
+          split[0] +
+          '<span class="currency-decimal" >.</span>' +
+          '<span class="currency-cents">' +
+          split[1] +
+          '</span >' +
+          '</div>';
 
-            return new Handlebars.SafeString(html);
+        return new Handlebars.SafeString(html);
+      });
 
-        });
+      Handlebars.registerHelper('plusOne', function (value) {
+        if (isNaN(value)) return '';
 
-        Handlebars.registerHelper('plusOne', function (value)
-        {
-            if (isNaN(value))
-                return '';
+        return value + 1;
+      });
 
-
-            return value + 1;
-
-        });
-
-        Handlebars.registerHelper('repeat', function (n, block)
-        {
-            var accum = '';
-            for (var i = 0; i < n; ++i)
-                accum += block.fn(i);
-            return accum;
-        });
+      Handlebars.registerHelper('repeat', function (n, block) {
+        var accum = '';
+        for (var i = 0; i < n; ++i) accum += block.fn(i);
+        return accum;
+      });
     </script>
-
 
     <script src="https://www.grizzly.com/js/event-handler.js?v=J1bUEQWKhu9HcXbIVplrcwg984Ry6rA4h5SRmT-uuE0"></script>
     <script src="https://www.grizzly.com/js/rest-api.js?v=oSMrO7XE6t1BSU4TSXjxtUsQf6fI6E3SpW0kBUGS4Zk"></script>
 
     <script src="https://cdn.lr-ingest.io/LogRocket.min.js"></script>
     <script>
-        window.LogRocket && window.LogRocket.init('grizzly-industrial/grizzly', {
-            network: {
-                requestSanitizer: function (request)
-                {
-                    if (request.url.toLowerCase().indexOf('createpayment') !== -1)
-                    {
-                        request.body = null;
-                    }
+      window.LogRocket &&
+        window.LogRocket.init('grizzly-industrial/grizzly', {
+          network: {
+            requestSanitizer: function (request) {
+              if (request.url.toLowerCase().indexOf('createpayment') !== -1) {
+                request.body = null;
+              }
 
-                    return request;
-                },
+              return request;
             },
+          },
         });
 
-        LogRocket.identify('');
+      LogRocket.identify('');
     </script>
 
     <script type="text/javascript">
-
-        (function (d) {
-            if (document.addEventListener)
-                document.addEventListener('ltkAsyncListener', d);
-            else {
-                e = document.documentElement;
-                e.ltkAsyncProperty = 0;
-                e.attachEvent('onpropertychange', function (e) {
-                    if (e.propertyName == 'ltkAsyncProperty') { d(); }
-                });
+      (function (d) {
+        if (document.addEventListener) document.addEventListener('ltkAsyncListener', d);
+        else {
+          e = document.documentElement;
+          e.ltkAsyncProperty = 0;
+          e.attachEvent('onpropertychange', function (e) {
+            if (e.propertyName == 'ltkAsyncProperty') {
+              d();
             }
-        })(function () {
-            /********** Begin Custom Code **********/
-                
-            /********** End Custom Code ************/
-        });
+          });
+        }
+      })(function () {
+        /********** Begin Custom Code **********/
+        /********** End Custom Code ************/
+      });
 
-        $(document).on('cartUpdated', function (event, customEvent)
-        {
-            var order = customEvent.order;
+      $(document).on('cartUpdated', function (event, customEvent) {
+        var order = customEvent.order;
 
-            if (typeof _ltk === 'undefined')
-                return;
+        if (typeof _ltk === 'undefined') return;
 
-            if (!order.items || !order.items.length) {
-                _ltk.SCA.ClearCart();
-            } else {
+        if (!order.items || !order.items.length) {
+          _ltk.SCA.ClearCart();
+        } else {
+          order.items.map(function (item) {
+            _ltk.SCA.AddItemWithLinks(
+              item.product.sku,
+              item.quantity,
+              item.product.price,
+              item.product.name,
+              'https://cdn0.grizzly.com/pics/jpeg1000/' +
+                item.product.sku.toLowerCase()[0] +
+                '/' +
+                item.product.sku.toLowerCase() +
+                '.jpg',
+              '/products/' + item.product.sku
+            );
+          });
 
-                order.items.map(function (item) {
-                    _ltk.SCA.AddItemWithLinks(
-                        item.product.sku,
-                        item.quantity,
-                        item.product.price,
-                        item.product.name,
-                        'https://cdn0.grizzly.com/pics/jpeg1000/' + item.product.sku.toLowerCase()[0] + '/' + item.product.sku.toLowerCase() + '.jpg',
-                        '/products/' + item.product.sku
-                    );
-                });
-
-                _ltk.SCA.Submit();
-            }
-        });
+          _ltk.SCA.Submit();
+        }
+      });
     </script>
-
 
     <!-- Start Conversant Tag -->
     <script type="text/javascript">
-        var conversantPromoId = {
-            homepage: 1,
-            department: 2,
-            category: 3,
-            subcategory: 4,
-            product: 5,
-            cart: 6,
-            searchResults: 7,
-            storeLocator: 10,
-            login: 30,
-            signup: 50,
-            orderConfirmation: 100
-        };
+      var conversantPromoId = {
+        homepage: 1,
+        department: 2,
+        category: 3,
+        subcategory: 4,
+        product: 5,
+        cart: 6,
+        searchResults: 7,
+        storeLocator: 10,
+        login: 30,
+        signup: 50,
+        orderConfirmation: 100,
+      };
 
-        var dtmSrc = window.location.protocol + "//login.dotomi.com/ucm/UCMController?" +
-            "dtm_com=28&dtm_cid=63135&dtm_cmagic=d5fe98&dtm_format=5";
+      var dtmSrc =
+        window.location.protocol +
+        '//login.dotomi.com/ucm/UCMController?' +
+        'dtm_com=28&dtm_cid=63135&dtm_cmagic=d5fe98&dtm_format=5';
 
-        var dtmTag = new Array();
+      var dtmTag = new Array();
 
-        dtmTag.dtm_fid = 101;
+      dtmTag.dtm_fid = 101;
 
-        //1   Homepage                - Page Visit
-        //2   Department              - Page Visit
-        //3   Category                - Page Visit
-        //4   Sub-Category            - Page Visit
-        //5   Product Detail          - Page Visit
-        //6   Cart                    - Page Visit        (If the cart holds multiple items, send data regarding the first or last item)
-        //10  Store Locator           - Page Visit
-        //30  Account Login           - Page Visit        (Fired upon user login)
-        //50  Account Signup          - Action Conversion (Fired upon new account creation)
-        //100 Conversion Confirmation - Conversion        (Single tag on final order confirmation page)
-
-
-
-
-
-
+      //1   Homepage                - Page Visit
+      //2   Department              - Page Visit
+      //3   Category                - Page Visit
+      //4   Sub-Category            - Page Visit
+      //5   Product Detail          - Page Visit
+      //6   Cart                    - Page Visit        (If the cart holds multiple items, send data regarding the first or last item)
+      //10  Store Locator           - Page Visit
+      //30  Account Login           - Page Visit        (Fired upon user login)
+      //50  Account Signup          - Action Conversion (Fired upon new account creation)
+      //100 Conversion Confirmation - Conversion        (Single tag on final order confirmation page)
     </script>
 
     <script>
-        var dtm_config = {};
+      var dtm_config = {};
     </script>
 
-
-    
     <script>
-        dtmTag.cli_promo_id = conversantPromoId.searchResults;
+      dtmTag.cli_promo_id = conversantPromoId.searchResults;
     </script>
     <script src="https://tags.grizzly.com/tag_path/profile/visit/js/1_0?dtm_cid=63135&dtm_cmagic=d5fe98&dtm_fid=101&dtm_promo_id=7&cachebuster=060e79c9c9f54044bdf37dd731a0a498"></script>
 
-
     <script>
-        dtmTag.canonical_url = ""; //Set By Code Below
-        dtmTag.dtm_user_token = ""; //Leave Empty
-        dtmTag.dtmc_ref = document.referrer; //Dynamic
-        dtmTag.dtmc_loc = document.location.href; //Dynamic
-        dtmTag.fpc_status = ""; //Leave Empty
+      dtmTag.canonical_url = ''; //Set By Code Below
+      dtmTag.dtm_user_token = ''; //Leave Empty
+      dtmTag.dtmc_ref = document.referrer; //Dynamic
+      dtmTag.dtmc_loc = document.location.href; //Dynamic
+      dtmTag.fpc_status = ''; //Leave Empty
 
-        readCanonicalUrl();
+      readCanonicalUrl();
 
-        readCookieDotomi();
+      readCookieDotomi();
 
-        for (var item in dtmTag) {
-            if (typeof dtmTag[item] != "function" && typeof dtmTag[item] != "object") {
-                dtmSrc += "&" + item + "=" + encodeURIComponent(dtmTag[item]);
-            }
+      for (var item in dtmTag) {
+        if (typeof dtmTag[item] != 'function' && typeof dtmTag[item] != 'object') {
+          dtmSrc += '&' + item + '=' + encodeURIComponent(dtmTag[item]);
         }
+      }
 
-        setTimeout('document.getElementById("dtmdiv").innerHTML = ""', 2000);
+      setTimeout('document.getElementById("dtmdiv").innerHTML = ""', 2000);
 
-        var dotomiNode = document.createElement("div");
+      var dotomiNode = document.createElement('div');
 
-        dotomiNode.style.display = "none";
-        dotomiNode.id = "dtmdiv";
+      dotomiNode.style.display = 'none';
+      dotomiNode.id = 'dtmdiv';
 
-        var dotomiIFrame = document.createElement("iframe");
+      var dotomiIFrame = document.createElement('iframe');
 
-        dotomiIFrame.name = "response_frame";
-        dotomiIFrame.src = dtmSrc;
-        dotomiNode.appendChild(dotomiIFrame);
-        document.getElementsByTagName('body')[0].appendChild(dotomiNode);
+      dotomiIFrame.name = 'response_frame';
+      dotomiIFrame.src = dtmSrc;
+      dotomiNode.appendChild(dotomiIFrame);
+      document.getElementsByTagName('body')[0].appendChild(dotomiNode);
 
-
-        function readCanonicalUrl() {
-            if (document.querySelector("link[rel=canonical]")) {
-                var canonical_selector = document.querySelector("link[rel=canonical]").href;
-                if (canonical_selector) {
-                    dtmTag.canonical_url = canonical_selector;
-                }
-            }
+      function readCanonicalUrl() {
+        if (document.querySelector('link[rel=canonical]')) {
+          var canonical_selector = document.querySelector('link[rel=canonical]').href;
+          if (canonical_selector) {
+            dtmTag.canonical_url = canonical_selector;
+          }
         }
+      }
 
-        function readCookieDotomi() {
-            var nameEQ = "dtm_token=";
-            var fpcStatus = 'DotomiStatus=';
-            var ca = document.cookie.split(';');
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1, c.length);
-                }
-                if (c.indexOf(nameEQ) == 0) {
-                    dtmTag.dtm_user_token = c.substring(nameEQ.length, c.length);
-                }
-                if (c.indexOf(fpcStatus) == 0) {
-                    dtmTag.fpc_status = c.substring(fpcStatus.length, c.length);
-                }
-            }
+      function readCookieDotomi() {
+        var nameEQ = 'dtm_token=';
+        var fpcStatus = 'DotomiStatus=';
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1, c.length);
+          }
+          if (c.indexOf(nameEQ) == 0) {
+            dtmTag.dtm_user_token = c.substring(nameEQ.length, c.length);
+          }
+          if (c.indexOf(fpcStatus) == 0) {
+            dtmTag.fpc_status = c.substring(fpcStatus.length, c.length);
+          }
         }
-
+      }
     </script>
 
-    
-
     <script>
+      var searchUrl =
+        '/search?q=(categoryid:161)+AND+(category:%22Straight+Bits%22)&fq=(price:[0+TO+24.99])(shank:%22.25+in.%22)&p=2';
+      $('#search-next,#search-prev,.search-page').click(function (e) {
+        var pageClicked = $(this).data('page');
 
-        var searchUrl = '/search?q=(categoryid:161)+AND+(category:%22Straight+Bits%22)&fq=(price:[0+TO+24.99])(shank:%22.25+in.%22)&p=2';
-        $('#search-next,#search-prev,.search-page').click(function (e)
-        {
-            var pageClicked = $(this).data('page');
+        location.href = searchUrl + '&cp=' + pageClicked;
+      });
 
-            location.href = searchUrl + '&cp=' + pageClicked;
-        });
+      $('#page-size').change(function (e) {
+        var newSize = $(this).val();
 
-        $('#page-size').change(function (e)
-        {
-            var newSize = $(this).val();
+        location.href = searchUrl + '&cz=' + newSize;
+      });
 
-            location.href = searchUrl + '&cz=' + newSize;
-        });
+      $('#sort').change(function (e) {
+        var newSort = $(this).val();
 
-        $('#sort').change(function (e) {
-            var newSort = $(this).val();
+        location.href = searchUrl + '&cs=' + newSort;
+      });
 
-            location.href = searchUrl + '&cs=' + newSort;
-        });
+      $('.open-filters').click(function (e) {
+        e.preventDefault();
 
-        $('.open-filters').click(function (e)
-        {
-            e.preventDefault();
+        $('.search-filters').addClass('open');
+        $('body').addClass('no-scroll');
+      });
 
-            $('.search-filters').addClass('open');
-            $('body').addClass('no-scroll');
-        });
+      $('.search-filters-bg, .search-filters-close').click(function (e) {
+        e.stopPropagation();
+        $('.search-filters').removeClass('open');
+        $('body').removeClass('no-scroll');
+      });
 
+      $('.show-more-facets').click(function (e) {
+        e.preventDefault();
+        $(this).parents('.facet').addClass('show-all');
+      });
 
-
-        $('.search-filters-bg, .search-filters-close').click(function (e)
-        {
-            e.stopPropagation();
-            $('.search-filters').removeClass('open');
-            $('body').removeClass('no-scroll');
-
-        });
-
-        $('.show-more-facets').click(function (e) {
-            e.preventDefault();
-            $(this).parents('.facet').addClass('show-all');
-        });
-
-        $('.show-less-facets').click(function (e) {
-            e.preventDefault();
-            $(this).parents('.facet').removeClass('show-all');
-        });
-
+      $('.show-less-facets').click(function (e) {
+        e.preventDefault();
+        $(this).parents('.facet').removeClass('show-all');
+      });
     </script>
     <script type="module" src="/src/main.tsx"></script>
-
-</body>
+  </body>
 </html>

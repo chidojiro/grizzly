@@ -1,11 +1,15 @@
+import tw from 'twin.macro';
+
 type Props = { q: string };
 
 export const NoResults = ({ q }: Props) => (
-  <div className='search-results tw-flex-col'>
-    <h2 className='no-results-header tw-mx-auto tw-w-fit mt-3'>We're sorry, we couldn't find any results for {q}</h2>
+  <div className='search-results' css={[tw`flex-col`]}>
+    <h2 className='no-results-header' css={[tw`mx-auto w-fit mt-3`]}>
+      We're sorry, we couldn't find any results for {q}
+    </h2>
     <div className='zero-results-categories'>
       <h3>Shop By Category</h3>
-      <ul role='menu' className='search-suggestions first tw-block'>
+      <ul role='menu' className='search-suggestions first' css={[tw`block`]}>
         <li>
           <ul>
             <li role='presentation'>

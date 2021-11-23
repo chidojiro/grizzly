@@ -1,5 +1,5 @@
 import { Pagination } from 'components';
-import { filterFields, navigating } from 'consts';
+import { navigating, sortByOptions } from 'consts';
 import { useQuery, useScrollToTop, useSearch, useSearchParams } from 'hooks';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -8,6 +8,7 @@ import { Results } from './Results';
 import { Sidebar } from './Sidebar';
 import { Toolbar } from './Toolbar';
 import { NoResults } from './NoResults';
+import tw from 'twin.macro';
 
 export const Main = () => {
   const query = useQuery();
@@ -59,7 +60,7 @@ export const Main = () => {
 
   React.useEffect(() => {
     setValue('size', size || '25');
-    setValue('sortBy', sortBy || 'relevance+desc');
+    setValue('sortBy', sortBy || sortByOptions[0].value);
 
     const rawFilters = fq ? fq.slice(1, fq.length - 1).split(')(') : [];
 
@@ -81,7 +82,7 @@ export const Main = () => {
   return (
     <div>
       <Toolbar />
-      <div className='tw-flex tw-pt-3'>
+      <div css={[tw`flex pt-3`]}>
         <Sidebar />
         <Results />
       </div>

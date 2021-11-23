@@ -3,6 +3,7 @@ import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Option } from 'types';
 import { FilterBox } from '../FilterBox';
+import tw from 'twin.macro';
 
 const DEFAULT_VISIBLE_ITEMS_COUNT = 5;
 
@@ -39,9 +40,7 @@ export const CheckboxGroupFilterBox = ({ name, options, title }: Props) => {
         ))}
       </Form.CheckboxGroup>
       {displayShowMoreToggle && (
-        <div
-          className='tw-text-xs tw-text-green hover:tw-underline tw-cursor-pointer'
-          onClick={() => setIsShowingMore(p => !p)}>
+        <div onClick={() => setIsShowingMore(p => !p)} css={[tw`text-xs text-green hover:underline cursor-pointer`]}>
           {isShowingMore ? 'Show Less...' : 'Show More...'}
         </div>
       )}

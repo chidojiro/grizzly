@@ -1,5 +1,5 @@
-import classNames from 'classnames';
 import { ClassName } from 'types';
+import tw from 'twin.macro';
 
 const formatNumber = (num: number) => {
   const segments: string[] = [];
@@ -28,10 +28,10 @@ export const Price = ({ price, className }: Props) => {
   const [dollars, cent] = price.toFixed(2).toString().split('.');
 
   return (
-    <span className={classNames(className)}>
-      <sup className='tw-text-[70%]'>$</sup>
+    <span className={className}>
+      <sup css={[tw`text-[70%]`]}>$</sup>
       {formatNumber(+dollars)}
-      <sup className='tw-text-[70%]'>{cent || '00'}</sup>
+      <sup css={[tw`text-[70%]`]}>{cent || '00'}</sup>
     </span>
   );
 };

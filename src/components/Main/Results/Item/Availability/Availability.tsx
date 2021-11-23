@@ -1,40 +1,30 @@
-import classNames from 'classnames';
 import { SearchResult } from 'types';
+import tw from 'twin.macro';
 
 export type Props = {
   data: SearchResult['values'];
 };
 
 export const Availability = ({ data: { instock, quantityavailable } }: Props) => {
-  let color = '';
-  let background = '';
+  let color = tw``;
+  let background = tw``;
   let label = '';
-  let padding = '';
+  let padding = tw``;
 
   if (instock.single === 'true') {
-    color = 'tw-text-green';
+    color = tw`text-green`;
     label = 'In Stock';
   } else if (quantityavailable.single === '0') {
-    color = 'tw-text-[#ae0101]';
+    color = tw`text-[#ae0101]`;
     label = 'More on the Way';
   } else {
-    color = 'tw-text-black';
+    color = tw`text-black`;
     label = 'Special Order Item';
-    background = 'tw-bg-yellow';
-    padding = 'px-[10px] py-[5px]';
+    background = tw`bg-yellow`;
+    padding = tw`px-[10px] py-[5px]`;
   }
 
   if (!label) return null;
 
-  return (
-    <div
-      className={classNames(
-        'tw-font-bold tw-text-[13px] tw-rounded tw-text-center tw-w-fit',
-        color,
-        background,
-        padding
-      )}>
-      {label}
-    </div>
-  );
+  return <div css={[tw`font-bold text-[13px] rounded text-center w-fit`, color, background, padding]}>{label}</div>;
 };
