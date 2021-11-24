@@ -1,12 +1,12 @@
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useAutoComplete } from 'hooks';
-import React from 'react';
-import { ClassName } from 'types';
 import { navigating } from 'consts';
+import { useAutoComplete } from 'hooks';
 import groupBy from 'lodash/groupBy';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import tw from 'twin.macro';
+import { ClassName } from 'types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = ClassName & {};
@@ -15,9 +15,7 @@ const navigatingGroupedByQuery = groupBy(navigating, 'SearchTriggers');
 
 export const Search = ({ className }: Props) => {
   const [isFocused, setIsFocused] = React.useState(false);
-
   const history = useHistory();
-
   const { q, setQ, data: suggestions } = useAutoComplete();
 
   const submitQ = (qOverride?: string) => {
@@ -31,8 +29,8 @@ export const Search = ({ className }: Props) => {
     } else {
       history.push(`/search?q=${_q}`);
     }
+
     window.location.reload();
-    setQ('');
   };
 
   const handleQChange: React.ChangeEventHandler<HTMLInputElement> = e => {
@@ -58,7 +56,7 @@ export const Search = ({ className }: Props) => {
         onKeyDown={handleKeyDown}
         onBlur={() => setIsFocused(false)}
         onFocus={() => setIsFocused(true)}
-        css={[tw`border-0 w-full px-4 font-medium text-black outline-none bg-gray`]}></input>
+        css={[tw`w-full px-4 font-medium text-black border-0 outline-none bg-gray`]}></input>
       <div
         onClick={() => submitQ()}
         css={[tw`flex items-center justify-center flex-shrink-0 h-full px-3 cursor-pointer bg-green`]}>
@@ -75,7 +73,7 @@ export const Search = ({ className }: Props) => {
             <a
               onClick={() => submitQ(suggestion)}
               css={[
-                tw`cursor-pointer block py-1 px-4 font-medium border-0 border-b border-gray border-solid last:border-b-0`,
+                tw`block px-4 py-1 font-medium border-0 border-b border-solid cursor-pointer border-gray last:border-b-0`,
               ]}>
               {suggestion}
             </a>

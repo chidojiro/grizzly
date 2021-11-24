@@ -10,6 +10,13 @@ export type Metadata = {
   'user-agent': string[];
 };
 
+export type Tracking = {
+  type: string;
+  query_id: string;
+  sequence: number;
+  field: string;
+};
+
 export type FieldOfSingleValue = {
   single: string;
 };

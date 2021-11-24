@@ -1,5 +1,5 @@
 import { SearchApis } from 'apis';
-import { count, metadata, priceBuckets, tracking } from 'consts';
+import { count, metadata, priceBuckets, defaultTracking } from 'consts';
 import { useSearchParams } from 'hooks';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -25,7 +25,7 @@ export const usePriceFilterInfo = () => {
     () => ({
       metadata,
       request: {
-        tracking,
+        tracking: defaultTracking,
         pipeline: { name: 'query' },
         values: {
           fields: '',
