@@ -52,14 +52,15 @@ export const useSearch = () => {
         },
       };
 
-      trackingRef.current.sequence = trackingRef.current.sequence + 1;
-
       return SearchApis.get(payload);
     },
     {
       onError: () => {
         history.push('/search');
         window.location.reload();
+      },
+      onSuccess: () => {
+        trackingRef.current.sequence = trackingRef.current.sequence + 1;
       },
     }
   );
