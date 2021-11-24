@@ -1,0 +1,1 @@
+export { usePriceFilterInfo } from './usePriceFilterInfo';

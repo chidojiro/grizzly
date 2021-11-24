@@ -1,6 +1,6 @@
 import { Pagination } from 'components';
 import { navigating, sortByOptions } from 'consts';
-import { useQuery, useScrollToTop, useSearch, useSearchParams } from 'hooks';
+import { useQuery, useScrollToTop, useSearch, useSearchParams, useUpdateEffect } from 'hooks';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useHistory, useLocation } from 'react-router';
@@ -9,6 +9,7 @@ import { Sidebar } from './Sidebar';
 import { Toolbar } from './Toolbar';
 import { NoResults } from './NoResults';
 import tw from 'twin.macro';
+import { isEqual } from 'lodash';
 
 export const Main = () => {
   const query = useQuery();
@@ -20,22 +21,21 @@ export const Main = () => {
   } = data ?? { searchResponse: { totalResults: 0 } };
   const { q } = useSearchParams();
   const { pathname } = useLocation();
+  const { watch, setValue, getValues } = useFormContext();
 
   const handlePageChange = (page: number) => {
     query.set('p', page);
   };
 
-  const { watch, setValue } = useFormContext();
-
   const values = watch();
+  const { size, sortBy, filters } = values;
 
   useScrollToTop([page, JSON.stringify(values)]);
 
-  React.useEffect(() => {
+  useUpdateEffect(() => {
     if (!q) return;
 
     const categoryPathNames = navigating.map(({ VirtualPath }) => VirtualPath);
-    const { size, sortBy, filters } = values;
 
     if (categoryPathNames.includes(pathname) && !hasSelectedAnyFilters) {
       query.set({ size, sortBy });
@@ -43,8 +43,11 @@ export const Main = () => {
     }
 
     if (typeof q === 'string') {
+      const filters = getValues('filters');
       const fq = Object.keys(filters).reduce((acc, curKey) => {
-        return acc + filters[curKey].reduce((accCurKey: string, cur: string) => accCurKey + `(${curKey}:${cur})`, '');
+        return (
+          acc + filters[curKey].reduce((accCurKey: string, cur: string) => accCurKey + `(${curKey}:"${cur}"")`, '')
+        );
       }, '');
 
       const searchParams = query.form({ fq, size, sortBy, q });
@@ -54,17 +57,17 @@ export const Main = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(values)]);
 
-  const size = query.get('size');
-  const sortBy = query.get('sortBy');
+  const sizeQuery = query.get('size');
+  const sortByQuery = query.get('sortBy');
   const fq = query.get('fq') as string;
 
   React.useEffect(() => {
-    setValue('size', size || '25');
-    setValue('sortBy', sortBy || sortByOptions[0].value);
+    setValue('size', sizeQuery || '25');
+    setValue('sortBy', sortByQuery || sortByOptions[0].value);
 
-    const rawFilters = fq ? fq.slice(1, fq.length - 1).split(')(') : [];
+    const rawFilters = fq ? fq.split(')(').map(v => v.replaceAll(/["()]/g, '')) : [];
 
-    const filters = rawFilters.reduce<{ [key: string]: string[] }>((acc, cur) => {
+    const filtersFromFq = rawFilters.reduce<{ [key: string]: string[] }>((acc, cur) => {
       const [key, value] = cur.split(':');
 
       acc[key] = (acc[key] || []).concat(value);
@@ -72,8 +75,10 @@ export const Main = () => {
       return acc;
     }, {});
 
-    setValue('filters', filters);
-  }, [fq, setValue, size, sortBy]);
+    if (!isEqual(filtersFromFq, filters)) {
+      setValue('filters', filtersFromFq);
+    }
+  }, [filters, fq, setValue, sizeQuery, sortByQuery]);
 
   if (!data) return null;
 

@@ -1,11 +1,11 @@
-import { useSearch, useSearchParams } from 'hooks';
+import { useFilterInfo, useSearchParams } from 'hooks';
 import React from 'react';
+import tw from 'twin.macro';
 import { FilterInfo } from 'types';
 import { CheckboxGroupFilterBox } from './CheckboxGroupFilterBox';
-import tw from 'twin.macro';
 
 export const Sidebar = () => {
-  const { filtersInfo } = useSearch();
+  const filtersInfo = useFilterInfo();
 
   const { filters } = useSearchParams();
 

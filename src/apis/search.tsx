@@ -9,11 +9,11 @@ import axios from 'axios';
 import { Price } from 'components/Main/Results/Item/Price';
 
 const get = (payload: SearchQueryRequestPayload): Promise<SearchQueryResponsePayload> => {
-  return axios.post('http://jsonapi.sajari.net/sajari.api.pipeline.v1.Query/Search', payload).then(({ data }) => data);
+  return axios.post('https://jsonapi.sajari.net/sajari.api.pipeline.v1.Query/Search', payload).then(({ data }) => data);
 };
 
 const getSuggestions = (payload: SearchAutoCompleteRequestPayload): Promise<SearchAutoCompleteResponsePayload> => {
-  return axios.post('http://jsonapi.sajari.net/sajari.api.pipeline.v1.Query/Search', payload).then(({ data }) => data);
+  return axios.post('https://jsonapi.sajari.net/sajari.api.pipeline.v1.Query/Search', payload).then(({ data }) => data);
 };
 
 const getPriceFilterInfo = async (payload: SearchQueryRequestPayload) => {

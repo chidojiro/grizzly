@@ -4,3 +4,4 @@ export { default as PromiseUtils } from './promise';
 export { default as ObjectUtils } from './object';
 export { default as NumberUtils } from './number';
 export { default as AssertUtils } from './assert';
+export { default as FilterUtils } from './filter';

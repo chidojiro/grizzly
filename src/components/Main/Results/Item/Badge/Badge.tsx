@@ -10,6 +10,7 @@ const StyledBadgeRightEdge = styled.div`
   clip-path: polygon(100% 0, 0 100%, 100% 100%);
   width: 20px;
   transform: scale(110%);
+  background-color: white;
 `;
 
 const StyledBadgeLeftEdge = styled.div`

@@ -1,7 +1,7 @@
 import { filterAliases, filterFields } from 'consts';
-export const isSimpleQ = (q: string) => !q.startsWith('(') && !q.endsWith(')');
+const isSimpleQ = (q: string) => !q.startsWith('(') && !q.endsWith(')');
 
-export const convertQToFilters = (q: string) => {
+const convertQToFilters = (q: string) => {
   if (isSimpleQ(q)) return {};
 
   const _q = q.replaceAll('(category', '(category1').replaceAll(/[()"]/g, '');
@@ -20,7 +20,7 @@ export const convertQToFilters = (q: string) => {
 };
 
 const countQueries = filterFields.map(({ name }) => name);
-export const combineFilters = (q: string, filters: Record<string, string[]>) => {
+const combineFilters = (q: string, filters: Record<string, string[]>) => {
   const filtersGetFromQ = convertQToFilters(q);
 
   const combinedFilters = countQueries.reduce<{ [key: string]: string[] }>((acc, curField) => {
@@ -47,7 +47,7 @@ export const combineFilters = (q: string, filters: Record<string, string[]>) => 
   return filterQueries.join(',');
 };
 
-export const resolvePriceFilterString = (selectedPriceFilters: string[]) => {
+const resolvePriceFilterString = (selectedPriceFilters: string[]) => {
   if (!selectedPriceFilters?.length) return '(price > 0)';
 
   return selectedPriceFilters
@@ -60,3 +60,12 @@ export const resolvePriceFilterString = (selectedPriceFilters: string[]) => {
     }, [])
     .join(' OR ');
 };
+
+const FilterUtils = {
+  combineFilters,
+  convertQToFilters,
+  resolvePriceFilterString,
+  isSimpleQ,
+};
+
+export default FilterUtils;

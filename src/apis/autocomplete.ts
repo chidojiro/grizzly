@@ -1,13 +1,8 @@
-import { SearchQueryRequestPayload } from "./../types/search";
-import axios from "axios";
+import { SearchQueryRequestPayload } from './../types/search';
+import axios from 'axios';
 
 const get = (payload: SearchQueryRequestPayload) => {
-  return axios
-    .post(
-      "http://jsonapi.sajari.net/sajari.api.pipeline.v1.Query/Search",
-      payload
-    )
-    .then(({ data }) => data);
+  return axios.post('https://jsonapi.sajari.net/sajari.api.pipeline.v1.Query/Search', payload).then(({ data }) => data);
 };
 
 const AutocompleteApis = { get };
