@@ -1,16 +1,19 @@
-import { Form } from 'components';
+import { Drawer, Form } from 'components';
 import { useLocation } from 'react-router';
 import { navigating, pageSizeOptions, sortByOptions } from 'consts';
 import groupBy from 'lodash/groupBy';
-import { usePagination, useSearch, useSearchParams } from 'hooks';
+import { usePagination, useSearch, useSearchParams, useVisibilityControl } from 'hooks';
 import tw from 'twin.macro';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { FilterBar } from '../FilterBar';
 
 const navigatingGroupedByVirtualPath = groupBy(navigating, 'VirtualPath');
 
 export const Toolbar = () => {
   const { pathname } = useLocation();
-
   const { data } = useSearch();
+  const control = useVisibilityControl();
 
   const {
     searchResponse: { totalResults },
@@ -23,21 +26,32 @@ export const Toolbar = () => {
   const foundNavigating = navigatingGroupedByVirtualPath[pathname]?.[0];
 
   const toolbarRight = (
-    <div css={[tw`flex flex-1`, tw`border-0 sm:border-t border-solid border-gray`]}>
+    <div css={[tw`flex flex-1`, tw`border-0 border-solid sm:border-t border-gray`]}>
       <Form.Select
         name='size'
         label='Page Size'
         options={pageSizeOptions}
         defaultValue={pageSizeOptions[0].value}
-        css={[tw`flex-shrink-0 border-0 border-r border-solid rounded border-gray w-1/2`, tw`sm:flex-1`]}
+        css={[tw`flex-1 flex-shrink-0 border-0 border-r border-solid rounded border-gray`, tw`sm:flex-1`]}
       />
       <Form.Select
         name='sortBy'
         options={sortByOptions}
         label='Sort By'
         defaultValue={sortByOptions[0].value}
-        css={[tw`flex-shrink-0 border-0 border-r border-solid rounded border-gray w-1/2`, tw`sm:flex-1`]}
+        css={[tw`flex-1 flex-shrink-0 border-0 border-r border-solid rounded border-gray`, tw`sm:flex-1`]}
       />
+      <Drawer control={control} anchor='right' size='fit'>
+        <FilterBar />
+      </Drawer>
+      <div
+        css={[
+          tw`items-center justify-center px-5 border border-solid rounded cursor-pointer border-gray`,
+          tw`hidden md:flex`,
+        ]}
+        onClick={control.show}>
+        <FontAwesomeIcon icon={faFilter} />
+      </div>
     </div>
   );
 
@@ -47,7 +61,7 @@ export const Toolbar = () => {
   if (pathname === '/search')
     return (
       <div css={[tw`h-[51px] shadow-md bg-white`, tw`sm:block sm:h-fit`, baseClassName]} style={baseStyles}>
-        <div css={[tw`text-sm flex-1`, tw`sm:text-[11px] sm:px-4 sm:py-1`]}>
+        <div css={[tw`flex-1 flex-shrink-0 text-sm`, tw`sm:text-[11px] sm:px-4 sm:py-1`]}>
           {showingRange.from} - {showingRange.to} of {showingRange.total} matches for{' '}
           <span css={[tw`font-medium text-green`]}>"{q}"</span>
         </div>
@@ -63,7 +77,7 @@ export const Toolbar = () => {
         baseClassName,
       ]}
       style={baseStyles}>
-      <h1 tw='sm:text-[17px] sm:px-2 flex-1'>{foundNavigating.DisplayText}</h1>
+      <h1 tw='sm:text-[17px] sm:px-2 flex-1 flex-shrink-0'>{foundNavigating.DisplayText}</h1>
       {toolbarRight}
     </div>
   );

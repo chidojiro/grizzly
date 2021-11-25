@@ -47,7 +47,7 @@ const MyGlobalStyles = () => {
 
 ReactDOM.render(
   <React.StrictMode>
-    <SWRConfig value={{ revalidateOnFocus: false, revalidateOnReconnect: false }}></SWRConfig>
+    <SWRConfig value={{ revalidateOnFocus: false, revalidateOnReconnect: false, revalidateIfStale: false }}></SWRConfig>
     <BrowserRouter>
       <MyGlobalStyles />
       <Search />
@@ -58,7 +58,7 @@ ReactDOM.render(
 
 ReactDOM.render(
   <React.StrictMode>
-    <SWRConfig value={{ revalidateOnFocus: false, revalidateOnReconnect: false }}>
+    <SWRConfig value={{ revalidateOnFocus: false, revalidateOnReconnect: false, revalidateIfStale: false }}>
       <BrowserRouter>
         <MyGlobalStyles />
         <App />

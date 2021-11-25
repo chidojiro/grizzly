@@ -29,7 +29,7 @@ export const Select = React.forwardRef(
     return (
       <div
         className={classNames('gl-select', className)}
-        css={[tw`relative cursor-default w-77 text-sm py-[5px] pl-[15px] bg-white h-[51px]`]}>
+        css={[tw`relative cursor-default w-full text-sm py-[5px] pl-[15px] bg-white h-[51px]`]}>
         <select
           {...restProps}
           ref={ref}
