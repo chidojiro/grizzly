@@ -5,6 +5,8 @@ import { Price } from './Price';
 import { Availability } from './Availability';
 import { Badge } from './Badge';
 import tw from 'twin.macro';
+import { SearchApis } from 'apis';
+import { useHistory } from 'react-router';
 
 const StyleTitle = styled.div`
   overflow: hidden;
@@ -16,16 +18,26 @@ const StyleTitle = styled.div`
 
 type Props = {
   data: SearchResult['values'];
+  posNegToken: any;
 };
 
-export const Item = ({ data }: Props) => {
+export const Item = ({ data, posNegToken }: Props) => {
   const [isHovered, setIsHovered] = React.useState(false);
+  const history = useHistory();
 
   const { image, title, url, price, catalogprice } = data;
 
+  const handleClick = async () => {
+    try {
+      await SearchApis.sendClickEvent(posNegToken);
+    } finally {
+      window.location.href = url;
+    }
+  };
+
   return (
-    <a
-      href={url}
+    <div
+      onClick={handleClick}
       onMouseOver={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       title={title}
@@ -57,6 +69,6 @@ export const Item = ({ data }: Props) => {
       </div>
 
       <Badge data={data} />
-    </a>
+    </div>
   );
 };

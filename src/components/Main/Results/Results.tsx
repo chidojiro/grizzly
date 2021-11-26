@@ -10,8 +10,8 @@ export const Results = () => {
   return (
     <div>
       <div css={[tw`grid grid-cols-5 pl-7.5 sm:grid-cols-1 md:pl-0`]}>
-        {data?.results?.map(({ values }) => (
-          <Item data={values as any} key={(values as any).id} />
+        {data?.results?.map(({ values, token }) => (
+          <Item data={values as any} key={(values as any).id} posNegToken={token} />
         ))}
       </div>
     </div>

@@ -1,5 +1,4 @@
-import { Client, SearchResponse, Tracking } from '@sajari/sdk-js/dist/index';
-import axios from 'axios';
+import { Client, PosNegLocalStorageManager, PosNegToken, SearchResponse, Tracking } from '@sajari/sdk-js/dist/index';
 import { Price } from 'components/Main/Results/Item/Price';
 import { defaultTracking } from 'consts';
 import { FilterInfo, SearchAutocompleteRequestValues, SearchQueryRequestValues } from 'types';
@@ -7,18 +6,20 @@ import { FilterInfo, SearchAutocompleteRequestValues, SearchQueryRequestValues }
 const collection = 'grizzly';
 const project = '1623269058042651642';
 
-const queryClient = new Client(project, collection).pipeline('query');
-const autocompleteClient = new Client(project, collection).pipeline('autocomplete');
+const client = new Client(project, collection);
+const queryPipeline = client.pipeline('query');
+const autocompletePipeline = client.pipeline('autocomplete');
+const posNegStorage = new PosNegLocalStorageManager(client);
 
 const get = (
   values: SearchQueryRequestValues,
   tracking: Tracking
 ): Promise<[SearchResponse, Record<string, string>]> => {
-  return queryClient.search(values, tracking);
+  return queryPipeline.search(values, tracking);
 };
 
 const getSuggestions = (values: SearchAutocompleteRequestValues): Promise<any> => {
-  return autocompleteClient.search(values, defaultTracking).then(data => data[1]);
+  return autocompletePipeline.search(values, defaultTracking).then(data => data[1]);
 };
 
 const getPriceFilterInfo = async (values: SearchQueryRequestValues) => {
@@ -71,4 +72,9 @@ const getPriceFilterInfo = async (values: SearchQueryRequestValues) => {
   } as FilterInfo;
 };
 
-export const SearchApis = { get, getSuggestions, getPriceFilterInfo };
+const sendClickEvent = (posToken: PosNegToken) => {
+  posNegStorage.add('id', posToken);
+  return posNegStorage.sendClickEvent('id');
+};
+
+export const SearchApis = { get, getSuggestions, getPriceFilterInfo, sendClickEvent };
