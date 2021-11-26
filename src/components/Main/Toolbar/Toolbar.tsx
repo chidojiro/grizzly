@@ -15,9 +15,7 @@ export const Toolbar = () => {
   const { data } = useSearch();
   const control = useVisibilityControl();
 
-  const {
-    searchResponse: { totalResults },
-  } = data || { searchResponse: {} };
+  const { totalResults } = data || { searchResponse: {} };
 
   const { page, perPage, q } = useSearchParams();
 

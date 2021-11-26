@@ -1,4 +1,5 @@
-import { Metadata, Tracking } from 'types';
+import { Tracking, TrackingType } from '@sajari/sdk-js/dist/index';
+import { Metadata } from 'types';
 import { v4 as UUID } from 'uuid';
 
 export const metadata: Metadata = {
@@ -8,8 +9,8 @@ export const metadata: Metadata = {
 };
 
 export const defaultTracking: Tracking = {
-  query_id: UUID(),
-  type: 'NONE',
+  queryID: UUID(),
+  type: TrackingType.None,
   sequence: 0,
-  field: '_id',
+  field: 'id',
 };

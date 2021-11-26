@@ -26,16 +26,16 @@ export const Badge = ({ data }: Props) => {
   let background = tw``;
   let label = '';
 
-  if (isnew.single === 'true') {
+  if (isnew === 'true') {
     background = tw`bg-cyan`;
     label = 'New Product';
-  } else if (freight.single === 'true' && freightcost_usa.single === '0') {
+  } else if (freight === 'true' && freightcost_usa === '0') {
     background = tw`bg-green`;
     label = 'Free Shipping!';
-  } else if (outlet.single === 'true' && instock.single === 'true') {
+  } else if (outlet === 'true' && instock === 'true') {
     background = tw`bg-orange`;
     label = 'Act Fast';
-  } else if (onspecial.single === 'true') {
+  } else if (onspecial === 'true') {
     background = tw`bg-red-light-1`;
     label = 'On Sale';
   }

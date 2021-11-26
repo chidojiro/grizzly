@@ -21,26 +21,20 @@ type Props = {
 export const Item = ({ data }: Props) => {
   const [isHovered, setIsHovered] = React.useState(false);
 
-  const {
-    image,
-    title,
-    url,
-    price: { single: price },
-    catalogprice: { single: catalogprice },
-  } = data;
+  const { image, title, url, price, catalogprice } = data;
 
   return (
     <a
-      href={url.single}
+      href={url}
       onMouseOver={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      title={title.single}
+      title={title}
       css={[
         tw`py-7.5 pr-4 border-0 border-b border-solid border-gray relative font-medium cursor-pointer !text-black hover:!no-underline`,
         tw`sm:flex sm:pt-[10px] sm:pr-[10px] sm:pb-[5px]`,
       ]}>
       <div>
-        <img src={image.single} alt='' css={[tw`w-full`, tw`sm:w-[100px] sm:p-2`]} />
+        <img src={image} alt='' css={[tw`w-full`, tw`sm:w-[100px] sm:p-2`]} />
         <Availability data={data} />
       </div>
       <div>
@@ -50,11 +44,11 @@ export const Item = ({ data }: Props) => {
             tw`sm:text-sm`,
             isHovered && tw`underline`,
           ]}>
-          {title.single}
+          {title}
         </StyleTitle>
         {catalogprice !== price ? (
           <div css={[tw`flex flex-wrap items-end`]}>
-            <Price price={+catalogprice} css={[tw`text-md text-gray-light-1 line-through`, tw`sm:text-sm`]} />
+            <Price price={+catalogprice} css={[tw`line-through text-md text-gray-light-1`, tw`sm:text-sm`]} />
             <Price price={+price} css={[tw`text-xl text-red-dark-1`, tw`sm:text-md`]} />
           </div>
         ) : (

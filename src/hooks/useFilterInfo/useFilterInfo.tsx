@@ -8,15 +8,13 @@ export const useFilterInfo = () => {
   const { data } = useSearch();
   const { data: priceFilterInfo } = usePriceFilterInfo();
 
-  const aggregateFilters = data?.searchResponse?.aggregateFilters || {};
+  const aggregateFilters = data?.aggregateFilters || {};
 
-  const filtersInfo = Object.keys(aggregateFilters).reduce<FilterInfo[]>((acc, curField) => {
-    const [type, field] = curField.split('.');
-
-    if (type !== 'count' || !field || q.includes(field) || ['altcategory', 'categoryid', 'category1'].includes(field))
+  const filtersInfo = Object.keys(aggregateFilters).reduce<FilterInfo[]>((acc, field) => {
+    if (!field || q.includes(field) || ['altcategory', 'categoryid', 'category1', 'buckets'].includes(field))
       return acc;
 
-    const options = Object.keys(aggregateFilters[curField].count.counts || {})
+    const options = Object.keys(aggregateFilters[field].count || {})
       .filter(Boolean)
       .map(option => ({ label: option.replaceAll(' in.', '"'), value: option }))
       .filter(Boolean);

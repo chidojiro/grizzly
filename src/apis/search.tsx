@@ -1,25 +1,30 @@
-import {
-  SearchQueryRequestPayload,
-  SearchAutoCompleteRequestPayload,
-  SearchQueryResponsePayload,
-  SearchAutoCompleteResponsePayload,
-  FilterInfo,
-} from 'types';
+import { Client, SearchResponse, Tracking } from '@sajari/sdk-js/dist/index';
 import axios from 'axios';
 import { Price } from 'components/Main/Results/Item/Price';
+import { defaultTracking } from 'consts';
+import { FilterInfo, SearchAutocompleteRequestValues, SearchQueryRequestValues } from 'types';
 
-const get = (payload: SearchQueryRequestPayload): Promise<SearchQueryResponsePayload> => {
-  return axios.post('https://jsonapi.sajari.net/sajari.api.pipeline.v1.Query/Search', payload).then(({ data }) => data);
+const collection = 'grizzly';
+const project = '1623269058042651642';
+
+const queryClient = new Client(project, collection).pipeline('query');
+const autocompleteClient = new Client(project, collection).pipeline('autocomplete');
+
+const get = (
+  values: SearchQueryRequestValues,
+  tracking: Tracking
+): Promise<[SearchResponse, Record<string, string>]> => {
+  return queryClient.search(values, tracking);
 };
 
-const getSuggestions = (payload: SearchAutoCompleteRequestPayload): Promise<SearchAutoCompleteResponsePayload> => {
-  return axios.post('https://jsonapi.sajari.net/sajari.api.pipeline.v1.Query/Search', payload).then(({ data }) => data);
+const getSuggestions = (values: SearchAutocompleteRequestValues): Promise<any> => {
+  return autocompleteClient.search(values, defaultTracking).then(data => data[1]);
 };
 
-const getPriceFilterInfo = async (payload: SearchQueryRequestPayload) => {
-  const data = await SearchApis.get(payload);
+const getPriceFilterInfo = async (values: SearchQueryRequestValues) => {
+  const data = await get(values, defaultTracking);
 
-  const buckets = (data?.searchResponse?.aggregateFilters?.count as any)?.buckets?.buckets;
+  const buckets = data[0].aggregateFilters?.buckets?.count as any;
 
   if (!buckets)
     return {
@@ -30,9 +35,8 @@ const getPriceFilterInfo = async (payload: SearchQueryRequestPayload) => {
 
   const ranges = Object.keys(buckets)
     .map(key => {
+      if (!buckets[key]) return [];
       const [, rangeString] = key.split('_');
-
-      if (!buckets[key]?.count) return [];
 
       return rangeString.split('-');
     })

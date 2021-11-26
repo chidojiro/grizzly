@@ -16,9 +16,7 @@ export const Main = () => {
   const { page, perPage, hasSelectedAnyFilters } = useSearchParams();
   const history = useHistory();
   const { data } = useSearch();
-  const {
-    searchResponse: { totalResults },
-  } = data ?? { searchResponse: { totalResults: 0 } };
+  const { totalResults } = data ?? { searchResponse: { totalResults: 0 } };
   const { q } = useSearchParams();
   const { pathname } = useLocation();
   const { watch, setValue, getValues } = useFormContext();
@@ -82,7 +80,7 @@ export const Main = () => {
 
   if (!data) return null;
 
-  if (!data.searchResponse.results?.length) return <NoResults q={q} />;
+  if (!data.results?.length) return <NoResults q={q} />;
 
   return (
     <div>

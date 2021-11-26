@@ -11,10 +11,10 @@ export const Availability = ({ data: { instock, quantityavailable } }: Props) =>
   let label = '';
   let padding = tw``;
 
-  if (instock.single === 'true') {
+  if (instock === 'true') {
     color = tw`text-green`;
     label = 'In Stock';
-  } else if (quantityavailable.single === '0') {
+  } else if (quantityavailable === '0') {
     color = tw`text-[#ae0101]`;
     label = 'More on the Way';
   } else {
