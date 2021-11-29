@@ -89,7 +89,7 @@ export const Main = () => {
         <Sidebar />
         <Results />
       </div>
-      <Pagination totalRecord={+totalResults || 0} perPage={perPage} onChange={handlePageChange} page={page} />
+      <Pagination totalRecord={totalResults || 0} perPage={perPage} onChange={handlePageChange} page={page} />
     </div>
   );
 };

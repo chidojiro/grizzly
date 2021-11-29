@@ -22,5 +22,5 @@ export const useAutoComplete = () => {
     {}
   );
 
-  return { ...restSwrReturn, data: data?.['q.suggestions']?.split(',') || [], q, setQ: setQ.current };
+  return { ...restSwrReturn, data: (data?.['q.suggestions']?.split(',') as string[]) || [], q, setQ: setQ.current };
 };
