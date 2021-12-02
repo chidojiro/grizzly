@@ -34,13 +34,13 @@ export const CheckboxGroupFilterBox = ({ name, options, title }: Props) => {
       <Form.CheckboxGroup name={name} defaultValue={[]}>
         <FilterBox.Title>{title}</FilterBox.Title>
         {visibleItems.map(({ label, value }) => (
-          <FilterBox.Item key={value}>
+          <FilterBox.Item key={value} css={[name === 'filters.price' && tw`font-medium`]}>
             <Checkbox label={label} value={value} />
           </FilterBox.Item>
         ))}
       </Form.CheckboxGroup>
       {displayShowMoreToggle && (
-        <div onClick={() => setIsShowingMore(p => !p)} css={[tw`text-xs text-green hover:underline cursor-pointer`]}>
+        <div onClick={() => setIsShowingMore(p => !p)} css={[tw`text-xs cursor-pointer text-green hover:underline`]}>
           {isShowingMore ? 'Show Less...' : 'Show More...'}
         </div>
       )}

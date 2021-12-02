@@ -29,9 +29,9 @@ export const Price = ({ price, className }: Props) => {
 
   return (
     <span className={className}>
-      <sup css={[tw`text-[70%]`]}>$</sup>
+      <sup css={[tw`text-[0.6em] top-[-0.5em]`]}>$</sup>
       {formatNumber(+dollars)}
-      <sup css={[tw`text-[70%]`]}>{cent || '00'}</sup>
+      <sup css={[tw`text-[0.6em] top-[-0.5em]`]}>{cent || '00'}</sup>
     </span>
   );
 };

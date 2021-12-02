@@ -75,7 +75,7 @@ export const Toolbar = () => {
         baseClassName,
       ]}
       style={baseStyles}>
-      <h1 tw='sm:text-[17px] sm:px-2 flex-1 flex-shrink-0'>{foundNavigating.DisplayText}</h1>
+      <h1 tw='sm:text-[17px] sm:px-2 flex-1 flex-shrink-0 my-0'>{foundNavigating.DisplayText}</h1>
       {toolbarRight}
     </div>
   );
