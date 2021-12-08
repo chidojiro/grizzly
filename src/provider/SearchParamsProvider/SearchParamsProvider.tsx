@@ -46,7 +46,11 @@ export const SearchParamsProvider = ({ children }: Props) => {
   const sortBy = (sortByQuery as string) ?? DefaultSearchParams.sortBy;
   const q =
     (qQuery as string) ??
-    (foundNavigating?.Query.split('&')?.[0]?.slice(2).replaceAll('((', '(').replaceAll('))', ')') ||
+    (foundNavigating?.Query.split('&')?.[0]
+      ?.slice(2)
+      .replaceAll('((', '(')
+      .replaceAll('))', ')')
+      .replaceAll('%26', '&') ||
       DefaultSearchParams.q);
   const { watch } = useFormContext();
   const filters = watch('filters');
