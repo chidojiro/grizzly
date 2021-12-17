@@ -12,3 +12,4 @@ export * from './useSearchParams';
 export * from './usePriceFilterInfo';
 export * from './useFilterInfo';
 export * from './useUpdateEffect';
+export * from './useSupport';

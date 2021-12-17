@@ -1,7 +1,7 @@
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { navigating } from 'consts';
-import { useAutoComplete } from 'hooks';
+import { useAutoComplete, useSupport } from 'hooks';
 import groupBy from 'lodash/groupBy';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
@@ -17,6 +17,7 @@ export const Search = ({ className }: Props) => {
   const [isFocused, setIsFocused] = React.useState(false);
   const history = useHistory();
   const { q, setQ, data: suggestions } = useAutoComplete();
+  const { data: articles } = useSupport(q);
 
   const submitQ = (qOverride?: string) => {
     const _q = qOverride || q;
@@ -47,7 +48,7 @@ export const Search = ({ className }: Props) => {
   return (
     <div
       className={className}
-      css={[tw`h-[45px] flex rounded-[2px] relative overflow-visible z-[10000] overflow-hidden`, tw`sm:mx-0`]}
+      css={[tw`h-[45px] flex rounded-[2px] relative overflow-visible z-[10000]`, tw`sm:mx-0`]}
       style={{ outline: isFocused ? '3px solid rgba(0, 123, 255, 0.3)' : 'none' }}>
       <input
         placeholder='Search Products'
@@ -78,6 +79,25 @@ export const Search = ({ className }: Props) => {
               {suggestion}
             </a>
           ))}
+          {!!articles?.length && (
+            <>
+              <div css={[tw`px-4 py-0.5 text-sm text-black bg-gray-light-2`]}>Help Articles Containing {q}</div>
+              <div>
+                {articles?.slice(0, 5).map(({ title, url }) => (
+                  // eslint-disable-next-line jsx-a11y/anchor-is-valid
+                  <a
+                    target='_blank'
+                    rel='noreferrer'
+                    href={url as string}
+                    css={[
+                      tw`block px-4 py-1 text-[13px] font-medium border-0 border-b border-solid cursor-pointer border-gray last:border-b-0`,
+                    ]}>
+                    {title}
+                  </a>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       )}
     </div>
