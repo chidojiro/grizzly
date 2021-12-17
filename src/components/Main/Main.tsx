@@ -36,7 +36,7 @@ export const Main = () => {
     const categoryPathNames = navigating.map(({ VirtualPath }) => VirtualPath);
 
     if (categoryPathNames.includes(pathname) && !hasSelectedAnyFilters) {
-      query.set({ size, sortBy });
+      query.set({ size, sortBy }, undefined, { sortBy: '', size: '25' });
       return;
     }
 
@@ -48,7 +48,7 @@ export const Main = () => {
         );
       }, '');
 
-      const searchParams = query.form({ fq, size, sortBy, q });
+      const searchParams = query.form({ fq, size, sortBy, q }, { sortBy: '', size: '25' });
 
       history.push({ pathname: '/search', search: searchParams });
     }

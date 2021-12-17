@@ -79,7 +79,10 @@ export const useQuery = (options?: UseQueryOptions) => {
   );
 
   const form = React.useCallback(
-    (param1: string | Record<string, string | string[]>, param2?: string | string[] | number) => {
+    (
+      params: Record<string, string | string[] | number | undefined>,
+      defaultValues?: Record<string, string | number>
+    ) => {
       // can't use search from useLocation due to closure issue
       const currentQueryParams = initUrlQueryParams();
 
@@ -94,11 +97,11 @@ export const useQuery = (options?: UseQueryOptions) => {
         }
       };
 
-      if (typeof param1 === 'string') {
-        addSingleValue(param1, param2);
-      } else {
-        Object.keys(param1).forEach(key => addSingleValue(key, param1[key]));
-      }
+      Object.keys(params).forEach(key => {
+        if (!params[key]) return currentQueryParams.delete(key);
+        if (defaultValues?.[key] === params[key]) return currentQueryParams.delete(key);
+        addSingleValue(key, params[key]);
+      });
 
       return currentQueryParams.toString();
     },
@@ -106,8 +109,12 @@ export const useQuery = (options?: UseQueryOptions) => {
   );
 
   const set = React.useCallback(
-    (param1: string | Record<string, string | string[]>, param2?: string | string[] | number) => {
-      const newQuery = form(param1, param2);
+    (
+      param1: string | Record<string, string | string[]>,
+      param2?: string | string[] | number,
+      defaultValues?: Record<string, string | number>
+    ) => {
+      const newQuery = typeof param1 === 'string' ? form({ [param1]: param2 }) : form(param1, defaultValues);
 
       history.push({ pathname, search: newQuery });
     },

@@ -35,6 +35,10 @@ const combineFilters = (q: string, filters: Record<string, string[]>) => {
   const filterQueries = countQueries.reduce<string[]>((acc, curField) => {
     const fieldFilterQueries =
       combinedFilters[curField]?.map((option: string) => {
+        if (curField === 'category1') {
+          return `(category1 = "${option}") OR (category2 = "${option}") OR (category3 = "${option}") OR (category4 = "${option}") OR (category5 = "${option}") OR (category6 = "${option}") OR (category7 = "${option}")`;
+        }
+
         const foundFilterField = filterFields.find(({ name }) => name === curField);
         return foundFilterField?.single
           ? `(${foundFilterField?.name} = "${option}")`
