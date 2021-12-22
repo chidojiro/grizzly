@@ -40,10 +40,10 @@ export const useSearch = () => {
       return SearchApis.get(values, trackingRef.current);
     },
     {
-      onError: () => {
-        history.push('/search');
-        window.location.reload();
-      },
+      // onError: () => {
+      //   history.push('/search');
+      //   window.location.reload();
+      // },
       onSuccess: () => {
         trackingRef.current.sequence = (trackingRef.current.sequence ?? 0) + 1;
       },

@@ -4,7 +4,7 @@ const OR = ' OR ';
 const AND = ' AND ';
 
 const buildFilter = (field: string, value: string) => {
-  return singeFields.includes(field) ? `(${field} = "${value}")` : `(${field} ~ ["${value}"])`;
+  return singeFields.includes(field) ? `(${field} ~ "${value}")` : `(${field} ~ ["${value}"])`;
 };
 
 const _buildFilterFromBaseFilters = (filters: any, operator: 'OR' | 'AND') => {
@@ -36,6 +36,10 @@ const buildFilterFromBaseFilters = (filters: Record<string, string>) => {
 };
 
 const buildFilterFromLuceneQueries = (queryString: string) => {
+  if (!queryString) return '';
+
+  if (!queryString.includes('(')) return buildFilter('title', queryString.split(OR)[0]);
+
   const _queryString = queryString.replaceAll('%26', '&');
   const filterStack: string[] = [];
   let i = 0;
@@ -70,11 +74,11 @@ const buildFilterFromLuceneQueries = (queryString: string) => {
           break;
         }
 
-        newArgQueue.unshift(lastArg);
+        newArgQueue.unshift(...lastArg.split(' OR ').filter(Boolean));
       }
 
-      if (newArgQueue.length === 1) {
-        filterStack.push(buildFilter('title', newArgQueue[0]).replaceAll('""', '"'));
+      if (!newArgQueue.includes(':') && newArgQueue.every(arg => !['~', '='].includes(arg))) {
+        filterStack.push(`(${newArgQueue.map(arg => buildFilter('title', arg).replaceAll('""', '"')).join(OR)})`);
       } else if (newArgQueue.includes(':')) {
         const field = newArgQueue[0] === 'category' ? 'filtercats' : newArgQueue[0];
 
@@ -103,7 +107,7 @@ const buildFilterFromLuceneQueries = (queryString: string) => {
     i += 1;
   }
 
-  return filterStack.join('');
+  return `(${filterStack.join('')})`;
 };
 
 const countQueries = filterFields.map(({ name }) => name);
