@@ -1,12 +1,18 @@
 import { Option } from 'types';
 
+const baseSortBy =
+  new URLSearchParams(window.location.search).get('baseSortBy') || (window as any).baseSearchParams?.sortBy || '';
+const resolveSortByValue = (value: string) => {
+  return [value, baseSortBy].filter(Boolean).join(',');
+};
+
 export const sortByOptions: Option[] = [
-  { value: '', label: 'Sort: Best Match' },
-  { value: '-reviewrating', label: 'Sort: Review Rating' },
-  { value: '-popularity', label: 'Sort: Popularity' },
-  { value: 'price', label: 'Sort: Price Low to High' },
-  { value: '-price', label: 'Sort: Price High to Low' },
-  { value: 'vendoritemnumber,title', label: 'Sort: Model Number' },
+  { value: resolveSortByValue(''), label: 'Sort: Best Match' },
+  { value: resolveSortByValue('-reviewrating'), label: 'Sort: Review Rating' },
+  { value: resolveSortByValue('-popularity'), label: 'Sort: Popularity' },
+  { value: resolveSortByValue('price'), label: 'Sort: Price Low to High' },
+  { value: resolveSortByValue('-price'), label: 'Sort: Price High to Low' },
+  { value: resolveSortByValue('vendoritemnumber,title'), label: 'Sort: Model Number' },
 ];
 
 export const pageSizeOptions: Option[] = [

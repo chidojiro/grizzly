@@ -1,48 +1,121 @@
-import { filterAliases, filterFields } from 'consts';
-const isSimpleQ = (q: string) => !q.startsWith('(') && !q.endsWith(')');
+import { filterFields, singeFields } from 'consts';
 
-const convertQToFilters = (q: string) => {
-  if (isSimpleQ(q)) return {};
+const OR = ' OR ';
+const AND = ' AND ';
 
-  const _q = q.replaceAll('(category', '(category1').replaceAll(/[()"]/g, '');
+const buildFilter = (field: string, value: string) => {
+  return singeFields.includes(field) ? `(${field} = "${value}")` : `(${field} ~ ["${value}"])`;
+};
 
-  return _q
-    .split(' AND ')
-    .map(frag => frag.split(' OR '))
-    .flat()
-    .reduce<{ [key: string]: string[] }>((acc, cur) => {
-      const [key, value] = cur.split(':');
+const _buildFilterFromBaseFilters = (filters: any, operator: 'OR' | 'AND') => {
+  return filters.reduce((acc: string, cur: Record<string, any>) => {
+    if (cur.hasOwnProperty('OR')) {
+      return [acc, '(' + _buildFilterFromBaseFilters(cur.OR, 'OR') + ')'].filter(Boolean).join(operator);
+    }
 
-      acc[key] = (acc[key] || []).concat(value.split(' OR '));
+    if (cur.hasOwnProperty('AND')) {
+      return [acc, '(' + _buildFilterFromBaseFilters(cur.AND, 'AND') + ')'].filter(Boolean).join(` ${operator} `);
+    }
+    const field = Object.keys(cur)[0] === 'category' ? 'filtercats' : Object.keys(cur)[0];
+    return [acc, buildFilter(field, Object.values(cur)[0])].filter(Boolean).join(` ${operator} `);
+  }, '');
+};
 
-      return acc;
-    }, {});
+const buildFilterFromBaseFilters = (filters: Record<string, string>) => {
+  if (!filters) return '';
+
+  if (filters.hasOwnProperty('OR')) {
+    return `(${_buildFilterFromBaseFilters(filters.OR, 'OR')})`;
+  }
+
+  if (filters.hasOwnProperty('AND')) {
+    return `(${_buildFilterFromBaseFilters(filters.AND, 'AND')})`;
+  }
+
+  return '';
+};
+
+const buildFilterFromLuceneQueries = (queryString: string) => {
+  const _queryString = queryString.replaceAll('%26', '&');
+  const filterStack: string[] = [];
+  let i = 0;
+  while (i < _queryString.length) {
+    const c = _queryString[i];
+    if (c === '(') {
+      filterStack.push(c);
+      i += 1;
+      continue;
+    }
+
+    if (_queryString.slice(i).startsWith(OR)) {
+      filterStack.push(OR);
+      i += OR.length;
+      continue;
+    }
+
+    if (_queryString.slice(i).startsWith(AND)) {
+      filterStack.push(AND);
+      i += AND.length;
+      continue;
+    }
+
+    if (c === ')') {
+      const newArgQueue = [];
+
+      while (true) {
+        if (!filterStack.length) break;
+        const lastArg = filterStack.pop() as string;
+
+        if (lastArg === '(') {
+          break;
+        }
+
+        newArgQueue.unshift(lastArg);
+      }
+
+      if (newArgQueue.length === 1) {
+        filterStack.push(buildFilter('title', newArgQueue[0]).replaceAll('""', '"'));
+      } else if (newArgQueue.includes(':')) {
+        const field = newArgQueue[0] === 'category' ? 'filtercats' : newArgQueue[0];
+
+        const filterQuery = newArgQueue
+          .slice(2)
+          .filter(val => val !== OR)
+          .map(val => buildFilter(field, val).replaceAll('""', '"'))
+          .join(' OR ');
+
+        filterStack.push(filterQuery);
+      } else {
+        filterStack.push(newArgQueue.join(''));
+      }
+
+      i += 1;
+      continue;
+    }
+
+    if (['(', ':'].includes(filterStack[filterStack.length - 1]) || c === ':') {
+      filterStack.push(c);
+      i += 1;
+      continue;
+    }
+
+    filterStack[filterStack.length - 1] = filterStack[filterStack.length - 1] + c;
+    i += 1;
+  }
+
+  return filterStack.join('');
 };
 
 const countQueries = filterFields.map(({ name }) => name);
-const combineFilters = (q: string, filters: Record<string, string[]>) => {
-  const filtersGetFromQ = convertQToFilters(q);
-
-  const combinedFilters = countQueries.reduce<{ [key: string]: string[] }>((acc, curField) => {
-    const curFieldAlias = filterAliases[curField as any];
-
-    return {
-      ...acc,
-      [curField]: [filters[curFieldAlias || curField] || [], filtersGetFromQ[curFieldAlias || curField] || []].flat(),
-    };
-  }, {});
-
+const buildCountFilters = (filters: Record<string, string[]>) => {
   const filterQueries = countQueries.reduce<string[]>((acc, curField) => {
     const fieldFilterQueries =
-      combinedFilters[curField]?.map((option: string) => {
+      filters[curField]?.map((option: string) => {
         if (curField === 'category1') {
           return `(category1 = "${option}") OR (category2 = "${option}") OR (category3 = "${option}") OR (category4 = "${option}") OR (category5 = "${option}") OR (category6 = "${option}") OR (category7 = "${option}")`;
         }
 
-        const foundFilterField = filterFields.find(({ name }) => name === curField);
-        return foundFilterField?.single
-          ? `(${foundFilterField?.name} = "${option}")`
-          : `(${foundFilterField?.name} ~ ["${option}"])`;
+        return buildFilter(curField, option);
       }) || [];
 
     return [...acc, fieldFilterQueries.join(' OR ')];
@@ -54,7 +127,7 @@ const combineFilters = (q: string, filters: Record<string, string[]>) => {
 const resolvePriceFilterString = (selectedPriceFilters: string[]) => {
   if (!selectedPriceFilters?.length) return '(price > 0)';
 
-  return selectedPriceFilters
+  return `(${selectedPriceFilters
     .reduce<string[]>((acc, cur) => {
       const [from, to] = cur.replaceAll(/[[\]]/g, '').split(' TO ');
 
@@ -62,14 +135,14 @@ const resolvePriceFilterString = (selectedPriceFilters: string[]) => {
 
       return [...acc, `(price >= ${from} AND price < ${to})`];
     }, [])
-    .join(' OR ');
+    .join(' OR ')})`;
 };
 
 const FilterUtils = {
-  combineFilters,
-  convertQToFilters,
+  buildCountFilters,
   resolvePriceFilterString,
-  isSimpleQ,
+  buildFilterFromLuceneQueries,
+  buildFilterFromBaseFilters,
 };
 
 export default FilterUtils;
