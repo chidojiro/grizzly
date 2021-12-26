@@ -15,6 +15,7 @@ type SearchParamsProviderValue = {
   baseFilter: string;
   hasSelectedAnyFilters: boolean;
   hasSelectedFilter: (field: string) => boolean;
+  displayQ: string;
 };
 
 const DefaultSearchParams: SearchParamsProviderValue = {
@@ -27,16 +28,21 @@ const DefaultSearchParams: SearchParamsProviderValue = {
   baseFilter: '',
   hasSelectedAnyFilters: false,
   hasSelectedFilter: () => false,
+  displayQ: '',
 };
 
 export const SearchParamsContext = React.createContext<SearchParamsProviderValue>(DefaultSearchParams);
 
 type Props = Children;
 
+const isSimpleQ = (q: string) => {
+  return [' OR ', ' AND ', ':', '(', ')'].every(keyword => !q.includes(keyword));
+};
+
 export const SearchParamsProvider = ({ children }: Props) => {
   const query = useQuery();
   const pageQuery = query.get('p');
-  const q = (query.get('q') as string) || '';
+  const qQuery = (query.get('q') || '') as string;
   const perPageQuery = query.get('size');
   const sortByQuery = query.get('sortBy');
   const baseFilterQuery = query.get('baseFilter');
@@ -46,9 +52,18 @@ export const SearchParamsProvider = ({ children }: Props) => {
   const sortBy = (sortByQuery as string) ?? DefaultSearchParams.sortBy;
   const { watch } = useFormContext();
   const baseSearchParams = (window as any).baseSearchParams;
+  const q = qQuery && isSimpleQ(qQuery) ? qQuery : baseSearchParams.q || '';
   const luceneQueries = new URLSearchParams((window as any).luceneQueries || '');
+  const luceneQ = (!isSimpleQ(qQuery) && qQuery) || luceneQueries.get('q') || '';
   const filters = watch('filters');
   const hasSelectedAnyFilters = Object.values(filters).some((selected: any) => !!selected.length);
+  const baseFilter =
+    (baseFilterQuery as string) ||
+    (baseSearchParams ? baseSearchParams.filter : FilterUtils.buildFilterFromLuceneQueries(luceneQ)) ||
+    '';
+  const displayQ = [q ? `q=${q}` : '', baseFilter ? `baseFilter=${baseFilter}` : ''].filter(Boolean).join(' AND ');
+  const baseSortBy =
+    (baseSortByQuery as string) || (baseSearchParams ? baseSearchParams?.sort : luceneQueries.get('sortBy')) || '';
 
   const hasSelectedFilter = React.useCallback((field: string) => filters[field]?.length > 0, [filters]);
 
@@ -56,24 +71,17 @@ export const SearchParamsProvider = ({ children }: Props) => {
     () => ({
       page,
       sortBy,
-      baseSortBy:
-        (baseSortByQuery as string) ||
-        (baseSearchParams ? baseSearchParams?.sortBy : luceneQueries.get('sortBy')) ||
-        '',
+      baseSortBy,
       perPage,
       q,
       filters,
       hasSelectedAnyFilters,
       hasSelectedFilter,
-      baseFilter:
-        (baseFilterQuery as string) ||
-        (baseSearchParams
-          ? FilterUtils.buildFilterFromBaseFilters(baseSearchParams?.filters)
-          : FilterUtils.buildFilterFromLuceneQueries(luceneQueries.get('q') || '')) ||
-        '',
+      baseFilter,
+      displayQ,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [JSON.stringify(filters), page, perPage, q, sortBy, hasSelectedFilter]
+    [JSON.stringify(filters), page, perPage, q, sortBy, hasSelectedFilter, displayQ]
   );
 
   return <SearchParamsContext.Provider value={returnValue}>{children}</SearchParamsContext.Provider>;

@@ -17,7 +17,7 @@ export const Toolbar = () => {
 
   const { totalResults } = data || { searchResponse: {} };
 
-  const { page, perPage, q } = useSearchParams();
+  const { page, perPage, q, baseFilter, displayQ } = useSearchParams();
 
   const { showingRange } = usePagination({ totalRecord: totalResults ? +totalResults : 0, page, perPage });
 
@@ -61,7 +61,7 @@ export const Toolbar = () => {
       <div css={[tw`h-[51px] shadow-md bg-white`, tw`sm:block sm:h-fit`, baseClassName]} style={baseStyles}>
         <div css={[tw`flex-1 flex-shrink-0 text-sm`, tw`sm:text-[11px] sm:px-4 sm:py-1`]}>
           {showingRange.from} - {showingRange.to} of {showingRange.total} matches for{' '}
-          <span css={[tw`font-medium text-green`]}>"{q}"</span>
+          <span css={[tw`font-medium text-green`]}>"{displayQ}"</span>
         </div>
         {toolbarRight}
       </div>

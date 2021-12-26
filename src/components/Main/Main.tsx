@@ -46,7 +46,7 @@ export const Main = () => {
     );
 
     history.push({ pathname: '/search', search: searchParams });
-  }, [JSON.stringify(values), baseFilter, baseSortBy]);
+  }, [baseFilter, baseSortBy, getValues, history, isDirty, q, query, size, sortBy]);
 
   const sizeQuery = query.get('size');
   const sortByQuery = query.get('sortBy');

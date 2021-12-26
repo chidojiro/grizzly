@@ -4,7 +4,7 @@ const OR = ' OR ';
 const AND = ' AND ';
 
 const buildFilter = (field: string, value: string) => {
-  return singeFields.includes(field) ? `(${field} ~ "${value}")` : `(${field} ~ ["${value}"])`;
+  return singeFields.includes(field) ? `${field} ~ "${value}"` : `${field} ~ ["${value}"]`;
 };
 
 const _buildFilterFromBaseFilters = (filters: any, operator: 'OR' | 'AND') => {
