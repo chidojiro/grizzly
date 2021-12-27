@@ -39,6 +39,22 @@ const isSimpleQ = (q: string) => {
   return [' OR ', ' AND ', ':', '(', ')'].every(keyword => !q.includes(keyword));
 };
 
+const parseLuceneSortBy = (sortBy: string) => {
+  return (
+    sortBy
+      .split(',')
+      .map(lucSortBy => {
+        const [sb, order] = lucSortBy.split(' ');
+
+        if (order === 'desc') return `-${sb}`;
+
+        return sb;
+      })
+      .filter(Boolean)
+      .join(',') || ''
+  );
+};
+
 export const SearchParamsProvider = ({ children }: Props) => {
   const query = useQuery();
   const pageQuery = query.get('p');
@@ -52,7 +68,7 @@ export const SearchParamsProvider = ({ children }: Props) => {
   const sortBy = (sortByQuery as string) ?? DefaultSearchParams.sortBy;
   const { watch } = useFormContext();
   const baseSearchParams = (window as any).baseSearchParams;
-  const q = qQuery && isSimpleQ(qQuery) ? qQuery : baseSearchParams.q || '';
+  const q = qQuery && isSimpleQ(qQuery) ? qQuery : baseSearchParams?.q || '';
   const luceneQueries = new URLSearchParams((window as any).luceneQueries || '');
   const luceneQ = (!isSimpleQ(qQuery) && qQuery) || luceneQueries.get('q') || '';
   const filters = watch('filters');
@@ -63,7 +79,9 @@ export const SearchParamsProvider = ({ children }: Props) => {
     '';
   const displayQ = [q ? `q=${q}` : '', baseFilter ? `baseFilter=${baseFilter}` : ''].filter(Boolean).join(' AND ');
   const baseSortBy =
-    (baseSortByQuery as string) || (baseSearchParams ? baseSearchParams?.sort : luceneQueries.get('sortBy')) || '';
+    (baseSortByQuery as string) ||
+    (baseSearchParams ? baseSearchParams?.sort : parseLuceneSortBy(luceneQueries.get('sortBy') || '')) ||
+    '';
 
   const hasSelectedFilter = React.useCallback((field: string) => filters[field]?.length > 0, [filters]);
 
