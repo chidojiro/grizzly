@@ -1,18 +1,19 @@
 import { Pagination } from 'components';
 import { sortByOptions } from 'consts';
-import { useQuery, useScrollToTop, useSearch, useSearchParams, useUpdateEffect } from 'hooks';
+import { useScrollToTop, useSearch, useSearchParams } from 'hooks';
 import { isEqual } from 'lodash';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import tw from 'twin.macro';
+import URI from 'urijs';
 import { NoResults } from './NoResults';
 import { Results } from './Results';
 import { Sidebar } from './Sidebar';
 import { Toolbar } from './Toolbar';
 
 export const Main = () => {
-  const query = useQuery();
+  const { pathname, search } = useLocation();
   const { page, perPage, baseFilter, baseSortBy } = useSearchParams();
   const history = useHistory();
   const { data } = useSearch();
@@ -23,8 +24,13 @@ export const Main = () => {
     formState: { isDirty },
   } = useFormContext();
 
+  const uri = React.useMemo(() => {
+    return new URI(search);
+  }, [search]);
+
   const handlePageChange = (page: number) => {
-    query.set('p', page);
+    uri.setSearch('p', page);
+    history.push({ pathname, search });
   };
 
   const values = watch();
@@ -32,27 +38,31 @@ export const Main = () => {
 
   useScrollToTop([page, JSON.stringify(values)]);
 
-  useUpdateEffect(() => {
-    if (!isDirty) return;
+  const queryParams = uri.search(true) as Record<string, string>;
+  const { sortBy: sortByQuery, size: sizeQuery, fq } = queryParams;
 
-    const filters = getValues('filters');
+  const syncFiltersToUrl = React.useCallback(() => {
+    if (!isDirty) return;
     const fq = Object.keys(filters).reduce((acc, curKey) => {
       return acc + filters[curKey].reduce((accCurKey: string, cur: string) => accCurKey + `(${curKey}:"${cur}"")`, '');
     }, '');
 
-    const searchParams = query.form(
-      { fq, size, sortBy, q, baseFilter, baseSortBy },
-      { sortBy: '', size: '25', baseFilter: '', baseSortBy: '' }
-    );
+    uri.setSearch({
+      fq: fq || undefined,
+      size: size === '25' ? size : null,
+      sortBy: sortBy || undefined,
+      q: q || undefined,
+      baseFilter: baseFilter || undefined,
+      baseSortBy: baseSortBy || undefined,
+    });
 
-    history.push({ pathname: '/search', search: searchParams });
-  }, [baseFilter, baseSortBy, getValues, history, isDirty, q, query, size, sortBy]);
+    if (uri.href().toString() !== search) {
+      history.push({ pathname: '/search', search: uri.href().toString() });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [baseFilter, baseSortBy, JSON.stringify(filters), history, isDirty, q, size, sortBy]);
 
-  const sizeQuery = query.get('size');
-  const sortByQuery = query.get('sortBy');
-  const fq = query.get('fq') as string;
-
-  React.useEffect(() => {
+  const syncUrlToFilters = React.useCallback(() => {
     setValue('size', sizeQuery || '25');
     setValue('sortBy', sortByQuery || sortByOptions[0].value);
 
@@ -70,6 +80,15 @@ export const Main = () => {
       setValue('filters', filtersFromFq);
     }
   }, [filters, fq, setValue, sizeQuery, sortByQuery]);
+
+  React.useEffect(() => {
+    syncUrlToFilters();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
+
+  useEffect(() => {
+    syncFiltersToUrl();
+  }, [syncFiltersToUrl]);
 
   if (!data) return null;
 
