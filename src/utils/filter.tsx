@@ -77,7 +77,7 @@ const buildFilterFromLuceneQueries = (queryString: string) => {
         newArgQueue.unshift(...lastArg.split(' OR ').filter(Boolean));
       }
 
-      if (!newArgQueue.includes(':') && newArgQueue.every(arg => !['~', '='].includes(arg))) {
+      if (!newArgQueue.includes(':') && newArgQueue.every(arg => !/[~=]/.test(arg))) {
         filterStack.push(`(${newArgQueue.map(arg => buildFilter('title', arg).replaceAll('""', '"')).join(OR)})`);
       } else if (newArgQueue.includes(':')) {
         const field = newArgQueue[0] === 'category' ? 'filtercats' : newArgQueue[0];
