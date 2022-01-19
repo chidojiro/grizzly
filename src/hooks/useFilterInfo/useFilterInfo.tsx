@@ -11,8 +11,7 @@ export const useFilterInfo = () => {
   const aggregateFilters = data?.aggregateFilters || {};
 
   const filtersInfo = Object.keys(aggregateFilters).reduce<FilterInfo[]>((acc, field) => {
-    if (!field || q.includes(field) || ['altcategory', 'categoryid', 'category1', 'buckets'].includes(field))
-      return acc;
+    if (!field || q.includes(field) || ['altcategory', 'categoryid', 'buckets'].includes(field)) return acc;
 
     const options = Object.keys(aggregateFilters[field].count || {})
       .filter(Boolean)

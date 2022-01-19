@@ -19,7 +19,7 @@ export const Main = () => {
   const { data } = useSearch();
   const { totalResults } = data ?? { searchResponse: { totalResults: 0 } };
   const { q } = useSearchParams();
-  const { watch, setValue, getValues } = useFormContext();
+  const { watch, setValue } = useFormContext();
   const {
     formState: { isDirty },
   } = useFormContext();

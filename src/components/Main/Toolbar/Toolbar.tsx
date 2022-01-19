@@ -60,8 +60,7 @@ export const Toolbar = () => {
     return (
       <div css={[tw`h-[51px] shadow-md bg-white`, tw`sm:block sm:h-fit`, baseClassName]} style={baseStyles}>
         <div css={[tw`flex-1 flex-shrink-0 text-sm`, tw`sm:text-[11px] sm:px-4 sm:py-1`, tw`truncate`]}>
-          {showingRange.from} - {showingRange.to} of {showingRange.total} matches for{' '}
-          <span css={[tw`font-medium text-green`]}>"{displayQ}"</span>
+          {showingRange.from} - {showingRange.to} of {showingRange.total} matches
         </div>
         {toolbarRight}
       </div>

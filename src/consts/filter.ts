@@ -38,10 +38,6 @@ export const filterFields = [
     label: 'categoryid',
   },
   {
-    name: 'category1',
-    label: 'category1',
-  },
-  {
     name: 'filtercats',
     label: 'Category',
   },
