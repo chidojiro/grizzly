@@ -1,15 +1,12 @@
-import { useSearchParams } from 'hooks';
 import tw from 'twin.macro';
 
 type Props = { q: string };
 
 export const NoResults = ({ q }: Props) => {
-  const { displayQ } = useSearchParams();
-
   return (
     <div className='search-results' css={[tw`flex-col`]}>
       <h2 className='no-results-header' css={[tw`mx-auto mt-3 w-fit`]}>
-        We're sorry, we couldn't find any results for "{displayQ}"
+        We're sorry, we couldn't find any results"
       </h2>
       <div className='zero-results-categories'>
         <h3>Shop By Category</h3>

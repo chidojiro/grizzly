@@ -3,6 +3,10 @@ import { filterFields, singeFields } from 'consts';
 const OR = ' OR ';
 const AND = ' AND ';
 
+const isSimpleQ = (q: string) => {
+  return [' OR ', ' AND ', ':', '(', ')'].every(keyword => !q.includes(keyword));
+};
+
 const buildFilter = (field: string, value: string) => {
   return singeFields.includes(field) ? `${field} ~ "${value}"` : `${field} ~ ["${value}"]`;
 };
@@ -36,7 +40,7 @@ const buildFilterFromBaseFilters = (filters: Record<string, string>) => {
 };
 
 const buildFilterFromLuceneQueries = (queryString: string) => {
-  if (!queryString) return '';
+  if (!queryString || isSimpleQ(queryString)) return '';
 
   if (!queryString.includes('(')) return buildFilter('title', queryString.split(OR)[0]);
 
@@ -45,7 +49,6 @@ const buildFilterFromLuceneQueries = (queryString: string) => {
   let i = 0;
   while (i < _queryString.length) {
     const c = _queryString[i];
-    console.log(c);
     if (c === '(') {
       filterStack.push(c);
       i += 1;
@@ -70,7 +73,6 @@ const buildFilterFromLuceneQueries = (queryString: string) => {
       while (true) {
         if (!filterStack.length) break;
         const lastArg = filterStack.pop() as string;
-        console.log(filterStack, lastArg);
 
         if (lastArg === '(') {
           break;
@@ -145,6 +147,7 @@ const FilterUtils = {
   resolvePriceFilterString,
   buildFilterFromLuceneQueries,
   buildFilterFromBaseFilters,
+  isSimpleQ,
 };
 
 export default FilterUtils;
