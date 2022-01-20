@@ -70,7 +70,7 @@ export const SearchParamsProvider = ({ children }: Props) => {
   const baseSearchParams = (window as any).baseSearchParams;
   const q = qQuery && isSimpleQ(qQuery) ? qQuery : baseSearchParams?.q || '';
   const luceneQueries = new URLSearchParams((window as any).luceneQueries || '');
-  const luceneQ = (!isSimpleQ(qQuery) && qQuery) || luceneQueries.get('q') || '';
+  const luceneQ = !isSimpleQ(qQuery) && qQuery ? luceneQueries.get('q') || '' : '';
   const filters = watch('filters');
   const hasSelectedAnyFilters = Object.values(filters).some((selected: any) => !!selected.length);
   const baseFilter =
@@ -82,6 +82,8 @@ export const SearchParamsProvider = ({ children }: Props) => {
     (baseSortByQuery as string) ||
     (baseSearchParams ? baseSearchParams?.sort : parseLuceneSortBy(luceneQueries.get('sortBy') || '')) ||
     '';
+
+  console.log(luceneQ);
 
   const hasSelectedFilter = React.useCallback((field: string) => filters[field]?.length > 0, [filters]);
 

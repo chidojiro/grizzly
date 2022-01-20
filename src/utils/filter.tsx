@@ -45,6 +45,7 @@ const buildFilterFromLuceneQueries = (queryString: string) => {
   let i = 0;
   while (i < _queryString.length) {
     const c = _queryString[i];
+    console.log(c);
     if (c === '(') {
       filterStack.push(c);
       i += 1;
@@ -69,6 +70,7 @@ const buildFilterFromLuceneQueries = (queryString: string) => {
       while (true) {
         if (!filterStack.length) break;
         const lastArg = filterStack.pop() as string;
+        console.log(filterStack, lastArg);
 
         if (lastArg === '(') {
           break;
