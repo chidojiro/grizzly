@@ -13,7 +13,7 @@ export const Availability = ({ data: { instock, quantityavailable } }: Props) =>
 
   if (instock === 'true') {
     color = tw`text-green`;
-    label = 'In Stock';
+    label = 'Ready To Ship';
   } else if (quantityavailable === '0') {
     color = tw`text-[#ae0101]`;
     label = 'More on the Way';
