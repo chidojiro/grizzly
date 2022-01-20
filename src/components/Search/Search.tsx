@@ -1,6 +1,5 @@
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { navigating } from 'consts';
 import { useAutoComplete, useSupport } from 'hooks';
 import groupBy from 'lodash/groupBy';
 import React from 'react';
@@ -11,7 +10,7 @@ import { ClassName } from 'types';
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = ClassName & {};
 
-const navigatingGroupedByQuery = groupBy(navigating, 'SearchTriggers');
+const navigatingGroupedByQuery = groupBy((window as any).navigating, 'SearchTriggers');
 
 export const Search = ({ className }: Props) => {
   const [isFocused, setIsFocused] = React.useState(false);

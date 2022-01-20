@@ -1,6 +1,6 @@
 import { Drawer, Form } from 'components';
 import { useLocation } from 'react-router';
-import { navigating, pageSizeOptions, sortByOptions } from 'consts';
+import { pageSizeOptions, sortByOptions } from 'consts';
 import groupBy from 'lodash/groupBy';
 import { usePagination, useSearch, useSearchParams, useVisibilityControl } from 'hooks';
 import tw from 'twin.macro';
@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { FilterBar } from '../FilterBar';
 
-const navigatingGroupedByVirtualPath = groupBy(navigating, 'VirtualPath');
+const navigatingGroupedByVirtualPath = groupBy((window as any).navigating, 'VirtualPath');
 
 export const Toolbar = () => {
   const { pathname } = useLocation();
@@ -17,7 +17,7 @@ export const Toolbar = () => {
 
   const { totalResults } = data || { searchResponse: {} };
 
-  const { page, perPage, q, baseFilter, displayQ } = useSearchParams();
+  const { page, perPage } = useSearchParams();
 
   const { showingRange } = usePagination({ totalRecord: totalResults ? +totalResults : 0, page, perPage });
 
@@ -56,7 +56,7 @@ export const Toolbar = () => {
   const baseClassName = tw`flex items-center justify-between w-[calc(100% + 15px)] px-[15px] sm:px-0`;
   const baseStyles = { transform: 'translateX(-7.5px)' };
 
-  if (pathname === '/search')
+  if (!foundNavigating)
     return (
       <div css={[tw`h-[51px] shadow-md bg-white`, tw`sm:block sm:h-fit`, baseClassName]} style={baseStyles}>
         <div css={[tw`flex-1 flex-shrink-0 text-sm`, tw`sm:text-[11px] sm:px-4 sm:py-1`, tw`truncate`]}>
