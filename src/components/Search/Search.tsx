@@ -1,20 +1,16 @@
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAutoComplete, useSupport } from 'hooks';
-import groupBy from 'lodash/groupBy';
+import URI from 'urijs';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import tw from 'twin.macro';
 import { ClassName } from 'types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = ClassName & {};
 
-const navigatingGroupedByQuery = groupBy((window as any).navigating, 'SearchTriggers');
-
 export const Search = ({ className }: Props) => {
   const [isFocused, setIsFocused] = React.useState(false);
-  const history = useHistory();
   const { q, setQ, data: suggestions } = useAutoComplete();
   const { data: articles } = useSupport(q);
 
@@ -22,15 +18,9 @@ export const Search = ({ className }: Props) => {
     const _q = qOverride || q;
     if (!_q) return;
 
-    const foundNavigating = navigatingGroupedByQuery[_q];
-
-    if (foundNavigating?.[0].VirtualPath) {
-      history.push(foundNavigating[0].VirtualPath);
-    } else {
-      history.push(`/search?q=${_q}`);
-    }
-
-    window.location.reload();
+    const uri = new URI('/search');
+    uri.setSearch('q', _q);
+    window.location.href = uri.href().toString();
   };
 
   const handleQChange: React.ChangeEventHandler<HTMLInputElement> = e => {

@@ -1,17 +1,15 @@
-import { Drawer, Form } from 'components';
-import { useLocation } from 'react-router';
-import { pageSizeOptions, sortByOptions } from 'consts';
-import groupBy from 'lodash/groupBy';
-import { usePagination, useSearch, useSearchParams, useVisibilityControl } from 'hooks';
-import tw from 'twin.macro';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Drawer, Form } from 'components';
+import { pageSizeOptions, sortByOptions } from 'consts';
+import { usePagination, useSearch, useSearchParams, useVisibilityControl } from 'hooks';
+import { useLocation } from 'react-router';
+import tw from 'twin.macro';
 import { FilterBar } from '../FilterBar';
 
-const navigatingGroupedByVirtualPath = groupBy((window as any).navigating, 'VirtualPath');
+const displayText = (window as any).displayText;
 
 export const Toolbar = () => {
-  const { pathname } = useLocation();
   const { data } = useSearch();
   const control = useVisibilityControl();
 
@@ -20,8 +18,6 @@ export const Toolbar = () => {
   const { page, perPage } = useSearchParams();
 
   const { showingRange } = usePagination({ totalRecord: totalResults ? +totalResults : 0, page, perPage });
-
-  const foundNavigating = navigatingGroupedByVirtualPath[pathname]?.[0];
 
   const toolbarRight = (
     <div css={[tw`flex flex-1`, tw`border-0 border-solid sm:border-t border-gray`]}>
@@ -56,7 +52,7 @@ export const Toolbar = () => {
   const baseClassName = tw`flex items-center justify-between w-[calc(100% + 15px)] px-[15px] sm:px-0`;
   const baseStyles = { transform: 'translateX(-7.5px)' };
 
-  if (!foundNavigating)
+  if (!displayText)
     return (
       <div css={[tw`h-[51px] shadow-md bg-white`, tw`sm:block sm:h-fit`, baseClassName]} style={baseStyles}>
         <div css={[tw`flex-1 flex-shrink-0 text-sm`, tw`sm:text-[11px] sm:px-4 sm:py-1`, tw`truncate`]}>
@@ -74,7 +70,7 @@ export const Toolbar = () => {
         baseClassName,
       ]}
       style={baseStyles}>
-      <h1 tw='sm:text-[17px] sm:px-2 flex-1 flex-shrink-0 my-0'>{foundNavigating.DisplayText}</h1>
+      <h1 tw='sm:text-[17px] sm:px-2 flex-1 flex-shrink-0 my-0'>{displayText}</h1>
       {toolbarRight}
     </div>
   );
