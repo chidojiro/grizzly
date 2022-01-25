@@ -6,7 +6,7 @@ export const NoResults = ({ q }: Props) => {
   return (
     <div className='search-results' css={[tw`flex-col`]}>
       <h2 className='no-results-header' css={[tw`mx-auto mt-3 w-fit`]}>
-        We're sorry, we couldn't find any results"
+        We're sorry, we couldn't find any results
       </h2>
       <div className='zero-results-categories'>
         <h3>Shop By Category</h3>

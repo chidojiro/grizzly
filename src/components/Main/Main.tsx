@@ -49,7 +49,7 @@ export const Main = () => {
 
     uri.setSearch({
       fq: fq || undefined,
-      size: size !== '25' ? size : null,
+      size: size !== '25' ? size : undefined,
       sortBy: sortBy || undefined,
       q: q || undefined,
       baseFilter: baseFilter || undefined,

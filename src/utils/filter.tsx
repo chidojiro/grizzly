@@ -8,110 +8,83 @@ const isSimpleQ = (q: string) => {
 };
 
 const buildFilter = (field: string, value: string) => {
-  return singeFields.includes(field) ? `${field} ~ "${value}"` : `${field} ~ ["${value}"]`;
+  return singeFields.includes(field) ? `(${field} ~ "${value}")` : `(${field} ~ ["${value}"])`;
 };
 
-const _buildFilterFromBaseFilters = (filters: any, operator: 'OR' | 'AND') => {
-  return filters.reduce((acc: string, cur: Record<string, any>) => {
-    if (cur.hasOwnProperty('OR')) {
-      return [acc, '(' + _buildFilterFromBaseFilters(cur.OR, 'OR') + ')'].filter(Boolean).join(operator);
+const buildFilterFromLuceneQueries = (_queryString: string) => {
+  if (!_queryString) return { q: '', filter: '' };
+
+  if (isSimpleQ(_queryString)) return { q: _queryString, filter: '' };
+
+  let q = '';
+  let filter = '';
+
+  const buildLuceneQuerySegment = (fragment: string): string => {
+    if (fragment.includes(OR)) {
+      const parts = fragment.split(OR);
+
+      return parts
+        .map(part => buildLuceneQuerySegment(part))
+        .filter(Boolean)
+        .join(OR);
     }
 
-    if (cur.hasOwnProperty('AND')) {
-      return [acc, '(' + _buildFilterFromBaseFilters(cur.AND, 'AND') + ')'].filter(Boolean).join(` ${operator} `);
-    }
-    const field = Object.keys(cur)[0] === 'category' ? 'filtercats' : Object.keys(cur)[0];
-    return [acc, buildFilter(field, Object.values(cur)[0])].filter(Boolean).join(` ${operator} `);
-  }, '');
-};
+    if (fragment.includes(AND)) {
+      const parts = fragment.split(AND);
 
-const buildFilterFromBaseFilters = (filters: Record<string, string>) => {
-  if (!filters) return '';
-
-  if (filters.hasOwnProperty('OR')) {
-    return `(${_buildFilterFromBaseFilters(filters.OR, 'OR')})`;
-  }
-
-  if (filters.hasOwnProperty('AND')) {
-    return `(${_buildFilterFromBaseFilters(filters.AND, 'AND')})`;
-  }
-
-  return '';
-};
-
-const buildFilterFromLuceneQueries = (queryString: string) => {
-  if (!queryString || isSimpleQ(queryString)) return '';
-
-  if (!queryString.includes('(')) return buildFilter('title', queryString.split(OR)[0]);
-
-  const _queryString = queryString.replaceAll('%26', '&');
-  const filterStack: string[] = [];
-  let i = 0;
-  while (i < _queryString.length) {
-    const c = _queryString[i];
-    if (c === '(') {
-      filterStack.push(c);
-      i += 1;
-      continue;
+      return parts
+        .map(part => buildLuceneQuerySegment(part))
+        .filter(Boolean)
+        .join(AND);
     }
 
-    if (_queryString.slice(i).startsWith(OR)) {
-      filterStack.push(OR);
-      i += OR.length;
-      continue;
-    }
-
-    if (_queryString.slice(i).startsWith(AND)) {
-      filterStack.push(AND);
-      i += AND.length;
-      continue;
-    }
-
-    if (c === ')') {
-      const newArgQueue = [];
-
-      while (true) {
-        if (!filterStack.length) break;
-        const lastArg = filterStack.pop() as string;
-
-        if (lastArg === '(') {
-          break;
-        }
-
-        newArgQueue.unshift(...lastArg.split(' OR ').filter(Boolean));
+    if (!fragment.includes(':')) {
+      if (!q && !filter) {
+        q = fragment;
       }
-
-      if (!newArgQueue.includes(':') && newArgQueue.every(arg => !/[~=]/.test(arg))) {
-        filterStack.push(`(${newArgQueue.map(arg => buildFilter('title', arg).replaceAll('""', '"')).join(OR)})`);
-      } else if (newArgQueue.includes(':')) {
-        const field = newArgQueue[0] === 'category' ? 'filtercats' : newArgQueue[0];
-
-        const filterQuery = newArgQueue
-          .slice(2)
-          .filter(val => val !== OR)
-          .map(val => buildFilter(field, val).replaceAll('""', '"'))
-          .join(' OR ');
-
-        filterStack.push(filterQuery);
-      } else {
-        filterStack.push(newArgQueue.join(''));
-      }
-
-      i += 1;
-      continue;
+      return 'title ~ ""';
     }
 
-    if (['(', ':'].includes(filterStack[filterStack.length - 1]) || c === ':') {
-      filterStack.push(c);
-      i += 1;
-      continue;
-    }
+    const [_key, value] = fragment.split(':');
+    const key = _key === 'category' ? 'filtercats' : _key;
 
-    filterStack[filterStack.length - 1] = filterStack[filterStack.length - 1] + c;
-    i += 1;
+    return buildFilter(key, value);
+  };
+
+  const queryString = _queryString.replaceAll('%26', '&').replaceAll(/["']/g, '');
+
+  if ([OR, AND].some(op => _queryString.includes(op)) && ['(', ')'].every(op => !_queryString.includes(op))) {
+    const filter = buildLuceneQuerySegment(_queryString);
+    return { q, filter };
   }
 
-  return `(${filterStack.join('')})`;
+  let openParenthesesIndex = -1;
+
+  for (let i = 0; i < queryString.length; i++) {
+    const character = queryString[i];
+
+    const hasOpenParentheses = openParenthesesIndex !== -1;
+
+    if (character === '(') {
+      if (hasOpenParentheses) {
+        filter += character;
+      }
+      openParenthesesIndex = i;
+    } else if (character === ')' && hasOpenParentheses) {
+      const closeParenthesesIndex = i;
+      const nextFilterSegment = buildLuceneQuerySegment(
+        queryString.slice(openParenthesesIndex + 1, closeParenthesesIndex)
+      );
+      filter += nextFilterSegment;
+      openParenthesesIndex = -1;
+    } else if (!hasOpenParentheses) {
+      filter += character;
+    }
+  }
+
+  console.log(filter);
+
+  return { filter: filter ? `(${filter.replaceAll(/(\sAND\s|\sOR\s)\(\)/g, '')})` : '', q };
 };
 
 const countQueries = filterFields.map(({ name }) => name);
@@ -128,7 +101,7 @@ const buildCountFilters = (filters: Record<string, string[]>) => {
   return filterQueries.join(',');
 };
 
-const resolvePriceFilterString = (selectedPriceFilters: string[]) => {
+const buildPriceFilter = (selectedPriceFilters: string[]) => {
   if (!selectedPriceFilters?.length) return '(price > 0)';
 
   return `(${selectedPriceFilters
@@ -144,9 +117,8 @@ const resolvePriceFilterString = (selectedPriceFilters: string[]) => {
 
 const FilterUtils = {
   buildCountFilters,
-  resolvePriceFilterString,
+  buildPriceFilter,
   buildFilterFromLuceneQueries,
-  buildFilterFromBaseFilters,
   isSimpleQ,
 };
 

@@ -17,7 +17,7 @@ export const useSearch = () => {
   const countFilters = FilterUtils.buildCountFilters(filters);
 
   const values: SearchQueryRequestValues = React.useMemo(() => {
-    const priceFilter = FilterUtils.resolvePriceFilterString(filters.price);
+    const priceFilter = FilterUtils.buildPriceFilter(filters.price);
     return {
       fields: '',
       q,
