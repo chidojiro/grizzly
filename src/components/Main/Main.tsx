@@ -54,6 +54,7 @@ export const Main = () => {
       q: q || undefined,
       baseFilter: baseFilter || undefined,
       baseSortBy: baseSortBy || undefined,
+      p: undefined,
     });
 
     if (uri.href().toString() !== search) {
