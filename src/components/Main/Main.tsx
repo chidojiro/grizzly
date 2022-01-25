@@ -30,7 +30,7 @@ export const Main = () => {
 
   const handlePageChange = (page: number) => {
     uri.setSearch('p', page);
-    history.push({ pathname, search });
+    history.push(uri.href().toString());
   };
 
   const values = watch();
@@ -49,7 +49,7 @@ export const Main = () => {
 
     uri.setSearch({
       fq: fq || undefined,
-      size: size === '25' ? size : null,
+      size: size !== '25' ? size : null,
       sortBy: sortBy || undefined,
       q: q || undefined,
       baseFilter: baseFilter || undefined,
