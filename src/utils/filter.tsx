@@ -23,26 +23,26 @@ const buildFilterFromLuceneQueries = (_queryString: string) => {
     if (fragment.includes(OR)) {
       const parts = fragment.split(OR);
 
-      return parts
+      return `(${parts
         .map(part => buildLuceneQuerySegment(part))
         .filter(Boolean)
-        .join(OR);
+        .join(OR)})`;
     }
 
     if (fragment.includes(AND)) {
       const parts = fragment.split(AND);
 
-      return parts
+      return `(${parts
         .map(part => buildLuceneQuerySegment(part))
         .filter(Boolean)
-        .join(AND);
+        .join(AND)})`;
     }
 
     if (!fragment.includes(':')) {
       if (!q && !filter) {
         q = fragment;
       }
-      return 'title ~ ""';
+      return '(title ~ "")';
     }
 
     const [_key, value] = fragment.split(':');
