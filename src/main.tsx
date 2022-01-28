@@ -65,5 +65,5 @@ ReactDOM.render(
       </BrowserRouter>
     </SWRConfig>
   </React.StrictMode>,
-  document.querySelector('main')
+  document.querySelector('main#searchio-app')
 );
