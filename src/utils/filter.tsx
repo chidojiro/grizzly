@@ -7,7 +7,9 @@ const isSimpleQ = (q: string) => {
   return [' OR ', ' AND ', ':', '(', ')'].every(keyword => !q.includes(keyword));
 };
 
-const buildFilter = (field: string, value: string) => {
+const buildFilter = (field: string, _value: string) => {
+  const value = _value.replaceAll(',', '\\,');
+
   return singeFields.includes(field) ? `(${field} ~ "${value}")` : `(${field} ~ ["${value}"])`;
 };
 
