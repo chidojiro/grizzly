@@ -27,7 +27,7 @@ export const usePriceFilterInfo = () => {
       buckets: priceBuckets,
       count,
       countFilters,
-      filter: [baseFilter && `(${baseFilter})`, '(price > 0)'].filter(Boolean).join(' AND '),
+      filter: [baseFilter && `(${baseFilter})`].filter(Boolean).join(' AND '),
       max: '',
       min: '',
     }),

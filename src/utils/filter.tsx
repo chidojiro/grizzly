@@ -102,7 +102,7 @@ const buildCountFilters = (filters: Record<string, string[]>) => {
 };
 
 const buildPriceFilter = (selectedPriceFilters: string[]) => {
-  if (!selectedPriceFilters?.length) return '(price > 0)';
+  if (!selectedPriceFilters?.length) return '';
 
   return `(${selectedPriceFilters
     .reduce<string[]>((acc, cur) => {
