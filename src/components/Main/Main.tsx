@@ -100,9 +100,11 @@ export const Main = () => {
       <Toolbar />
       <div css={[tw`flex pt-3`]}>
         <Sidebar />
-        <Results />
+        <div>
+          <Results />
+          <Pagination totalRecord={totalResults || 0} perPage={perPage} onChange={handlePageChange} page={page} />
+        </div>
       </div>
-      <Pagination totalRecord={totalResults || 0} perPage={perPage} onChange={handlePageChange} page={page} />
     </div>
   );
 };

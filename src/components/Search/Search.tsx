@@ -15,7 +15,10 @@ export const Search = ({ className }: Props) => {
   const { data: articles } = useSupport(q);
 
   const submitQ = (qOverride?: string) => {
-    const _q = qOverride || q;
+    const _q = (qOverride || q || '')
+      .replaceAll(/[/(/):]/g, ' ')
+      .trim()
+      .replaceAll(/\s+/g, ' ');
     if (!_q) return;
 
     const uri = new URI('/search');
@@ -34,11 +37,39 @@ export const Search = ({ className }: Props) => {
     }
   };
 
+  const handleContainerKeydown: React.KeyboardEventHandler<HTMLInputElement> = e => {
+    const focused = document.activeElement as Element;
+    const suggests: any[] = Array.from(document.querySelectorAll('.search-suggest'));
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const nextSuggest = suggests.includes(focused)
+        ? suggests[suggests.indexOf(focused) + 1] || suggests[suggests.length - 1]
+        : suggests[0];
+
+      nextSuggest.focus();
+    }
+
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const nextSuggest = suggests.includes(focused)
+        ? suggests[suggests.indexOf(focused) - 1] || suggests[0]
+        : suggests[0];
+
+      nextSuggest.focus();
+    }
+  };
+
   return (
     <div
       className={className}
       css={[tw`h-[45px] flex rounded-[2px] relative overflow-visible z-[10000]`, tw`sm:mx-0`]}
-      style={{ outline: isFocused ? '3px solid rgba(0, 123, 255, 0.3)' : 'none' }}>
+      style={{ outline: isFocused ? '3px solid rgba(0, 123, 255, 0.3)' : 'none' }}
+      onKeyDown={handleContainerKeydown}>
       <input
         placeholder='Search Products'
         value={q}
@@ -61,6 +92,10 @@ export const Search = ({ className }: Props) => {
           {suggestions.slice(0, 5).map(suggestion => (
             // eslint-disable-next-line jsx-a11y/anchor-is-valid
             <a
+              className='search-suggest'
+              tabIndex={0}
+              key={suggestion}
+              href='#'
               onClick={() => submitQ(suggestion)}
               css={[
                 tw`block px-4 py-1 font-medium border-0 border-b border-solid cursor-pointer border-gray last:border-b-0`,
@@ -75,6 +110,9 @@ export const Search = ({ className }: Props) => {
                 {articles?.slice(0, 5).map(({ title, url }) => (
                   // eslint-disable-next-line jsx-a11y/anchor-is-valid
                   <a
+                    className='search-suggest'
+                    tabIndex={0}
+                    key={url as string}
                     target='_blank'
                     rel='noreferrer'
                     href={url as string}

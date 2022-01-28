@@ -23,7 +23,7 @@ export const Pagination = (props: Props) => {
   };
 
   return (
-    <div className='search-pagination' css={[tw`flex items-center h-[33px] gap-1 mx-auto w-fit`]}>
+    <div className='search-pagination' css={[tw`flex items-center h-[33px] gap-1 mx-auto w-fit !mt-6`]}>
       {items.map(({ type, disabled, onClick, page, selected }, idx) => (
         <button
           type='button'
