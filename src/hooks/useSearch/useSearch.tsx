@@ -9,7 +9,7 @@ import { SearchQueryRequestValues } from 'types';
 import { FilterUtils } from 'utils';
 
 export const useSearch = () => {
-  const { page, perPage, sortBy, q, baseFilter, filters, baseSortBy } = useSearchParams();
+  const { page, perPage, sortBy, q, baseFilter, filters } = useSearchParams();
   const [data, setData] = React.useState<SearchResponse>();
   const history = useHistory();
   const trackingRef = React.useRef<Tracking>({ ...defaultTracking, type: TrackingType.PosNeg });
@@ -22,7 +22,7 @@ export const useSearch = () => {
       fields: '',
       q,
       resultsPerPage: perPage.toString(),
-      sort: [sortBy, baseSortBy].filter(Boolean).join(','),
+      sort: sortBy,
       page: page.toString(),
       buckets: priceBuckets,
       count,

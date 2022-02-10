@@ -2,7 +2,7 @@ import { Pagination } from 'components';
 import { sortByOptions } from 'consts';
 import { useScrollToTop, useSearch, useSearchParams } from 'hooks';
 import { isEqual } from 'lodash';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useHistory, useLocation } from 'react-router';
 import tw from 'twin.macro';
@@ -14,7 +14,7 @@ import { Toolbar } from './Toolbar';
 
 export const Main = () => {
   const { pathname, search } = useLocation();
-  const { page, perPage, baseFilter, baseSortBy } = useSearchParams();
+  const { page, perPage, baseFilter, sortBy: sortByQuery } = useSearchParams();
   const history = useHistory();
   const { data } = useSearch();
   const { totalResults } = data ?? { searchResponse: { totalResults: 0 } };
@@ -39,7 +39,7 @@ export const Main = () => {
   useScrollToTop([page, JSON.stringify(values)]);
 
   const queryParams = uri.search(true) as Record<string, string>;
-  const { sortBy: sortByQuery, size: sizeQuery, fq } = queryParams;
+  const { size: sizeQuery, fq } = queryParams;
 
   const syncFiltersToUrl = React.useCallback(() => {
     if (!isDirty) return;
@@ -53,7 +53,6 @@ export const Main = () => {
       sortBy: sortBy || undefined,
       q: q || undefined,
       baseFilter: baseFilter || undefined,
-      baseSortBy: baseSortBy || undefined,
       p: undefined,
     });
 
@@ -61,7 +60,7 @@ export const Main = () => {
       history.push({ pathname: '/search', search: uri.href().toString() });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [baseFilter, baseSortBy, JSON.stringify(filters), history, isDirty, q, size, sortBy]);
+  }, [baseFilter, JSON.stringify(filters), history, isDirty, q, size, sortBy]);
 
   const syncUrlToFilters = React.useCallback(() => {
     setValue('size', sizeQuery || '25');
@@ -87,7 +86,7 @@ export const Main = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     syncFiltersToUrl();
   }, [syncFiltersToUrl]);
 

@@ -10,7 +10,6 @@ type SearchParamsProviderValue = {
   page: number;
   perPage: number;
   sortBy: string;
-  baseSortBy: string;
   q: string;
   filters: Record<string, string[]>;
   baseFilter: string;
@@ -22,7 +21,6 @@ const DefaultSearchParams: SearchParamsProviderValue = {
   page: 1,
   perPage: 25,
   sortBy: sortByOptions[0].value,
-  baseSortBy: '',
   q: '',
   filters: {},
   baseFilter: '',
@@ -61,26 +59,27 @@ export const SearchParamsProvider = ({ children }: Props) => {
   const perPageQuery = query.get('size') as string;
   const sortByQuery = query.get('sortBy') as string;
   const baseFilterQuery = query.get('baseFilter') as string;
-  const baseSortByQuery = query.get('baseSortBy') as string;
 
   const page = pageQuery ? +pageQuery : DefaultSearchParams.page;
   const perPage = perPageQuery ? +perPageQuery : DefaultSearchParams.perPage;
-  const sortBy = (sortByQuery as string) ?? DefaultSearchParams.sortBy;
 
   // from global variable
   const baseSearchParams = (window as any).baseSearchParams as Record<string, string> | undefined;
   const luceneQueries = React.useMemo(() => new URLSearchParams((window as any).luceneQueries || ''), []);
-
-  const baseSortBy =
-    (baseSortByQuery as string) ||
-    (baseSearchParams ? baseSearchParams?.sort : parseLuceneSortBy(luceneQueries.get('sortBy') || '')) ||
-    '';
 
   const { watch } = useFormContext();
   const filters = watch('filters');
   const hasSelectedAnyFilters = Object.values(filters).some((selected: any) => !!selected.length);
 
   const hasSelectedFilter = React.useCallback((field: string) => filters[field]?.length > 0, [filters]);
+
+  const resolveSortBy = React.useCallback(() => {
+    if (isSearchPage) {
+      return parseLuceneSortBy(sortByQuery || '');
+    }
+
+    return baseSearchParams ? baseSearchParams.sort : parseLuceneSortBy(luceneQueries.get('sortBy') || '');
+  }, [baseSearchParams, isSearchPage, luceneQueries, sortByQuery]);
 
   const resolveQ = React.useCallback(() => {
     if (isSearchPage) {
@@ -105,8 +104,7 @@ export const SearchParamsProvider = ({ children }: Props) => {
   const returnValue = React.useMemo<SearchParamsProviderValue>(
     () => ({
       page,
-      sortBy,
-      baseSortBy,
+      sortBy: resolveSortBy(),
       perPage,
       filters,
       hasSelectedAnyFilters,
@@ -115,7 +113,7 @@ export const SearchParamsProvider = ({ children }: Props) => {
       baseFilter: resolveBaseFilter(),
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [JSON.stringify(filters), page, perPage, sortBy, hasSelectedFilter, resolveQ, resolveBaseFilter]
+    [JSON.stringify(filters), page, perPage, hasSelectedFilter, resolveQ, resolveBaseFilter, resolveSortBy]
   );
 
   return <SearchParamsContext.Provider value={returnValue}>{children}</SearchParamsContext.Provider>;

@@ -6,7 +6,7 @@ export const sortByOptions: Option[] = [
   { value: '-popularity', label: 'Sort: Popularity' },
   { value: 'price', label: 'Sort: Price Low to High' },
   { value: '-price', label: 'Sort: Price High to Low' },
-  { value: 'vendoritemnumber,title', label: 'Sort: Model Number' },
+  { value: 'id', label: 'Sort: Model Number' },
 ];
 
 export const pageSizeOptions: Option[] = [

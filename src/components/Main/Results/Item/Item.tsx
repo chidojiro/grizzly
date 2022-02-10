@@ -47,7 +47,7 @@ export const Item = ({ data, posNegToken }: Props) => {
       ]}>
       <div>
         <div css={[tw`flex items-center justify-center`]}>
-          <img src={image} alt='' css={[tw`w-fit max-w-[255px] mx-auto mb-[15px]`, tw`sm:w-[100px] sm:p-2`]} />
+          <img src={image} alt='' css={[tw`w-full max-w-[255px] mx-auto mb-[15px]`, tw`sm:w-[100px] sm:p-2`]} />
         </div>
         <Availability data={data} />
       </div>

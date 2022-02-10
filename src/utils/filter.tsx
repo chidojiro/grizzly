@@ -84,8 +84,6 @@ const buildFilterFromLuceneQueries = (_queryString: string) => {
     }
   }
 
-  console.log(filter);
-
   return { filter: filter ? `(${filter.replaceAll(/(\sAND\s|\sOR\s)\(\)/g, '')})` : '', q };
 };
 

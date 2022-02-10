@@ -24,7 +24,7 @@ export const Select = React.forwardRef(
       defaultValue: defaultValue || options[0]?.value,
     });
 
-    const selectedOption = options.find(({ value: _value }) => _value === value);
+    const selectedOption = options.find(({ value: _value }) => _value === value) || options[0];
 
     return (
       <div
