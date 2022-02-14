@@ -29,7 +29,7 @@ export const Item = ({ data, posNegToken }: Props) => {
 
   const handleClick = async () => {
     try {
-      await SearchApis.sendClickEvent(posNegToken);
+      await SearchApis.sendClickEvent(data.id, posNegToken);
     } finally {
       window.location.href = url;
     }

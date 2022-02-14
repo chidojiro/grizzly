@@ -72,9 +72,9 @@ const getPriceFilterInfo = async (values: SearchQueryRequestValues) => {
   } as FilterInfo;
 };
 
-const sendClickEvent = (posToken: PosNegToken) => {
-  posNegStorage.add('id', posToken);
-  return posNegStorage.sendClickEvent('id');
+const sendClickEvent = (id: string, posToken: PosNegToken) => {
+  posNegStorage.add(id, posToken);
+  return posNegStorage.sendClickEvent(id);
 };
 
 export const SearchApis = { get, getSuggestions, getPriceFilterInfo, sendClickEvent };
