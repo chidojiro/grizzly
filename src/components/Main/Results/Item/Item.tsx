@@ -26,15 +26,18 @@ export const Item = ({ data, posNegToken }: Props) => {
 
   const { image, title, url, price, catalogprice, onspecial, msrp, outlet, id } = data;
 
+  console.log(catalogprice, onspecial, msrp, outlet, id);
+
   const renderOldPrice = () => {
-    if (onspecial && catalogprice > price)
+    if (id === 'sb1036') debugger;
+    if (onspecial === 'true' && catalogprice > price)
       return (
         <div css={[tw`flex flex-wrap items-end`]}>
           <Price price={+catalogprice} css={[tw`line-through text-md text-gray-light-1`, tw`sm:text-sm`]} />
         </div>
       );
 
-    if (outlet && msrp > price)
+    if (outlet === 'true' && msrp > price)
       return (
         <div css={[tw`flex flex-wrap items-end`]}>
           <Price price={+msrp} css={[tw`line-through text-md text-gray-light-1`, tw`sm:text-sm`]} />
