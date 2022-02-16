@@ -5,6 +5,8 @@ import URI from 'urijs';
 import React from 'react';
 import tw from 'twin.macro';
 import { ClassName } from 'types';
+import { SearchApis } from 'apis';
+import { useHistory, useLocation } from 'react-router';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = ClassName & {};
@@ -13,6 +15,23 @@ export const Search = ({ className }: Props) => {
   const [isFocused, setIsFocused] = React.useState(false);
   const { q, setQ, data: suggestions } = useAutoComplete();
   const { data: articles } = useSupport(q);
+  const history = useHistory();
+  const { pathname, search } = useLocation();
+
+  React.useEffect(() => {
+    const uri = new URI(search);
+    const searches = uri.search(true);
+
+    const { productid, ...posNegToken } = searches;
+
+    if (productid) {
+      SearchApis.sendClickEvent(productid, posNegToken as any);
+      uri.removeSearch('productid').removeSearch('pos').removeSearch('neg');
+
+      history.replace({ pathname, search: uri.href() });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const submitQ = (qOverride?: string) => {
     const _q = (qOverride || q || '')

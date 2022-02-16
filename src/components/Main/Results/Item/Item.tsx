@@ -6,7 +6,7 @@ import { Availability } from './Availability';
 import { Badge } from './Badge';
 import tw from 'twin.macro';
 import { SearchApis } from 'apis';
-import { useHistory } from 'react-router';
+import URI from 'urijs';
 
 const StyleTitle = styled.div`
   overflow: hidden;
@@ -23,21 +23,32 @@ type Props = {
 
 export const Item = ({ data, posNegToken }: Props) => {
   const [isHovered, setIsHovered] = React.useState(false);
-  const history = useHistory();
 
-  const { image, title, url, price, catalogprice } = data;
+  const { image, title, url, price, catalogprice, onspecial, msrp, outlet, id } = data;
 
-  const handleClick = async () => {
-    try {
-      await SearchApis.sendClickEvent(data.id, posNegToken);
-    } finally {
-      window.location.href = url;
-    }
+  const renderOldPrice = () => {
+    if (onspecial && catalogprice > price)
+      return (
+        <div css={[tw`flex flex-wrap items-end`]}>
+          <Price price={+catalogprice} css={[tw`line-through text-md text-gray-light-1`, tw`sm:text-sm`]} />
+        </div>
+      );
+
+    if (outlet && msrp > price)
+      return (
+        <div css={[tw`flex flex-wrap items-end`]}>
+          <Price price={+msrp} css={[tw`line-through text-md text-gray-light-1`, tw`sm:text-sm`]} />
+        </div>
+      );
+
+    return null;
   };
 
+  const urlWithPosNeg = new URI(url.toLowerCase()).addSearch({ ...posNegToken, productid: id }).href();
+
   return (
-    <div
-      onClick={handleClick}
+    <a
+      href={urlWithPosNeg}
       onMouseOver={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       title={title}
@@ -60,17 +71,11 @@ export const Item = ({ data, posNegToken }: Props) => {
           ]}>
           {title}
         </StyleTitle>
-        {catalogprice !== price ? (
-          <div css={[tw`flex flex-wrap items-end`]}>
-            <Price price={+catalogprice} css={[tw`line-through text-md text-gray-light-1`, tw`sm:text-sm`]} />
-            <Price price={+price} css={[tw`text-xl text-red-dark-1`, tw`sm:text-md`]} />
-          </div>
-        ) : (
-          <Price price={+price} css={[tw`text-xl text-red-dark-1`, tw`sm:text-md`]} />
-        )}
+        {renderOldPrice()}
+        <Price price={+price} css={[tw`text-xl text-red-dark-1`, tw`sm:text-md`]} />
       </div>
 
       <Badge data={data} />
-    </div>
+    </a>
   );
 };
