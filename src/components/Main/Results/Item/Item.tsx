@@ -26,8 +26,6 @@ export const Item = ({ data, posNegToken }: Props) => {
 
   const { image, title, url, price, catalogprice, onspecial, msrp, outlet, id } = data;
 
-  console.log(catalogprice, onspecial, msrp, outlet, id);
-
   const renderOldPrice = () => {
     if (id === 'sb1036') debugger;
     if (onspecial === 'true' && catalogprice > price)
