@@ -17,12 +17,12 @@ export const Availability = ({ data: { instock, quantityavailable, special_order
     label = 'Special Order Item';
     background = tw`bg-yellow`;
     padding = tw`px-[10px] py-[5px]`;
-  } else if (quantityavailable === '0') {
-    color = tw`text-[#ae0101]`;
-    label = 'More on the Way';
   } else if (instock === 'true') {
     color = tw`text-green`;
     label = 'Ready To Ship';
+  } else if (quantityavailable === '0') {
+    color = tw`text-[#ae0101]`;
+    label = 'More on the Way';
   }
 
   if (!label) return null;
