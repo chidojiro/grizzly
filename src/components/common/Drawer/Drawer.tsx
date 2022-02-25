@@ -57,7 +57,7 @@ export const Drawer = ({
     <div css={[tw`fixed top-0 left-0 z-[10001] w-screen h-screen`]} className='drawer'>
       <div className='drawer-backdrop' css={[tw`w-full h-full`]} onClick={handleBackdropClick}></div>
       <StyledDrawerContent
-        className={'drawer-content'}
+        className={'drawer-content overflow-auto'}
         style={{ boxShadow: '0px 0px 999px 200px rgba(0, 0, 0, 0.5)' }}
         css={[
           tw`absolute top-0 h-full max-w-full p-5 bg-white border-0 border-solid border-green`,
