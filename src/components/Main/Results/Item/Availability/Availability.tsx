@@ -6,23 +6,25 @@ export type Props = {
   data: SearchResult['values'];
 };
 
-export const Availability = ({ data: { instock, quantityavailable, special_order } }: Props) => {
+export const Availability = ({ data: { instock, quantityavailable, special_order, title } }: Props) => {
   let color = tw``;
   let background = tw``;
   let label = '';
   let padding = tw``;
+
+  if (title.includes('g0555xh')) console.log(instock, quantityavailable);
 
   if (isEqual(special_order, ['1'])) {
     color = tw`text-black`;
     label = 'Special Order Item';
     background = tw`bg-yellow`;
     padding = tw`px-[10px] py-[5px]`;
-  } else if (quantityavailable === '0') {
-    color = tw`text-[#ae0101]`;
-    label = 'More on the Way';
-  } else {
+  } else if (instock === 'true') {
     color = tw`text-green`;
     label = 'Ready To Ship';
+  } else {
+    color = tw`text-[#ae0101]`;
+    label = 'More on the Way';
   }
 
   if (!label) return null;
