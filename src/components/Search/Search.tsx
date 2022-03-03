@@ -102,50 +102,51 @@ export const Search = ({ className }: Props) => {
         css={[tw`flex items-center justify-center flex-shrink-0 h-full px-3 cursor-pointer bg-green`]}>
         <FontAwesomeIcon icon={faSearch} css={[tw`text-white`]} />
       </div>
-      {!!suggestions?.length && (
-        <div
-          css={[
-            tw`w-full absolute bg-white text-[16px] top-[44px] shadow border border-solid border-gray`,
-            tw`sm:top-[38px]`,
-          ]}>
-          {suggestions.slice(0, 5).map(suggestion => (
-            // eslint-disable-next-line jsx-a11y/anchor-is-valid
-            <a
-              className='search-suggest'
-              tabIndex={0}
-              key={suggestion}
-              href='#'
-              onClick={() => submitQ(suggestion)}
-              css={[
-                tw`block px-4 py-1 font-medium border-0 border-b border-solid cursor-pointer border-gray last:border-b-0`,
-              ]}>
-              {suggestion}
-            </a>
-          ))}
-          {!!articles?.length && (
-            <>
-              <div css={[tw`px-4 py-0.5 text-sm text-black bg-gray-light-2`]}>Help Articles Containing {q}</div>
-              <div>
-                {articles?.slice(0, 5).map(({ title, url }) => (
-                  // eslint-disable-next-line jsx-a11y/anchor-is-valid
-                  <a
-                    className='search-suggest'
-                    tabIndex={0}
-                    key={url as string}
-                    target='_blank'
-                    rel='noreferrer'
-                    href={url as string}
-                    css={[
-                      tw`block px-4 py-1 text-[13px] font-medium border-0 border-b border-solid cursor-pointer border-gray last:border-b-0`,
-                    ]}>
-                    {title}
-                  </a>
-                ))}
-              </div>
-            </>
-          )}
-        </div>
-      )}
+      {!!suggestions?.length ||
+        (!!articles?.length && (
+          <div
+            css={[
+              tw`w-full absolute bg-white text-[16px] top-[44px] shadow border border-solid border-gray`,
+              tw`sm:top-[38px]`,
+            ]}>
+            {suggestions.slice(0, 5).map(suggestion => (
+              // eslint-disable-next-line jsx-a11y/anchor-is-valid
+              <a
+                className='search-suggest'
+                tabIndex={0}
+                key={suggestion}
+                href='#'
+                onClick={() => submitQ(suggestion)}
+                css={[
+                  tw`block px-4 py-1 font-medium border-0 border-b border-solid cursor-pointer border-gray last:border-b-0`,
+                ]}>
+                {suggestion}
+              </a>
+            ))}
+            {!!articles?.length && (
+              <>
+                <div css={[tw`px-4 py-0.5 text-sm text-black bg-gray-light-2`]}>Help Articles Containing {q}</div>
+                <div>
+                  {articles?.slice(0, 5).map(({ title, url }) => (
+                    // eslint-disable-next-line jsx-a11y/anchor-is-valid
+                    <a
+                      className='search-suggest'
+                      tabIndex={0}
+                      key={url as string}
+                      target='_blank'
+                      rel='noreferrer'
+                      href={url as string}
+                      css={[
+                        tw`block px-4 py-1 text-[13px] font-medium border-0 border-b border-solid cursor-pointer border-gray last:border-b-0`,
+                      ]}>
+                      {title}
+                    </a>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        ))}
     </div>
   );
 };
