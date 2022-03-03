@@ -1,26 +1,24 @@
 import { SearchApis } from 'apis';
-import debounce from 'lodash/debounce';
 import React from 'react';
 import useSWR from 'swr';
 import { SearchAutocompleteRequestValues } from 'types';
 
-export const useAutoComplete = () => {
-  const [q, _setQ] = React.useState('');
-  const [debouncedQ, setDebouncedQ] = React.useState(q);
-
-  const debouncedSetQ = debounce((q: string) => setDebouncedQ(q), 300);
-  const setQ = React.useRef((q: string) => {
-    _setQ(q);
-    debouncedSetQ(q);
-  });
+export const useAutoComplete = (q: string) => {
+  const [data, setData] = React.useState<any>();
 
   const values = React.useMemo<SearchAutocompleteRequestValues>(() => ({ q, resultsPerPage: '5', fields: '' }), [q]);
 
-  const { data, ...restSwrReturn } = useSWR(
-    debouncedQ && ['/autocomplete', debouncedQ],
-    () => SearchApis.getSuggestions(values),
-    {}
-  );
+  const swrReturn = useSWR(['/autocomplete', q], () => {
+    if (!q) return { data: {} } as any;
 
-  return { ...restSwrReturn, data: (data?.['q.suggestions']?.split(',') as string[]) || [], q, setQ: setQ.current };
+    return SearchApis.getSuggestions(values);
+  });
+
+  // somehow swr doesn't keep stale data
+  // this is a workaround for that
+  React.useEffect(() => {
+    if (swrReturn.data) setData(swrReturn.data);
+  }, [q, swrReturn]);
+
+  return { ...swrReturn, data: (data?.['q.suggestions']?.split(',') as string[]) || [] };
 };
