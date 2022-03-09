@@ -27,7 +27,6 @@ export const Item = ({ data, posNegToken }: Props) => {
   const { image, title, url, price, catalogprice, onspecial, msrp, outlet, id } = data;
 
   const renderOldPrice = () => {
-    if (id === 'sb1036') debugger;
     if (onspecial === 'true' && catalogprice > price)
       return (
         <div css={[tw`flex flex-wrap items-end`]}>

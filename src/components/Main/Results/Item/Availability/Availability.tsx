@@ -12,8 +12,6 @@ export const Availability = ({ data: { instock, quantityavailable, special_order
   let label = '';
   let padding = tw``;
 
-  if (title.includes('g0555xh')) console.log(instock, quantityavailable);
-
   if (isEqual(special_order, ['1'])) {
     color = tw`text-black`;
     label = 'Special Order Item';

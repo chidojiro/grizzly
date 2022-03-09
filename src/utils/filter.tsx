@@ -10,7 +10,7 @@ const isSimpleQ = (q: string) => {
 const buildFilter = (field: string, _value: string) => {
   const value = _value.replaceAll(',', '\\,');
 
-  return singeFields.includes(field) ? `(${field} ~ "${value}")` : `(${field} ~ ["${value}"])`;
+  return singeFields.includes(field) ? `(${field} = "${value}")` : `(${field} ~ ["${value}"])`;
 };
 
 const buildFilterFromLuceneQueries = (_queryString: string) => {
