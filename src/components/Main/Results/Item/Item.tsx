@@ -5,7 +5,6 @@ import { Price } from './Price';
 import { Availability } from './Availability';
 import { Badge } from './Badge';
 import tw from 'twin.macro';
-import { SearchApis } from 'apis';
 import URI from 'urijs';
 
 const StyleTitle = styled.div`
@@ -27,14 +26,14 @@ export const Item = ({ data, posNegToken }: Props) => {
   const { image, title, url, price, catalogprice, onspecial, msrp, outlet, id } = data;
 
   const renderOldPrice = () => {
-    if (onspecial === 'true' && catalogprice > price)
+    if (onspecial === 'true' && +catalogprice > +price)
       return (
         <div css={[tw`flex flex-wrap items-end`]}>
           <Price price={+catalogprice} css={[tw`line-through text-md text-gray-light-1`, tw`sm:text-sm`]} />
         </div>
       );
 
-    if (outlet === 'true' && msrp > price)
+    if (outlet === 'true' && +msrp > +price)
       return (
         <div css={[tw`flex flex-wrap items-end`]}>
           <Price price={+msrp} css={[tw`line-through text-md text-gray-light-1`, tw`sm:text-sm`]} />
