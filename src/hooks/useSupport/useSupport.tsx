@@ -7,7 +7,7 @@ export const useSupport = (q: string) => {
   const [data, setData] = React.useState<SearchResponse>();
 
   const swrReturn = useSWR(['/articles', q], () => {
-    if (!q) return { data: [] } as any;
+    if (q.length < 3) return { data: [] } as any;
 
     return SupportApis.get(q);
   });

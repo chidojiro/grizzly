@@ -9,7 +9,7 @@ export const useAutoComplete = (q: string) => {
   const values = React.useMemo<SearchAutocompleteRequestValues>(() => ({ q, resultsPerPage: '5', fields: '' }), [q]);
 
   const swrReturn = useSWR(['/autocomplete', q], () => {
-    if (!q) return { data: {} } as any;
+    if (q.length < 3) return { data: {} } as any;
 
     return SearchApis.getSuggestions(values);
   });
