@@ -34,18 +34,20 @@ export const Checkbox = React.forwardRef(
     return (
       <label
         className={classNames('gl-checkbox', className)}
-        css={[tw`flex items-center cursor-pointer whitespace-pre-line hover:text-green`, isChecked && tw`font-bold`]}>
+        css={[tw`flex items-center whitespace-pre-line cursor-pointer hover:text-green`, isChecked && tw`font-bold`]}>
         <div css={[tw`flex items-center mr-2`]}>
-          <input
-            type='checkbox'
-            {...restProps}
-            ref={ref}
-            disabled={disabled}
-            value={valueProp}
-            checked={isChecked}
-            onChange={handleChange}
-            css={[tw`w-0 h-0 overflow-hidden`]}
-          />
+          <div css={[tw`relative top-0 left-0 w-0 h-0 p-0 m-0 overflow-hidden`]}>
+            <input
+              type='checkbox'
+              {...restProps}
+              ref={ref}
+              disabled={disabled}
+              value={valueProp}
+              checked={isChecked}
+              onChange={handleChange}
+              css={[tw`absolute top-0 left-0`]}
+            />
+          </div>
           <div
             css={[
               tw`relative w-4 h-4 flex items-center justify-center rounded-sm border border-solid border-[#aaa]`,

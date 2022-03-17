@@ -27,7 +27,7 @@ export const Pagination = (props: Props) => {
       {items.map(({ type, disabled, onClick, page, selected }, idx) => (
         <button
           type='button'
-          key={type + page}
+          key={type + page + type === 'ellipsis' ? idx : ''}
           onClick={onClick}
           disabled={disabled}
           className={classNames('btn btn-default', {
