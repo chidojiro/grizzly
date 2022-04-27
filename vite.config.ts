@@ -10,6 +10,7 @@ export default defineConfig({
     jsxInject: `
       import { jsx } from '@emotion/react';
     `,
+    target: 'es2015',
   },
   plugins: [reactRefresh(), macrosPlugin(), tsconfigPaths()],
   define: {

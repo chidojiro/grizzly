@@ -66,7 +66,7 @@ export const Main = () => {
     setValue('size', sizeQuery || '25');
     setValue('sortBy', sortByQuery || sortByOptions[0].value);
 
-    const rawFilters = fq ? fq.split(')(').map(v => v.replaceAll(/["()]/g, '')) : [];
+    const rawFilters = fq ? fq.split(')(').map(v => v.replace(/["()]/g, '')) : [];
 
     const filtersFromFq = rawFilters.reduce<{ [key: string]: string[] }>((acc, cur) => {
       const [key, value] = cur.split(':');

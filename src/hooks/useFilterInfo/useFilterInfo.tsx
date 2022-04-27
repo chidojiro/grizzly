@@ -15,7 +15,7 @@ export const useFilterInfo = () => {
 
     const options = Object.keys(aggregateFilters[field].count || {})
       .filter(Boolean)
-      .map(option => ({ label: option.replaceAll(' in.', '"'), value: option }))
+      .map(option => ({ label: option.replace(/ in\./g, '"'), value: option }))
       .filter(Boolean);
 
     if (!hasSelectedFilter(field) && options.length < 2) return acc;

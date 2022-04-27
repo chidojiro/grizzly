@@ -45,9 +45,9 @@ export const Search = ({ className }: Props) => {
 
   const submitQ = (qOverride?: string) => {
     const _q = (qOverride || q || '')
-      .replaceAll(/[/(/):]/g, ' ')
+      .replace(/[/(/):]/g, ' ')
       .trim()
-      .replaceAll(/\s+/g, ' ');
+      .replace(/\s+/g, ' ');
     if (!_q) return;
 
     const uri = new URI('/search');

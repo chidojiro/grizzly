@@ -8,7 +8,7 @@ const isSimpleQ = (q: string) => {
 };
 
 const buildFilter = (field: string, _value: string) => {
-  const value = _value.replaceAll(',', '\\,');
+  const value = _value.replace(/,/g, '\\,');
 
   return singeFields.includes(field) ? `(${field} = "${value}")` : `(${field} ~ ["${value}"])`;
 };
@@ -53,7 +53,7 @@ const buildFilterFromLuceneQueries = (_queryString: string) => {
     return buildFilter(key, value);
   };
 
-  const queryString = _queryString.replaceAll('%26', '&').replaceAll(/["']/g, '');
+  const queryString = _queryString.replace('%26', '&').replace(/["']/g, '');
 
   if ([OR, AND].some(op => _queryString.includes(op)) && ['(', ')'].every(op => !_queryString.includes(op))) {
     const filter = buildLuceneQuerySegment(_queryString);
@@ -84,7 +84,7 @@ const buildFilterFromLuceneQueries = (_queryString: string) => {
     }
   }
 
-  return { filter: filter ? `(${filter.replaceAll(/(\sAND\s|\sOR\s)\(\)/g, '')})` : '', q };
+  return { filter: filter ? `(${filter.replace(/(\sAND\s|\sOR\s)\(\)/g, '')})` : '', q };
 };
 
 const countQueries = filterFields.map(({ name }) => name);
@@ -106,7 +106,7 @@ const buildPriceFilter = (selectedPriceFilters: string[]) => {
 
   return `(${selectedPriceFilters
     .reduce<string[]>((acc, cur) => {
-      const [from, to] = cur.replaceAll(/[[\]]/g, '').split(' TO ');
+      const [from, to] = cur.replace(/[[\]]/g, '').split(' TO ');
 
       if (to === '*') return [...acc, `(price >= ${from})`];
 
